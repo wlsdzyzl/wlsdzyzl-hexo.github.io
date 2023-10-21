@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/light_tracking8.jpg">
 <meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/light_tracking7.jpg">
 <meta property="article:published_time" content="2019-03-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-20T20:23:46.300Z">
+<meta property="article:modified_time" content="2023-10-21T23:32:27.079Z">
 <meta property="article:author" content="wlsdzyzl">
 <meta property="article:tag" content="computer graphics">
 <meta name="twitter:card" content="summary">
@@ -102,7 +102,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">82</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">17</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">140</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -142,18 +142,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-count">141</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">83</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -259,7 +259,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:23:46" itemprop="dateModified" datetime="2023-10-21T04:23:46+08:00">2023-10-21</time>
+      <time title="Modified: 2023-10-22 07:32:27" itemprop="dateModified" datetime="2023-10-22T07:32:27+08:00">2023-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -306,7 +306,7 @@
 <li><p>平面的表示</p>
 <ul>
 <li>显示表示：$n_0&#x3D;(A,B,C),P_0&#x3D;(x_0,y_0,z_0)$分别表示法向量和平面上一点</li>
-<li>隐示表示：$\begin{aligned}H(P) &amp;&#x3D; Ax+By+Cz+D&#x3D;0\\&#x3D;&amp;nP+D&#x3D;0\end{aligned}$</li>
+<li>隐示表示：$\begin{aligned}H(P) &amp;&#x3D; Ax+By+Cz+D&#x3D;0\&#x3D;&amp;nP+D&#x3D;0\end{aligned}$</li>
 </ul>
 </li>
 <li><p>点到平面的距离：</p>
@@ -314,23 +314,15 @@
 <li>当$n$是单位法向量时，$P$到平面$H$的距离为$H(P)$</li>
 </ul>
 </li>
-<li><p>根据平面和光线的方程得到方程组，求解即可：</p>
-<p>P(t) &#x3D; R_0+t\cdot R_d\\ n\cdot P(t) + D &#x3D; 0</p>
-<p>解得：$t &#x3D; -(D+n\cdot R_0)&#x2F;(n\cdot R_d)$，最后验算$t&gt;0$。</p>
+<li><p>根据平面和光线的方程得到方程组，求解即可：<br>$$<br>P(t) &#x3D; R_0+t\cdot R_d\ n\cdot P(t) + D &#x3D; 0<br>$$<br>解得：$t &#x3D; -(D+n\cdot R_0)&#x2F;(n\cdot R_d)$，最后验算$t&gt;0$。</p>
 </li>
 </ul>
 <h3 id="光线与三角形求交"><a href="#光线与三角形求交" class="headerlink" title="光线与三角形求交"></a><a href="about:blank#%E5%85%89%E7%BA%BF%E4%B8%8E%E4%B8%89%E8%A7%92%E5%BD%A2%E6%B1%82%E4%BA%A4" title="光线与三角形求交"></a>光线与三角形求交</h3><p>首先求与三角形平面交点，再检查交点是否在三角形内。不过对于三角形中的点有多种表示方法，因此我们可以使用更简单的操作。</p>
 <ul>
 <li>重心坐标：</li>
 </ul>
-<p>三角形$P_0P_1P_2$内部一点$P$可以表示为：</p>
-<p>P &#x3D; \alpha P_0 + \beta P_1 + \gamma P_2</p>
-<p>这里的$(\alpha,\beta,\gamma)$被称为重心坐标。满足$0\leq\alpha,\beta,\gamma \leq 1,\alpha+\beta+\gamma&#x3D;1$。<br>重心坐标有很多应用，纹理映射，法向插值，颜色插值等等。</p>
-<p>通过将重心坐标与射线方程联立：</p>
-<p>P &#x3D; (1 - \beta - \gamma)P_0+\beta P_1 + \gamma P_2 &#x3D; R_0+tR_d</p>
-<p>也就是：</p>
-<p>\begin{pmatrix}R_d &amp;P_0-P_1 &amp; P_0-P_2 \end{pmatrix}\begin{pmatrix} t\\ \beta\\ \gamma \end{pmatrix} &#x3D; P_0 - R_0</p>
-<p>最后需要检查$t,\alpha,\beta,\gamma$的有效性。</p>
+<p>三角形$P_0P_1P_2$内部一点$P$可以表示为：<br>$$<br>P &#x3D; \alpha P_0 + \beta P_1 + \gamma P_2<br>$$<br>这里的$(\alpha,\beta,\gamma)$被称为重心坐标。满足$0\leq\alpha,\beta,\gamma \leq 1,\alpha+\beta+\gamma&#x3D;1$。<br>重心坐标有很多应用，纹理映射，法向插值，颜色插值等等。</p>
+<p>通过将重心坐标与射线方程联立：<br>$$<br>P &#x3D; (1 - \beta - \gamma)P_0+\beta P_1 + \gamma P_2 &#x3D; R_0+tR_d<br>$$<br>也就是：<br>$$<br>\begin{pmatrix}R_d &amp;P_0-P_1 &amp; P_0-P_2 \end{pmatrix}\begin{pmatrix} t\ \beta\ \gamma \end{pmatrix} &#x3D; P_0 - R_0<br>$$<br>最后需要检查$t,\alpha,\beta,\gamma$的有效性。</p>
 <h3 id="光线与多边形求交"><a href="#光线与多边形求交" class="headerlink" title="光线与多边形求交"></a><a href="about:blank#%E5%85%89%E7%BA%BF%E4%B8%8E%E5%A4%9A%E8%BE%B9%E5%BD%A2%E6%B1%82%E4%BA%A4" title="光线与多边形求交"></a>光线与多边形求交</h3><p>与多边形求交也非常重要。思路为求与多边形平面交点，再检查交点是否在多边形内。为了判断第二个，首先我们需要将平面和交点投影到XY，XZ或者YZ面，然后判断在这个平面上的关系。这时候需要使用交点检测算法，属于计算几何的范畴。交点检测算法的原理如下：</p>
 <p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/light_tracking2.jpg"></p>
 <p>很简单，如果一个点是多边形的内点，那么从它射出去的一条射线，与多边形边的交点是奇数个。如果是外点，则交点为0或者为偶数个。但是这检测的过程中会有一些有歧义的地方，比如射线和边重叠了，或者射线和多边形顶点重叠了，需要进行额外的判断。</p>
@@ -374,13 +366,9 @@
 <td>…</td>
 </tr>
 </tbody></table>
-<p>下面的变化依照上面的规律。这是计算各个之间弧长（并不是真正的角度）的方法，另外一种方法通过计算:</p>
-<p>f &#x3D; y_{i+1}x_i - x_{i+1}y_i</p>
-<p>如果$f&#x3D;0$，则边穿过坐标原点，如果$f&gt;0$，弧长代数和增加$\pi$，否则弧长代数和减少$\pi$。最后，得到弧长和为$2\pi$，则为内点。</p>
+<p>下面的变化依照上面的规律。这是计算各个之间弧长（并不是真正的角度）的方法，另外一种方法通过计算:<br>$$<br>f &#x3D; y_{i+1}x_i - x_{i+1}y_i<br>$$<br>如果$f&#x3D;0$，则边穿过坐标原点，如果$f&gt;0$，弧长代数和增加$\pi$，否则弧长代数和减少$\pi$。最后，得到弧长和为$2\pi$，则为内点。</p>
 <p>弧长法好的地方在与它除了速度外还有鲁棒性。因为计算不能精确为0或者$2\pi$，只要近似，我们就能得到结果。</p>
-<h3 id="光线与球面交点"><a href="#光线与球面交点" class="headerlink" title="光线与球面交点"></a><a href="about:blank#%E5%85%89%E7%BA%BF%E4%B8%8E%E7%90%83%E9%9D%A2%E4%BA%A4%E7%82%B9" title="光线与球面交点"></a>光线与球面交点</h3><p>之前的交点计算都是比较简单的，这次说说与球面的交点。球的隐式方程为：</p>
-<p>\Vert P(t) - P_c \Vert &#x3D; r</p>
-<p>最容易想到的方法，是根据方程组来解。联立球的坐标和射线坐标，我们可以得到一个一元二次方程组，从而得到两个解。这个方法的缺点是，需要解方程。而且，我们往往仅需要一个交点即可。下面介绍另一种几何方法。看下图：</p>
+<h3 id="光线与球面交点"><a href="#光线与球面交点" class="headerlink" title="光线与球面交点"></a><a href="about:blank#%E5%85%89%E7%BA%BF%E4%B8%8E%E7%90%83%E9%9D%A2%E4%BA%A4%E7%82%B9" title="光线与球面交点"></a>光线与球面交点</h3><p>之前的交点计算都是比较简单的，这次说说与球面的交点。球的隐式方程为：<br>$$<br>\Vert P(t) - P_c \Vert &#x3D; r<br>$$<br>最容易想到的方法，是根据方程组来解。联立球的坐标和射线坐标，我们可以得到一个一元二次方程组，从而得到两个解。这个方法的缺点是，需要解方程。而且，我们往往仅需要一个交点即可。下面介绍另一种几何方法。看下图：</p>
 <p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/light_tracking4.jpg"></p>
 <ul>
 <li>计算视点指向球心的向量为$l: l &#x3D; P_c - R_0$。</li>
@@ -396,11 +384,7 @@
 <p>由此就计算出来了$t$，从而得到交点。虽然上面的过程看着也比较复杂，但是只是简单的向量乘积，因此速度更快，而且鲁棒性更高。而解方程由于有较多除法，可能会遇到奇异解。</p>
 <h3 id="光线与长方体交点"><a href="#光线与长方体交点" class="headerlink" title="光线与长方体交点"></a><a href="about:blank#%E5%85%89%E7%BA%BF%E4%B8%8E%E9%95%BF%E6%96%B9%E4%BD%93%E4%BA%A4%E7%82%B9" title="光线与长方体交点"></a>光线与长方体交点</h3><p>求光线与长方体的交点是非常有必要的。因为在做光线追踪的时候，对于一个复杂的模型的所有三角面片进行求交点是非常麻烦的，最后求出来结果可能是根本没有交点。因此会需要一个预处理，来排除一定没有交点的情况。这时候常用的方法是用长方体做对物体做包围盒。如果光线与包围盒不相交，那么和模型也一定不相交。这个思想在图形学中是非常重要而且普遍应用的。</p>
 <p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/light_tracking5.jpg"></p>
-<p>对于长方体的求交最直接的想法是向多边形求交那样，对于长方体的6个面进行判断，但是由于长方体的形状特殊，实际上有更简便的方法。首先，长方形有6个面，每两个面是互相平行的，平面方程：$Ax+By+Cz+d &#x3D; 0$，也就是只有$d$有区别。这两个面一个是近平面，一个是远平面。我们求对每对平面（不是长方体的面，是长方体面所在平面）求$t_{max},t_{min}$,最后得到：</p>
-<p>t^{(1)}_{max},t^{(1)}_{min}, t^{(2)}_{max},t^{(2)}_{min},t^{(3)}_{max},t^{(3)}_{min}.</p>
-<p>接着，我们对所有的最大值求最小值，对所有的最小值求最大值。得到：</p>
-<p>t_{max} &#x3D; \min\{t^{(1)}_{max},t^{(2)}_{max},t^{(3)}_{max}\}\\ t_{min} &#x3D; \max\{t^{(1)}_{min},t^{(2)}_{min},t^{(3)}_{min}\}</p>
-<p>如果$t_{max} \ge t_{min}$，则这两个就是光线与长方体的交点。对于这个算法的原理解释，我们可以在二维的情况下画图理解，这个思路是非常巧妙的，如下：</p>
+<p>对于长方体的求交最直接的想法是向多边形求交那样，对于长方体的6个面进行判断，但是由于长方体的形状特殊，实际上有更简便的方法。首先，长方形有6个面，每两个面是互相平行的，平面方程：$Ax+By+Cz+d &#x3D; 0$，也就是只有$d$有区别。这两个面一个是近平面，一个是远平面。我们求对每对平面（不是长方体的面，是长方体面所在平面）求$t_{max},t_{min}$,最后得到：<br>$$<br>t^{(1)}<em>{max},t^{(1)}</em>{min}, t^{(2)}<em>{max},t^{(2)}</em>{min},t^{(3)}<em>{max},t^{(3)}</em>{min}.<br>$$<br>接着，我们对所有的最大值求最小值，对所有的最小值求最大值。得到：<br>$$<br>t_{max} &#x3D; \min{t^{(1)}<em>{max},t^{(2)}</em>{max},t^{(3)}<em>{max} }\ t</em>{min} &#x3D; \max{t^{(1)}<em>{min},t^{(2)}</em>{min},t^{(3)}<em>{min} }<br>$$<br>如果$t</em>{max} \ge t_{min}$，则这两个就是光线与长方体的交点。对于这个算法的原理解释，我们可以在二维的情况下画图理解，这个思路是非常巧妙的，如下：</p>
 <p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/light_tracking6.jpg"></p>
 <p>实际上，这个不光是长方体，只要有一组组平行面组成的多面体（凸的）都可以。</p>
 <h2 id="计算阴影"><a href="#计算阴影" class="headerlink" title="计算阴影"></a><a href="about:blank#%E8%AE%A1%E7%AE%97%E9%98%B4%E5%BD%B1" title="计算阴影"></a>计算阴影</h2><p>在交点向着光源发出一条射线，如果有遮挡，那说明该点位于阴影区域。在计算阴影区域时，我们只需关注是否与物体相交，而不用关注哪个是最近交点。</p>

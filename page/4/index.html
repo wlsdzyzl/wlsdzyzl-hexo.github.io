@@ -89,7 +89,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">82</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">17</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">140</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -128,18 +128,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-count">141</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">83</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -207,6 +207,98 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2019/01/21/SLAM%E2%80%94%E2%80%94%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89%E5%85%89%E6%B5%81%E6%B3%95%E5%92%8C%E7%9B%B4%E6%8E%A5%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/21/SLAM%E2%80%94%E2%80%94%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89%E5%85%89%E6%B5%81%E6%B3%95%E5%92%8C%E7%9B%B4%E6%8E%A5%E6%B3%95/" class="post-title-link" itemprop="url">SLAM——视觉里程计（五）光流法和直接法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-21T00:00:00+08:00">2019-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-22 07:28:57" itemprop="dateModified" datetime="2023-10-22T07:28:57+08:00">2023-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>特征点法是提取特征，根据稀疏特征点的对应点来计算相机的位姿变换。但是它是有比较明显的缺点的：1.特征点的提取比较耗时，限制了SLAM的运行速度，2. 特征点过于稀疏，可能会浪费很多有用信息 3. 我们在生活中总会遇到纹理特征缺失的情况，比如一面白墙，这时候我们找不到足够的特征点来得到相机的运动。所以我们来讨论另外的两种方法，叫做光流法和直接法。  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/21/SLAM%E2%80%94%E2%80%94%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%EF%BC%88%E4%BA%94%EF%BC%89%E5%85%89%E6%B5%81%E6%B3%95%E5%92%8C%E7%9B%B4%E6%8E%A5%E6%B3%95/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2019/01/20/SLAM%E2%80%94%E2%80%94%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%EF%BC%88%E5%9B%9B%EF%BC%89ICP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -243,7 +335,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:27:32" itemprop="dateModified" datetime="2023-10-21T04:27:32+08:00">2023-10-21</time>
+      <time title="Modified: 2023-10-22 07:28:14" itemprop="dateModified" datetime="2023-10-22T07:28:14+08:00">2023-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -335,7 +427,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:27:30" itemprop="dateModified" datetime="2023-10-21T04:27:30+08:00">2023-10-21</time>
+      <time title="Modified: 2023-10-22 07:25:19" itemprop="dateModified" datetime="2023-10-22T07:25:19+08:00">2023-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -427,7 +519,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:25:53" itemprop="dateModified" datetime="2023-10-21T04:25:53+08:00">2023-10-21</time>
+      <time title="Modified: 2023-10-22 07:15:18" itemprop="dateModified" datetime="2023-10-22T07:15:18+08:00">2023-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -611,7 +703,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:24:40" itemprop="dateModified" datetime="2023-10-21T04:24:40+08:00">2023-10-21</time>
+      <time title="Modified: 2023-10-22 07:07:12" itemprop="dateModified" datetime="2023-10-22T07:07:12+08:00">2023-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -703,7 +795,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:27:28" itemprop="dateModified" datetime="2023-10-21T04:27:28+08:00">2023-10-21</time>
+      <time title="Modified: 2023-10-22 07:24:17" itemprop="dateModified" datetime="2023-10-22T07:24:17+08:00">2023-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -795,7 +887,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:24:36" itemprop="dateModified" datetime="2023-10-21T04:24:36+08:00">2023-10-21</time>
+      <time title="Modified: 2023-10-22 07:05:02" itemprop="dateModified" datetime="2023-10-22T07:05:02+08:00">2023-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -887,7 +979,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:24:38" itemprop="dateModified" datetime="2023-10-21T04:24:38+08:00">2023-10-21</time>
+      <time title="Modified: 2023-10-22 07:32:27" itemprop="dateModified" datetime="2023-10-22T07:32:27+08:00">2023-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1071,7 +1163,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:24:32" itemprop="dateModified" datetime="2023-10-21T04:24:32+08:00">2023-10-21</time>
+      <time title="Modified: 2023-10-22 07:03:02" itemprop="dateModified" datetime="2023-10-22T07:03:02+08:00">2023-10-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1948,100 +2040,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/28/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94EVD%E4%B8%8ESVD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/28/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94EVD%E4%B8%8ESVD/" class="post-title-link" itemprop="url">数学——EVD与SVD</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-28 20:59:54" itemprop="dateCreated datePublished" datetime="2018-11-28T20:59:54+08:00">2018-11-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 15:45:15" itemprop="dateModified" datetime="2023-10-21T15:45:15+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这个博客介绍特征值分解（Eigen Value Decomposition,EVD）和奇异值分解(Singular Value Decomposition),　可以当作机器学习的补充材料。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/28/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94EVD%E4%B8%8ESVD/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
