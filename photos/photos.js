@@ -40,13 +40,12 @@ photo ={
            imageSize = data[i].split(' ')[0];
            imageX = imageSize.split('.')[0];
            imageY = imageSize.split('.')[1];
-            li += '<div class="card" style="width:330px">' +
-                    '<div class="ImageInCard" style="height:'+ 330 * imageY / imageX + 'px">' +
-                      '<a data-fancybox="gallery" href="https://wlsdzyzl.top/photos/uploaded/' + imgNameWithPattern + '?raw=true" data-caption="' + imgName + '">' +
-                        '<img src="https://wlsdzyzl.top/photos/uploaded/' + imgNameWithPattern + '?raw=true"/>' +
+            li += 
+                '<div class="TextInCard">' + imgName + '</div>' +
+                '<div class="ImageInCard" style="width:100%"' +
+                      '<a href="/photos/uploaded/' + imgNameWithPattern + '?raw=true" data-caption="' + imgName + '">' +
+                        '<img src="/photos/uploaded/' + imgNameWithPattern + '?raw=true"/>' +
                       '</a>' +
-                    '</div>' +
-                    // '<div class="TextInCard">' + imgName + '</div>' +
                   '</div>'
         }
         $(".ImageGrid").append(li);
