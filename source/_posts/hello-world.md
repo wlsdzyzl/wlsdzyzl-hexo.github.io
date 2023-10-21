@@ -2,7 +2,7 @@
 title: Hello World
 date: 2018-7-25 17:13
 tags: [casual note]
-categories: 灌水
+categories: 随手写的
 ---
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时间过的真快，转眼间从大学毕业已经一个月了。

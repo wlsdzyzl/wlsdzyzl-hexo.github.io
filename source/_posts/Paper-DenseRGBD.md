@@ -1,7 +1,7 @@
 ---
 title: Paper——Real-Time Visual Odometry from Dense RGB-D Images
 date: 2019-12-10 00:00:00
-tags: [paper,mathmetics]
+tags: [paper,mathematics]
 categories: 论文
 mathjax: true
 ---    

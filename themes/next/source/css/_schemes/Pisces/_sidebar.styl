@@ -55,18 +55,29 @@
   if (not hexo-config('social_icons.icons_only')) {
     width: 50%;
   }
-
   a {
     border-bottom: 0;
     border-radius: 4px;
     display: block;
-
     &:hover {
       background: var(--body-bg-color);
     }
   }
 }
-
+.links-of-flinks-item {
+  sidebar-inline-links-item();
+  width: 100%;
+  a {
+    color: $grey-dark;
+    border-bottom: 0;
+    border-radius: 4px;
+    display: block;
+    &:hover {
+      background: var(--body-bg-color);
+    }
+  }
+  
+}
 .links-of-blogroll-item {
   if (hexo-config('links_settings.layout') == 'inline') {
     display: inline-block;

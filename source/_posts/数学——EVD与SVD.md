@@ -1,7 +1,7 @@
 ---
 title: 数学——EVD与SVD
 date: 2018-11-28 20:59:54
-tags: [mathmatics, algebra, SVD]
+tags: [mathematics, algebra, SVD]
 mathjax: true
 categories: 数学
 ---

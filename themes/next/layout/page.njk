@@ -10,6 +10,8 @@
     {{- __('title.tag') + page_title_suffix }}
   {%- elif page.type === 'schedule' and not page.title %}
     {{- __('title.schedule') + page_title_suffix }}
+{% elif page.type === "photos" and not page.title %}
+  {{- __('title.photos') + page_title_suffix }}
   {%- else %}
     {{- page.title + page_title_suffix }}
   {%- endif %}
@@ -34,6 +36,8 @@
           {%- include '_partials/page/categories.njk' -%}
         {% elif page.type === 'schedule' %}
           {%- include '_partials/page/schedule.njk' -%}
+        {% elif page.type === "photos" %}
+        {{ page.content }}<div class="ImageGrid"></div>
         {% else %}
           {{ page.content }}
         {%- endif %}
