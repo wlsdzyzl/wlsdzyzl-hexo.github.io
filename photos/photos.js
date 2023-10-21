@@ -4,11 +4,30 @@ photo ={
     init: function () {
         // alert('fuck???');
         var that = this;
-        $.getJSON("/photos/photoslist.json", function (data) {
+        fetch('/photos/photoslist.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json(); // 将响应解析为JSON格式
+        })
+        .then(data => {
             // alert(data);
             that.render(that.page, data);
             //that.scroll(data);
+        })
+        .catch(error => {
+          console.error('There has been a problem with your fetch operation:', error);
         });
+        // console.log("成功获取JSON数据：");
+        // var that = this;
+        // console.log("成功获取JSON数据：");
+        // $.getJSON("/photos/photoslist.json", function (data) {
+        //     console.log("成功获取JSON数据：", data);
+        //     alert('fuck???');
+        //     that.render(that.page, data);
+        //     //that.scroll(data);
+        // });
     },
     render: function (page, data) {
         var begin = (page - 1) * this.offset;
