@@ -1,13 +1,11 @@
 {%- if theme.friendly_links %}
-  <div class="links-of-author animated">
-  <div class="site-author-name" itemprop="name">Friendly Links</div>
+<div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Friendly Links</p>
+
     {%- for name,link in theme.friendly_links %}
-    
-      <span class="links-of-flinks-item">
-        {%- set sidebarURL = link.split('||')[0] | trim %}
-        {%- set sidebarText = '' if (theme.social_icons.enable and theme.social_icons.icons_only) else name %}
-        {{ next_url(sidebarURL, sidebarText, {title: name + ' → ' + sidebarURL, rel: 'noopener me'}) }}
-      </span>
+        <div class="site-description" itemprop="description">
+        <a href="{{link}}" style="color:inherit" >{{name}}</a>
+       </div>
     {%- endfor %}
-  </div>
+</div>
 {%- endif %}

@@ -1,75 +1,75 @@
 ---
-title: CPP——并发编程（四）condition\_variable
+title: CPP——并发编程（四）condition_variable
 date: 2019-03-31 00:00:00
-tags: [cpp,concurrent programmingm,Programming language]
+tags: [cpp,concurrent programming,Programming language]
 categories: 程序设计语言
 mathjax: true
 ---   
 
-到目前为止介绍的并发过程都是类似于去“争夺”控制，也就是只要有机会就去上，但是有时候我们会遇到那种等待的情况，达到某个条件了才能运行，这时候就需要用条件变量（condition\_variable）。
+到目前为止介绍的并发过程都是类似于去“争夺”控制，也就是只要有机会就去上，但是有时候我们会遇到那种等待的情况，达到某个条件了才能运行，这时候就需要用条件变量（condition_variable）。
 
 
 <!--more-->
 
 
-关于条件变量的内容都在头文件中。它包含了std::condition\_variable，std::condition\_variable\_any，还有枚举类型std::cv\_status，函数std::notify\_all\_at\_thread\_exit()。这篇文章会介绍上面这些类以及函数的作用。
+关于条件变量的内容都在头文件中。它包含了std::condition_variable，std::condition_variable_any，还有枚举类型std::cv_status，函数std::notify_all_at_thread_exit()。这篇文章会介绍上面这些类以及函数的作用。
 
-### [](about:blank#std-condition-variable "std::condition_variable")std::condition\_variable
+### [](about:blank#std-condition-variable "std::condition_variable")std::condition_variable
 
-condition\_variable的设定是这样的，它调用wait函数，使用unique\_lock锁住当前线程，表明条件还未满足，这时候当前线程会被阻塞，直到另外一个线程在相同的condition\_variable变量上调用了notification相关的函数，说明条件满足，则开始运行。
+condition_variable的设定是这样的，它调用wait函数，使用unique_lock锁住当前线程，表明条件还未满足，这时候当前线程会被阻塞，直到另外一个线程在相同的condition_variable变量上调用了notification相关的函数，说明条件满足，则开始运行。
 
-condition\_variable只有默认构造函数，拷贝构造函数被删除。下面介绍它其他的成员函数。
+condition_variable只有默认构造函数，拷贝构造函数被删除。下面介绍它其他的成员函数。
 
 **wait**
 
-condition\_variable有两个wait函数的重载。  
+condition_variable有两个wait函数的重载。  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wait</span> <span class="params">(unique_lock&lt;mutex&gt;&amp; lck)</span></span>;<span class="comment">// unconditional</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Predicate</span>&gt; //<span class="title">predicate</span></span></span><br><span class="line"><span class="class">  <span class="title">void</span> <span class="title">wait</span> (<span class="title">unique_lock</span>&lt;mutex&gt;&amp; <span class="title">lck</span>, <span class="title">Predicate</span> <span class="title">pred</span>);</span></span><br></pre></td></tr></tbody></table>
 
-wait接受一个参数，类型是unique\_lock，调用wait函数后，当前线程被阻塞（当前线程已经获得了mutex的控制权，也就是mutex已经被锁住了），直到该condition\_variable变量被notify之后，才能继续运行wait之后的内容。当线程被阻塞时，wait会调用unique\_lock的unlock对mutex进行解锁，使得其他的线程可以占用mutex。当被notify之后，wait会调用lock来继续锁住mutex（如果此时被占用，当前线程继续被阻塞）。
+wait接受一个参数，类型是unique_lock，调用wait函数后，当前线程被阻塞（当前线程已经获得了mutex的控制权，也就是mutex已经被锁住了），直到该condition_variable变量被notify之后，才能继续运行wait之后的内容。当线程被阻塞时，wait会调用unique_lock的unlock对mutex进行解锁，使得其他的线程可以占用mutex。当被notify之后，wait会调用lock来继续锁住mutex（如果此时被占用，当前线程继续被阻塞）。
 
 对于predicate的wait，只有当predicate条件为false时候调用wait才会阻塞当前线程，并且只有当其他的线程通知predicate为true时才会解除阻塞，相当于又多了一个条件。predicate是一个callable的对象，不接受参数，并且能返回值可以转化成bool值。相当于：  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (!pred()) wait(lck);</span><br></pre></td></tr></tbody></table>
 
-**wait\_for**
+**wait_for**
 
-wait\_for与wait一样，也有两个重载。  
+wait_for与wait一样，也有两个重载。  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Rep</span>, <span class="title">class</span> <span class="title">Period</span>&gt;//<span class="title">unconditional</span></span></span><br><span class="line"><span class="class">  <span class="title">cv_status</span> <span class="title">wait_for</span> (<span class="title">unique_lock</span>&lt;mutex&gt;&amp; <span class="title">lck</span>,</span></span><br><span class="line"><span class="class">                      <span class="title">const</span> <span class="title">chrono</span>:</span>:duration&lt;Rep,Period&gt;&amp; rel_time);</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Rep</span>, <span class="title">class</span> <span class="title">Period</span>, <span class="title">class</span> <span class="title">Predicate</span>&gt;//<span class="title">predicate</span></span></span><br><span class="line"><span class="class">       <span class="title">bool</span> <span class="title">wait_for</span> (<span class="title">unique_lock</span>&lt;mutex&gt;&amp; <span class="title">lck</span>,</span></span><br><span class="line"><span class="class">                      <span class="title">const</span> <span class="title">chrono</span>:</span>:duration&lt;Rep,Period&gt;&amp; rel_time, Predicate pred);</span><br></pre></td></tr></tbody></table>
 
-wait\_for和wait的区别在于它会接受一个时间段，在当前线程收到通知，或者在指定的时间内，它都会阻塞，当超时，或者收到了通知达到条件，wait\_for返回，剩下的和wait一致。
+wait_for和wait的区别在于它会接受一个时间段，在当前线程收到通知，或者在指定的时间内，它都会阻塞，当超时，或者收到了通知达到条件，wait_for返回，剩下的和wait一致。
 
-**wait\_until**
+**wait_until**
 
-wait\_until和wait\_for类似，只不过时间范围被替换成了时间点。  
+wait_until和wait_for类似，只不过时间范围被替换成了时间点。  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Clock</span>, <span class="title">class</span> <span class="title">Duration</span>&gt;//<span class="title">unconditional</span></span></span><br><span class="line"><span class="class">  <span class="title">cv_status</span> <span class="title">wait_until</span> (<span class="title">unique_lock</span>&lt;mutex&gt;&amp; <span class="title">lck</span>,</span></span><br><span class="line"><span class="class">                        <span class="title">const</span> <span class="title">chrono</span>:</span>:time_point&lt;Clock,Duration&gt;&amp; abs_time);</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Clock</span>, <span class="title">class</span> <span class="title">Duration</span>, <span class="title">class</span> <span class="title">Predicate</span>&gt;</span></span><br><span class="line"><span class="class">       <span class="title">bool</span> <span class="title">wait_until</span> (<span class="title">unique_lock</span>&lt;mutex&gt;&amp; <span class="title">lck</span>,//<span class="title">predicate</span></span></span><br><span class="line"><span class="class">                        <span class="title">const</span> <span class="title">chrono</span>:</span>:time_point&lt;Clock,Duration&gt;&amp; abs_time,</span><br><span class="line">                        Predicate pred);</span><br></pre></td></tr></tbody></table>
 
-**notify\_one**
+**notify_one**
 
 唤醒某个等待线程，如果没有线程在等待，那么这个函数什么也不做，如果有多个线程等待，唤醒哪个线程是随机的。
 
-**notify\_all**
+**notify_all**
 
 唤醒所有的等待线程。
 
-### [](about:blank#std-condition-variable-any "std::condition_variable_any")std::condition\_variable\_any
+### [](about:blank#std-condition-variable-any "std::condition_variable_any")std::condition_variable_any
 
-condition\_variable\_any和condition\_variable的区别是wait接受的锁是任意的，而condition\_variable只能接受unique\_lock。
+condition_variable_any和condition_variable的区别是wait接受的锁是任意的，而condition_variable只能接受unique_lock。
 
-### [](about:blank#std-cv-status "std::cv_status")std::cv\_status
+### [](about:blank#std-cv-status "std::cv_status")std::cv_status
 
-这个枚举类型仅仅枚举了两个状态，标志着wait\_for或者wait\_until是否是因为超时解除阻塞的。
+这个枚举类型仅仅枚举了两个状态，标志着wait_for或者wait_until是否是因为超时解除阻塞的。
 
 | 值 | 描述 |
 | --- | --- |
-| cv\_status::no\_timeout | wait\_for 或者 wait\_until 没有超时，即在规定的时间段内线程收到了通知 |
-| cv\_status::timeout | wait\_for 或者 wait\_until 超时 |
+| cv_status::no_timeout | wait_for 或者 wait_until 没有超时，即在规定的时间段内线程收到了通知 |
+| cv_status::timeout | wait_for 或者 wait_until 超时 |
 
-### [](about:blank#std-notify-all-at-thread-exit "std::notify_all_at_thread_exit")std::notify\_all\_at\_thread\_exit
+### [](about:blank#std-notify-all-at-thread-exit "std::notify_all_at_thread_exit")std::notify_all_at_thread_exit
 
-notify\_all\_at\_thread\_exit是一个函数，原型如下：  
+notify_all_at_thread_exit是一个函数，原型如下：  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">notify_all_at_thread_exit</span> <span class="params">(condition_variable&amp; cond, unique_lock&lt;mutex&gt; lck)</span></span>;</span><br></pre></td></tr></tbody></table>
 

@@ -24,11 +24,11 @@ mathjax: true
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Couldn't find an AF_INET address for [XXX]</span><br></pre></td></tr></tbody></table>
 
-这导致虽然服务器可以连接到Master，但是在客户端A发的消息却送不到服务器上。因为没有找到一个AF\_INET address。这个地址有什么用我也不清楚，因为目前的我只重视问题怎么解决，而不在乎背后的原理，因此就不多了解了。后来发现，多机通信还要在各个结点的机器上指定ROS\_IP:  
+这导致虽然服务器可以连接到Master，但是在客户端A发的消息却送不到服务器上。因为没有找到一个AF_INET address。这个地址有什么用我也不清楚，因为目前的我只重视问题怎么解决，而不在乎背后的原理，因此就不多了解了。后来发现，多机通信还要在各个结点的机器上指定ROS_IP:  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname -I</span><br></pre></td></tr></tbody></table>
 
-得到IP后，再通过下面的指令分别指定本机的ROS\_IP：  
+得到IP后，再通过下面的指令分别指定本机的ROS_IP：  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export ROS_IP=192.168.0.110</span><br><span class="line">export ROS_IP=10.8.5.230</span><br></pre></td></tr></tbody></table>
 

@@ -6,7 +6,7 @@ categories: ROS
 mathjax: true
 ---            
 
-ROS是Robot os，也就是机器人操作系统。目前我们看到的很多机器人，比如波士顿动力，还有很多slam中，都用到了ros。早在大四的时候我在电脑上试图跑CHISEL的时候就看到了ros，当时觉得真是复杂。后来到了现在发现还是得啃。复杂只是因为不了解，任何好用的工具，都是尝试再把事情变得简单。
+ROS是Robot os，也就是机器人操作系统。目前我们看到的很多机器人，比如波士顿动力，还有很多SLAM中，都用到了ros。早在大四的时候我在电脑上试图跑CHISEL的时候就看到了ros，当时觉得真是复杂。后来到了现在发现还是得啃。复杂只是因为不了解，任何好用的工具，都是尝试再把事情变得简单。
 
 
 <!--more-->
@@ -29,7 +29,7 @@ ROS虽然是一个操作系统，但是它并不是像linux，windows这样的�
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mkdir catkin_ws</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> catkin_ws</span><br><span class="line"></span><br><span class="line">mkdir src</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> src </span><br><span class="line"></span><br><span class="line">catkin_init_workspace</span><br></pre></td></tr></tbody></table>
 
-在src文件里编写package，或者拷贝别的package进来。编译时，在src的父目录，也就是catkin\_ws中编译：  
+在src文件里编写package，或者拷贝别的package进来。编译时，在src的父目录，也就是catkin_ws中编译：  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make</span><br></pre></td></tr></tbody></table>
 
@@ -45,4 +45,4 @@ ROS虽然是一个操作系统，但是它并不是像linux，windows这样的�
 
 metapackage是一组相关包的集合，一般来说除了非常专业的人，我们很少编写这样的包，只需要了解即可。在ros官方提供了很多这样的集合包，比如navigation，turtlebut等等，下载的时候也可以一键打包下载。
 
-这就是关于ros一些基本的介绍，注意，这一系列文章是记录了一些学习过程，类似于整理笔记，而不是一个教程。参考资料可以查看[ros\_wiki](http://wiki.ros.org/action/fullsearch/ROS?action=fullsearch&context=180&value=linkto%3A%22cn%2FROS%22)。
+这就是关于ros一些基本的介绍，注意，这一系列文章是记录了一些学习过程，类似于整理笔记，而不是一个教程。参考资料可以查看[ros_wiki](http://wiki.ros.org/action/fullsearch/ROS?action=fullsearch&context=180&value=linkto%3A%22cn%2FROS%22)。

@@ -29,7 +29,7 @@ mathjax: true
     <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd nicp</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></tbody></table>
     
 
-这个就是很普通的步骤，但是你最后可能会出现各种错误，比如未定义的引用，或者undefined reference to symbol哒哒哒之类的，这是因为在作者的cmakelists文件里，需要的opencv是2.4.8，使用3+的opencv编译可能会通过（之前的18.04版本无法编译通过，需要把2.4.8去掉才行，而且即使去掉了，找到的3.x的版本，依然make不成功。在这个项目的issue里也有说换了个系统成功了，所以尽量使用16.04系统吧），但是运行程序的时候可能会出错。可以下载两个opencv，分别是2.x和3.x，但是不能全部安装。不过，cmakelists中安装了之后只是把路径添加到环境变量了，我们也可以指定OpenCV的路径，这样它找到的就是我们想要让它找的版本。find\_package想要找的是OpenCVModules.cmake，这个一般在OpenCV的build文件夹里，因此在CMakeLists.txt中find\_package(OpenCV REQUIRED)前加一句：  
+这个就是很普通的步骤，但是你最后可能会出现各种错误，比如未定义的引用，或者undefined reference to symbol哒哒哒之类的，这是因为在作者的cmakelists文件里，需要的opencv是2.4.8，使用3+的opencv编译可能会通过（之前的18.04版本无法编译通过，需要把2.4.8去掉才行，而且即使去掉了，找到的3.x的版本，依然make不成功。在这个项目的issue里也有说换了个系统成功了，所以尽量使用16.04系统吧），但是运行程序的时候可能会出错。可以下载两个opencv，分别是2.x和3.x，但是不能全部安装。不过，cmakelists中安装了之后只是把路径添加到环境变量了，我们也可以指定OpenCV的路径，这样它找到的就是我们想要让它找的版本。find_package想要找的是OpenCVModules.cmake，这个一般在OpenCV的build文件夹里，因此在CMakeLists.txt中find_package(OpenCV REQUIRED)前加一句：  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(OpenCV_DIR <span class="string">"PATH\OpenCV-2.x\build"</span>)</span><br></pre></td></tr></tbody></table>
 
@@ -51,6 +51,6 @@ mathjax: true
 
 这样的话环境变量会立即生效，如果还不行就重启。
 
-然后，如果想要使用NICP的几个例子，对于下载的源代码中的CMakeLists.txt文件，find\_package(opencv)的这一块，也需要做相应的改动。然后就应该可以跑的通了。
+然后，如果想要使用NICP的几个例子，对于下载的源代码中的CMakeLists.txt文件，find_package(opencv)的这一块，也需要做相应的改动。然后就应该可以跑的通了。
 
 可是比较坑的地方是，NICP的代码不支持C++11以上！编译选项加上-std=c++11，就会出现“对类内部的static成员初始化需要constexpr类型”的错误，还好这个比较容易改，将static去掉就好了。这个问题还是挺诡异的，因为讲道理模板元编程的话是可以这样做的。

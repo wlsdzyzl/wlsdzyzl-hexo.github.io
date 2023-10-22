@@ -38,9 +38,9 @@ custom_file_path:
 
 # Schemes
 # scheme: Muse
-#scheme: Mist
-#scheme: Pisces
-scheme: Gemini
+scheme: Mist
+# scheme: Pisces
+# scheme: Gemini
 
 # Dark Mode
 darkmode: false
@@ -134,6 +134,7 @@ sidebar:
   padding: 18
   # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
   offset: 12
+  onmobile: true
 
 # Sidebar Avatar
 avatar:
@@ -164,7 +165,7 @@ social:
   # Instagram: https://instagram.com/wlsdzyzl || instagram
   #Skype: skype:yourname?call|chat || skype
 friendly_links:
-  yakult: https://yakult.fun/
+  yakult.fun: https://yakult.fun/
 
 social_icons:
   enable: true
@@ -562,7 +563,7 @@ math:
   every_page: false
 
   mathjax:
-    enable: false
+    enable: true
     # Available values: none | ams | all
     tags: none
 

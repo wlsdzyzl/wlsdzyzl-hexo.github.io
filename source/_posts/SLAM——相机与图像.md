@@ -241,7 +241,7 @@ target_link_libraries(imageOP ${OpenCV_LIBS})
 
 ## 总结：点云拼接 ##
 
-现在使用之前介绍的知识，来完成一个点云拼接的任务。这个需要用到高博提供的一些图片数据。地址：[joinMap](https://github.com/gaoxiang12/slambook/tree/master/ch5/joinMap).
+现在使用之前介绍的知识，来完成一个点云拼接的任务。这个需要用到高博提供的一些图片数据。地址：[joinMap](https://github.com/gaoxiang12/SLAMbook/tree/master/ch5/joinMap).
 
 点云的操作需要用到点云库PCL。
 

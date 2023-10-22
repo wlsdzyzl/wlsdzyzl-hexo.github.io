@@ -1,7 +1,7 @@
 ---
 title: CPP——并发编程（一）thread
 date: 2019-03-28 00:00:00
-tags: [cpp,concurrent programmingm,Programming language]
+tags: [cpp,concurrent programming,Programming language]
 categories: 程序设计语言
 mathjax: true
 ---   
@@ -21,7 +21,7 @@ thread的默认构造函数，初始化，拷贝构造函数，移动构造函�
 | --- | --- |
 | default (1) | thread() noexcept; |
 | initialization (2) | template explicit thread (Fn&& fn, Args&&… args); |
-| copy \[deleted \] (3) | thread (const thread&) = delete; |
+| copy [deleted ] (3) | thread (const thread&) = delete; |
 | move (4) | thread (thread&& x) noexcept; |
 
 可以看到的是，thread类型的初始化为参数可变参数,且不能隐式转换（explicit关键字），没有拷贝构造函数。移动构造后，原有的线程不再存在。示例代码如下：  
@@ -36,7 +36,7 @@ thread的默认构造函数，初始化，拷贝构造函数，移动构造函�
 | --- | --- |
 | move (1) | thread& operator= (thread&& rhs) noexcept; |
 
-copy \[deleted \] (2)thread& operator= (const thread&) = delete;
+copy [deleted ] (2)thread& operator= (const thread&) = delete;
 
 可以看到的是赋值函数的两个重构对应的是拷贝构造函数和移动构造函数，也就是thread只可以被右值赋值。  
 
@@ -52,7 +52,7 @@ join函数阻塞线程执行完毕再执行之后的结果。如：
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="function">thread <span class="title">t</span><span class="params">(f,<span class="built_in">std</span>::ref(n))</span></span>;</span><br><span class="line">t.join();</span><br><span class="line">other_operation();</span><br></pre></td></tr></tbody></table>
 
-则other\_operation只有在t线程执行完，也就是f函数执行完毕才会执行。需要注意的是，一旦一个线程创建了，它就开始运行了。
+则other_operation只有在t线程执行完，也就是f函数执行完毕才会执行。需要注意的是，一旦一个线程创建了，它就开始运行了。
 
 **thread::joinable()**
 
@@ -64,9 +64,9 @@ joinable返回这个线程是否可以join，也就是阻塞。当线程有下�
 *   已经被move了，被move后是一个右值，它原有的内容都是未定义的
 *   已经join或者detach过，detach稍后说明
 
-**thread::get\_id()**
+**thread::get_id()**
 
-id get\_id() const noexcept;
+id get_id() const noexcept;
 
 返回线程的id。没什么好说的，创建线程的时候会给每个线程分配一个id。
 
@@ -82,16 +82,16 @@ void swap (thread& x) noexcept;
 
 交换两个线程。
 
-**thread::native\_handle()**
+**thread::native_handle()**
 
-native\_handle\_type native\_handle();
+native_handle_type native_handle();
 
 这个函数只有库函数支持该函数时方法才有效。如果有效，它用于获取与操作系统相关的原生线程句柄。
 
-此外，thread还有两个数据成员，id和native\_handle\_type，他们分布代表id和原生句柄的类型。
+此外，thread还有两个数据成员，id和native_handle_type，他们分布代表id和原生句柄的类型。
 
-thread还有一个静态成员函数：**thread::hardware\_concurrency**：
+thread还有一个静态成员函数：**thread::hardware_concurrency**：
 
-static unsigned hardware\_concurrency() noexcept;
+static unsigned hardware_concurrency() noexcept;
 
 这个函数用于获取程序可以调动的最大线程数，在多核系统中，也就代表CPU个数，仅作参考。上面就是关于线程的内容，内容不多。

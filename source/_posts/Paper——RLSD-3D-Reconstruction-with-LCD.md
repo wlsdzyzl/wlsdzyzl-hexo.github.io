@@ -1,7 +1,7 @@
 ---
 title: Paper——RLSD 3D Reconstruction with LCD
 date: 2019-02-21 21:29:38
-tags: [paper, 3D reconstruction, slam]
+tags: [paper, 3D reconstruction, SLAM]
 mathjax: true
 categories: 论文
 ---

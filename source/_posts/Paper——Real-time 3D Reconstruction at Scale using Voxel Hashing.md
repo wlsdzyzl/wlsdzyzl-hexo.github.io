@@ -43,9 +43,9 @@ mathjax: true
 
 hash表与一般的hash表区别不大，也就是根据世界坐标位置$(x,y,z)$通过哈希函数得到一个映射，找到block，从而找到voxel。hash函数如下：
 
-H(x,y,z) = (x\\cdot p\_1 \\oplus y\\cdot p\_2 \\oplus z \\cdot p\_3)mod n
+H(x,y,z) = (x\cdot p_1 \oplus y\cdot p_2 \oplus z \cdot p_3)mod n
 
-为了减少冲突，$p\_1,p\_2,p\_3$是大质数（73856093, 19349669, 83492791），n是hash表的大小。除了存储一个指针指向voxel block，每个哈希entry也包含了世界坐标，一个偏移量，用来存储冲突发生时，相对于计算的位置的偏移量。
+为了减少冲突，$p_1,p_2,p_3$是大质数（73856093, 19349669, 83492791），n是hash表的大小。除了存储一个指针指向voxel block，每个哈希entry也包含了世界坐标，一个偏移量，用来存储冲突发生时，相对于计算的位置的偏移量。
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HashEntry</span>{</span></span><br><span class="line">    <span class="keyword">short</span> position[<span class="number">3</span>];<span class="comment">//the coordinate of </span></span><br><span class="line">    <span class="keyword">short</span> offset;<span class="comment">//offset of the next hash entry that suppose to be in the same bucket</span></span><br><span class="line">    <span class="keyword">int</span> pointer;<span class="comment">//pointer to voxel block</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table>
 

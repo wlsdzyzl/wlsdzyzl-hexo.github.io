@@ -23,40 +23,40 @@ B样条的动机来源于插值中的Runge-Kutta现象，高阶多项式很容�
 
 [](about:blank#B%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF%E5%8F%8A%E5%85%B6%E6%80%A7%E8%B4%A8 "B样条曲线及其性质")B样条曲线及其性质
 --------------------------------------------------------------------------------------------------------------
-
-P(t) = \\sum\_{i=0}^nP\_iN\_{i,k}(t).
-
-上式中，$P\_{i}(i=0,…,n)$是控制点，$N\_{i,k}(i=0,…,n)$是第$i$个$k$阶B样条基函数。B样条基函数是分段$k$次（$k+1$阶）多项式，它们由节点向量唯一决定，节点向量则是一串非减的实数序列。要注意这里的阶比次多一，但是实际上是一样的，只是由于历史原因叫法不同。次是从0开始，而阶从1开始。
+$$
+P(t) = \sum_{i=0}^nP_iN_{i,k}(t).
+$$
+上式中，$P_{i}(i=0,…,n)$是控制点，$N_{i,k}(i=0,…,n)$是第$i$个$k$阶B样条基函数。B样条基函数是分段$k$次（$k+1$阶）多项式，它们由节点向量唯一决定，节点向量则是一串非减的实数序列。要注意这里的阶比次多一，但是实际上是一样的，只是由于历史原因叫法不同。次是从0开始，而阶从1开始。
 
 ![](https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/Byt1.jpg)
 
 B样条基函数定义有多种解释，最简单的是由de Boor-Cox递推公式定义的：
-
-N\_{i,0}(t) = \\left\\{\\begin{matrix} 1 & t\_i < t< t\_{i+1}\\\\ 0 & otherwise \\end{matrix}\\right.\\\\ N\_{i,k} = \\frac{t - t\_i}{t\_{i+k} - t\_{i} }N\_{i,k-1}(t) + \\frac{t\_{i+k+1} - t}{t\_{i+k+1} - t\_{i+1} } N\_{i+1,k-1}(t)
-
+$$
+N_{i,0}(t) = \left\{\begin{matrix} 1 & t_i < t< t_{i+1}\\ 0 & otherwise \end{matrix}\right.\\ N_{i,k} = \frac{t - t_i}{t_{i+k} - t_{i} }N_{i,k-1}(t) + \frac{t_{i+k+1} - t}{t_{i+k+1} - t_{i+1} } N_{i+1,k-1}(t)
+$$
 而$t$为节点向量，非减的实数序列：
-
-t\_0,t\_1,...,t\_{k-1},t\_k,...,t\_n,t\_{n+1},...,t\_{n+k-1},t\_{n+k+1}.
-
+$$
+t_0,t_1,...,t_{k-1},t_k,...,t_n,t_{n+1},...,t_{n+k-1},t_{n+k+1}.
+$$
 现在考虑几个B样条基函数的问题：
 
-*   B样条基函数$N\_{i,k}(t)$的非零区间是什么？  
-    从上述可以看到，当$k=0$时，$N\_{i,0}(t)$的非零区间为：$(t\_i - t\_{i+1})$。根据递推公式，可以得到： N\_{i,1} = \\frac{t-t\_i}{t\_{i+1} - t\_{i} } N\_{i,0}(t) + \\frac{t\_{i+2} - t}{t\_{i+2}-t\_{i+1} }N\_{i+1,0}(t)
+*   B样条基函数$N_{i,k}(t)$的非零区间是什么？  
+    从上述可以看到，当$k=0$时，$N_{i,0}(t)$的非零区间为：$(t_i - t_{i+1})$。根据递推公式，可以得到： $$N_{i,1} = \frac{t-t_i}{t_{i+1} - t_{i} } N_{i,0}(t) + \frac{t_{i+2} - t}{t_{i+2}-t_{i+1} }N_{i+1,0}(t)$$
 
-这时候，只要$N\_{i,0},N\_{i+1,0}$有一个不为0，那么$N\_{i,1}$就不为0，因此它的非零区间为：$(t\_i,t\_{i+1})\\cup(t\_{i+1},t\_{i+2})$,也就是：$(t\_{i},t\_{i+2})$。
+这时候，只要$N_{i,0},N_{i+1,0}$有一个不为0，那么$N_{i,1}$就不为0，因此它的非零区间为：$(t_i,t_{i+1})\cup(t_{i+1},t_{i+2})$,也就是：$(t_{i},t_{i+2})$。
 
-依次类推，我们得到$N\_{i,2}$的非零区间为：$(t\_i,t\_{i+2})\\cup(t\_{i+1},t\_{i+3})$，也就是$(t\_{i},t\_{i+3})$。
+依次类推，我们得到$N_{i,2}$的非零区间为：$(t_i,t_{i+2})\cup(t_{i+1},t_{i+3})$，也就是$(t_{i},t_{i+3})$。
 
-最终得到$N\_{i,k}$的非零区间为：$(t\_{i},t\_{i+k+1})$。
+最终得到$N_{i,k}$的非零区间为：$(t_{i},t_{i+k+1})$。
 
 *   一共需要多少个节点？
 
-$N\_{i,k}(t)$的非零区间是$(t\_{i},t\_{i+k+1})$，共有$n$个控制节点，因此所有的非零区间为：$(t\_{0},t\_{k+1})\\cup (t\_{1},t\_{k+2})\\cup…\\cup (t\_{n},t\_{n+k+1})$。因此需要的节点个数为$n+k+2$。
+$N_{i,k}(t)$的非零区间是$(t_{i},t_{i+k+1})$，共有$n$个控制节点，因此所有的非零区间为：$(t_{0},t_{k+1})\cup (t_{1},t_{k+2})\cup…\cup (t_{n},t_{n+k+1})$。因此需要的节点个数为$n+k+2$。
 
 *   B样条插值得到的曲线定义区间是什么？  
-    这个也很容易得到：$(0,t\_{n+k+1})$。
+    这个也很容易得到：$(0,t_{n+k+1})$。
 
-以$k=3,n=4$为例：$P\_{t} = \\sum\_{i=0}^4P\_iN\_{i,3}(t)$，则求解$N\_{i,3}$的过程如下图：
+以$k=3,n=4$为例：$P_{t} = \sum_{i=0}^4P_iN_{i,3}(t)$，则求解$N_{i,3}$的过程如下图：
 
 ![](https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/Byt2.jpg)
 
@@ -65,15 +65,15 @@ $N\_{i,k}(t)$的非零区间是$(t\_{i},t\_{i+k+1})$，共有$n$个控制节点�
 B样条基函数有很多性质与Bezier曲线类似。
 
 *   非负性和局部支撑性  
-    $N\_{i,k}(t)$是非负的，$N\_{i,k}(t)$是$\[t\_i,t\_{i+k+1}\]$上的分段非零多项式： N\_{i,k}(t) = \\left \\{ \\begin{matrix} \\ge 0 & t\\in \[t\_i,t\_{i+k+1}\]\\\\ =0& otherwise \\end{matrix} \\right.
+    $N_{i,k}(t)$是非负的，$N_{i,k}(t)$是$[t_i,t_{i+k+1}]$上的分段非零多项式：$$ N_{i,k}(t) = \left \{ \begin{matrix} \ge 0 & t\in [t_i,t_{i+k+1}]\\ =0& otherwise \end{matrix} \right.$$
 *   归一性  
-    区间$\[t\_i,t\_{i+1}\]$上的所有$k$次非零基函数的和为1：
-    
-    \\sum\_{i=0}^n N\_{i,k}(t) = 1,t \\in \[t\_i,t\_{i+1}\].
+    区间$[t_i,t_{i+1}]$上的所有$k$次非零基函数的和为1：
+    $$
+    \sum_{i=0}^n N_{i,k}(t) = 1,t \in [t_i,t_{i+1}].$$
 *   基函数所满足的微分方程：
-    
-    N'\_{i,k}(t) = \\frac{k-1}{t\_{i+k-1} - t\_i}N\_{i,k-1}(t)+\\frac{k-1}{t\_{i+k}- t\_{i+1} }N\_{i+1,k-1}(t)
-
+    $$
+    N'_{i,k}(t) = \frac{k-1}{t_{i+k-1} - t_i}N_{i,k-1}(t)+\frac{k-1}{t_{i+k}- t_{i+1} }N_{i+1,k-1}(t)
+    $$
 ### [](about:blank#B%E6%A0%B7%E6%9D%A1%E5%88%86%E7%B1%BB "B样条分类")B样条分类
 
 一般的曲线可以根据其起始点和终止点是否重叠分为开曲线（不重叠）和闭曲线（重叠）。
@@ -101,7 +101,7 @@ B样条基函数有很多性质与Bezier曲线类似。
 
 B样条曲线的性质：
 
-*   局部支持性。区间$t \\in \[t\_i,t\_{i+1}\]$上的曲线仅由至多$k+1$个控制点决定。修改控制点$P\_i$仅会影响到$(t\_i,t\_{i+k+1})$上的曲线。
+*   局部支持性。区间$t \in [t_i,t_{i+1}]$上的曲线仅由至多$k+1$个控制点决定。修改控制点$P_i$仅会影响到$(t_i,t_{i+k+1})$上的曲线。
 
 上述这个性质是可以根据定义推导出来的。
 
@@ -111,7 +111,8 @@ B样条曲线的性质：
     
 *   分段多项式性质：任何一个由相邻节点确定的区间上，$P(t)$是一个关于t的次数不超过$k$的多项式。
     
-*   导数公式： \\begin{aligned} P'(t) &= \\left(\\sum\_{i=0}^n P\_i N\_{i,k}(t) \\right)' \\\\ &= \\sum\_{i = 0}^n P\_i N\_{i,k}'(t)\\\\ &= (k-1)\\sum\_{i=0}^n \\left(\\frac{P\_i - P\_{i-1} }{t\_{i+k} - t} \\right)N\_{i,k-1}(t), t\\in\[t\_k,t\_{n+1} \] \\end{aligned}
+*   导数公式： 
+$$\begin{aligned} P'(t) &= \left(\sum_{i=0}^n P_i N_{i,k}(t) \right)' \\ &= \sum_{i = 0}^n P_i N_{i,k}'(t)\\ &= (k-1)\sum_{i=0}^n \left(\frac{P_i - P_{i-1} }{t_{i+k} - t} \right)N_{i,k-1}(t), t\in[t_k,t_{n+1} ] \end{aligned}$$
 *   变差缩减性：任何一条直线与B样条曲线的交点个数不会超过该直线与B样条曲线的控制多边形的交点数目
 *   几何不变性：曲线的形状和相对于控制点的位置不取决于坐标系的选择
 *   仿射不变性：将仿射变换用于控制点，变换后的控制点得到的曲线就是仿射变换后的曲线。
@@ -123,20 +124,20 @@ B样条曲线的性质：
 ### [](about:blank#de-Boor%E7%AE%97%E6%B3%95 "de Boor算法")de Boor算法
 
 计算B样条曲线的一点可以直接使用B样条的公式，但是de Boor算法是一个更有效的算法。首先，我们知道：
-
-\\begin{aligned} P(t) &= \\sum\_{i=0}^nP\_i N\_{i,k}(t) = \\sum\_{i = j-k}^j P\_iN\_{i,k}(t)\\\\ &= \\sum\_{i=j-k}^j P\_i \\left \[\\frac{t - t\_i}{t\_{i + k} - t\_i} N\_{i,k-1}(t) + \\frac{t\_{i+k+1} - t}{t\_{i + k + 1} - t\_{i+1} }N\_{i+1,k-1}(t) \\right\]\\\\ &= \\sum\_{i= j-k}^j\\left \[ \\frac{t - t\_i}{t\_{i+k} - t\_i}P\_i + \\frac{t\_{i+k} - t}{t\_{i+k} - t\_i} P\_{i-1} \\right\] N\_{i,k-1}(t) \\end{aligned}, t \\in \[t\_j,t\_{j+1}\]
-
-上面式子的由来也就是通过确定$t$的区间段$\[t\_j,t\_{j+1}\]$，然后我们知道在这个区间内的曲线最多受到$k+1$个控制顶点的控制。
+$$
+\begin{aligned} P(t) &= \sum_{i=0}^nP_i N_{i,k}(t) = \sum_{i = j-k}^j P_iN_{i,k}(t)\\ &= \sum_{i=j-k}^j P_i \left [\frac{t - t_i}{t_{i + k} - t_i} N_{i,k-1}(t) + \frac{t_{i+k+1} - t}{t_{i + k + 1} - t_{i+1} }N_{i+1,k-1}(t) \right]\\ &= \sum_{i= j-k}^j\left [ \frac{t - t_i}{t_{i+k} - t_i}P_i + \frac{t_{i+k} - t}{t_{i+k} - t_i} P_{i-1} \right] N_{i,k-1}(t) \end{aligned}, t \in [t_j,t_{j+1}]
+$$
+上面式子的由来也就是通过确定$t$的区间段$[t_j,t_{j+1}]$，然后我们知道在这个区间内的曲线最多受到$k+1$个控制顶点的控制。
 
 令：
-
-P\_i^{\[r\]}(t) = \\left\\{ \\begin{matrix} P\_i& r = 0, i = j-k,..,j;\\\\ \\frac{t - t\_i}{t\_{i+k+1-r} - t\_i}P\_i^{\[r-1\]}(t) + \\frac{t\_{i+k+1-r} - t}{t\_{i+k+1-r} - t\_i} P\_{i-1}^{\[r-1\]}(t)& r = 1,2,...,k-1; i = j-k+r,...,j \\end{matrix} \\right.
-
+$$
+P_i^{[r]}(t) = \left\{ \begin{matrix} P_i& r = 0, i = j-k,..,j;\\ \frac{t - t_i}{t_{i+k+1-r} - t_i}P_i^{[r-1]}(t) + \frac{t_{i+k+1-r} - t}{t_{i+k+1-r} - t_i} P_{i-1}^{[r-1]}(t)& r = 1,2,...,k-1; i = j-k+r,...,j \end{matrix} \right.
+$$
 则：
-
-\\begin{aligned} P(t) &= \\sum\_{i=j-k}^jP\_iN\_{i,k}(t)\\\\ &= \\sum\_{i= j -k+ 1}^j P\_i^{\[1\]}(t)N\_{i,k}(t) \\\\ &= \\sum\_{i=j-k+2}^jP\_i^{\[2\]}(t)N\_{i,k-2}(t)\\\\ &= ...\\\\ &= P\_i^{\[k\]}(t)N\_{i,0}(t) \\end{aligned}
-
-这就是de Boor算法。de Boor算法的递推也就是$P\_i^{\[k\]}(t)$的过程。为了求这个，需要的递归方式如下图（下图的k表示的是阶数，因此是从$j-k+1$到$j$，需要的是$k$个控制点点，也就是次数里$k+1$个控制点）：
+$$
+\begin{aligned} P(t) &= \sum_{i=j-k}^jP_iN_{i,k}(t)\\ &= \sum_{i= j -k+ 1}^j P_i^{[1]}(t)N_{i,k}(t) \\ &= \sum_{i=j-k+2}^jP_i^{[2]}(t)N_{i,k-2}(t)\\ &= ...\\ &= P_i^{[k]}(t)N_{i,0}(t) \end{aligned}
+$$
+这就是de Boor算法。de Boor算法的递推也就是$P_i^{[k]}(t)$的过程。为了求这个，需要的递归方式如下图（下图的k表示的是阶数，因此是从$j-k+1$到$j$，需要的是$k$个控制点点，也就是次数里$k+1$个控制点）：
 
 ![](https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/Byt11.jpg)
 
@@ -148,22 +149,22 @@ P\_i^{\[r\]}(t) = \\left\\{ \\begin{matrix} P\_i& r = 0, i = j-k,..,j;\\\\ \\fra
 
 节点插入可以增加曲线的可控度。为了增加节点而且保持原有的曲线形状以及原来的次数，需要改变控制顶点的个数。节点插入可以被描述为下面的过程：
 
-*   插入新的节点$t$到节点区间$\[t\_i,t\_{i+1}\]$
-*   节点向量变为：$T^1 = \[t\_0,t\_1,…,t\_i,t,t\_{i+1},…,t\_{n+k+1}\]$
-*   新的节点向量变为：$T^1 = \[t^1\_0,…,t^1\_i,t^1\_{i+1},t^1\_{i+2},…,t\_{n+k+2}\]$
+*   插入新的节点$t$到节点区间$[t_i,t_{i+1}]$
+*   节点向量变为：$T^1 = [t_0,t_1,…,t_i,t,t_{i+1},…,t_{n+k+1}]$
+*   新的节点向量变为：$T^1 = [t^1_0,…,t^1_i,t^1_{i+1},t^1_{i+2},…,t_{n+k+2}]$
 
-新的节点向量对应了新的B样条计函数。假设原始曲线$P(t)$可以由这些新的基函数和新的控制定点$P\_j^1$来表示，则：
-
-P(t) = \\sum\_{j=0}^{n+1}P\_j^1 N^1\_{j,k}(t)
-
+新的节点向量对应了新的B样条计函数。假设原始曲线$P(t)$可以由这些新的基函数和新的控制定点$P_j^1$来表示，则：
+$$
+P(t) = \sum_{j=0}^{n+1}P_j^1 N^1_{j,k}(t)
+$$
 而Boehm给出了计算这些新的控制点的公式：
-
-\\left\\{ \\begin{matrix} P\_j^1 = P\_j & j=0,1,...,i-k\\\\ P\_j^1 = (1 - \\beta\_j)P\_{j-1}+\\beta\_jP\_j& j = i-k+1,...,i-r\\\\ P\_j^1 = P\_{j-1} & j=i-r+1,...,n+1 \\end{matrix} \\right.
-
+$$
+\left\{ \begin{matrix} P_j^1 = P_j & j=0,1,...,i-k\\ P_j^1 = (1 - \beta_j)P_{j-1}+\beta_jP_j& j = i-k+1,...,i-r\\ P_j^1 = P_{j-1} & j=i-r+1,...,n+1 \end{matrix} \right.
+$$
 上式中：
-
-\\beta\_j = \\frac{t - t\_j}{t\_{j+k} - t\_j},
-
+$$
+\beta_j = \frac{t - t_j}{t_{j+k} - t_j},
+$$
 $r$是新插入的节点$t$在节点序列中的重复度。如下图（图中k为阶数）：
 
 ![](https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/Byt8.jpg)
@@ -172,13 +173,13 @@ $r$是新插入的节点$t$在节点序列中的重复度。如下图（图中k�
 ------------------------------------------------------------------
 
 给定$U,V$轴上的节点向量：
-
-U = \[u\_0,u\_1,...,u\_{m+p}\]\\\\ V = \[v\_0,v\_1,...,v\_{n+q}\]
-
-阶为$p \\times q$的B样条曲面可以定义为：
-
-P(u,v) = \\sum\_{i=0}^m \\sum\_{j=0}^n P\_{ij}N\_{i,p}(u)N\_{j,q}(v)
-
+$$
+U = [u_0,u_1,...,u_{m+p}]\\ V = [v_0,v_1,...,v_{n+q}]
+$$
+阶为$p \times q$的B样条曲面可以定义为：
+$$
+P(u,v) = \sum_{i=0}^m \sum_{j=0}^n P_{ij}N_{i,p}(u)N_{j,q}(v)
+$$
 ![](https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/Byt9.jpg)
 
 [](about:blank#NURBS%E6%9B%B2%E7%BA%BF-%E6%9B%B2%E9%9D%A2 "NURBS曲线/曲面")NURBS曲线/曲面
@@ -197,51 +198,51 @@ NURBS有下面几个优势：
     它的缺点是比传统的表达需要更大的存储空间，而且如果权重设计不合理，NURBS曲线可能会产生畸变。在某些情况下如曲线重叠，使用NURBS非常难以处理。
 
 NURBS曲线是由分段有理B样条多项式基函数定义的：
-
-P(t) = \\frac{\\sum\_{i=0}^n \\omega\_i P\_i N\_{i,k}(t)}{\\sum\_{i=0}^n \\omega\_iN\_{i,k}(t)} = \\sum\_{i=0}^nP\_iR\_{i,k}(t)
-
+$$
+P(t) = \frac{\sum_{i=0}^n \omega_i P_i N_{i,k}(t)}{\sum_{i=0}^n \omega_iN_{i,k}(t)} = \sum_{i=0}^nP_iR_{i,k}(t)
+$$
 其中：
-
-R\_{i,k}(t) = \\frac{\\omega\_i N\_{i,k}(t)}{\\sum\_{j=0}^n \\omega\_jN\_{j,k}(t)}
-
-因此，从定义可以看出来它是B样条加权重。它的基函数$R\_{i,k}(t)$包含了B样条基函数的所有性质：  
+$$
+R_{i,k}(t) = \frac{\omega_i N_{i,k}(t)}{\sum_{j=0}^n \omega_jN_{j,k}(t)}
+$$
+因此，从定义可以看出来它是B样条加权重。它的基函数$R_{i,k}(t)$包含了B样条基函数的所有性质：  
 局部支持性，归一性，可微，变差缩减，凸包，仿射不变。
 
 如果一个控制点的权重为0，那么该控制点的位置不对曲线产生任何影响。
 
-如果一个控制点权重为正无穷，而$\\omega\_i=+\\infty,R\_{i,k}(t)=1$，当$t \\in \[t\_i,t\_{i+k}$，$P(t) = P\_i$。
+如果一个控制点权重为正无穷，而$\omega_i=+\infty,R_{i,k}(t)=1$，当$t \in [t_i,t_{i+k}$，$P(t) = P_i$。
 
-如果用齐次坐标表示控制点，即：$P\_i^{\\omega} = (\\omega\_ix\_i,\\omega\_iy\_i,\\omega\_i)$，则：
+如果用齐次坐标表示控制点，即：$P_i^{\omega} = (\omega_ix_i,\omega_iy_i,\omega_i)$，则：
 
-P^{\\omega} (t) = \\sum\_{i=0}^n P\_i^{\\omega}N\_{i,k}(t).
+P^{\omega} (t) = \sum_{i=0}^n P_i^{\omega}N_{i,k}(t).
 
 #### [](about:blank#%E5%9C%86%E9%94%A5%E6%9B%B2%E7%BA%BF%E7%9A%84NURBS%E8%A1%A8%E7%A4%BA "圆锥曲线的NURBS表示")圆锥曲线的NURBS表示
 
-对于3个控制定点，节点向量$T=\[0,0,0,1,1,1\]$，NURBS曲线退化成二阶Bezier曲线。很容易可以证明该曲线是二次曲线：
-
-P(t) = \\frac{(1-t^2)\\omega\_0P\_0 + 2t(1-t)\\omega\_1P\_1 + t^2 \\omega\_2P\_2}{(1-t^2)\\omega\_0+2t(1-t)\\omega\_1+ t^2 \\omega\_2}
-
+对于3个控制定点，节点向量$T=[0,0,0,1,1,1]$，NURBS曲线退化成二阶Bezier曲线。很容易可以证明该曲线是二次曲线：
+$$
+P(t) = \frac{(1-t^2)\omega_0P_0 + 2t(1-t)\omega_1P_1 + t^2 \omega_2P_2}{(1-t^2)\omega_0+2t(1-t)\omega_1+ t^2 \omega_2}
+$$
 其中:
 
-*   $C\_{sf} = \\frac{\\omega\_1^2}{\\omega\_0\\omega\_2} $是形状因子，决定了圆锥曲线的类型。当$C\_{sf}=1$时，曲线为抛物线。而对于$C\_{sf}<1$，曲线为椭圆，当$c\_{sf}=0$，曲线退化为一条直线，当$c\_{sf}>1$，曲线为双曲线，当$C\_{sf} \\rightarrow \\infty$，曲线退化为两条直线。
+*   $C_{sf} = \frac{\omega_1^2}{\omega_0\omega_2} $是形状因子，决定了圆锥曲线的类型。当$C_{sf}=1$时，曲线为抛物线。而对于$C_{sf}<1$，曲线为椭圆，当$c_{sf}=0$，曲线退化为一条直线，当$c_{sf}>1$，曲线为双曲线，当$C_{sf} \rightarrow \infty$，曲线退化为两条直线。
 
 ![](https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/Byt10.jpg)
 
 #### [](about:blank#NURBS%E7%9A%84%E4%BF%AE%E6%94%B9 "NURBS的修改")NURBS的修改
 
-我们可以通过修改权重，控制点以及节点来修改NURBS曲线。对于权重，如果增加或者减少一个控制点的权重，曲线会向控制点靠近或远离。如果希望一个点$S$朝着控制点$P\_i$靠近或原理距离$d$，可以修改权重:
-
-\\omega^\* = \\omega\_i\\left\[ 1 + \\frac{d}{R\_{i,k}(t)(P\_iS - d)}\\right\].
-
+我们可以通过修改权重，控制点以及节点来修改NURBS曲线。对于权重，如果增加或者减少一个控制点的权重，曲线会向控制点靠近或远离。如果希望一个点$S$朝着控制点$P_i$靠近或原理距离$d$，可以修改权重:
+$$
+\omega^* = \omega_i\left[ 1 + \frac{d}{R_{i,k}(t)(P_iS - d)}\right].
+$$
 对于控制点的修改，也会改变NURBS曲线的形状。我们还可以通过带约束的优化方法，来求解对于每个控制点的修改量，以得到最佳的修改量（比如需要经过空间中的某个点）。
 
 NURBS曲面的定义也就是曲线简单的拓展：
-
-P(u,v) = \\frac{\\sum\_{i=0}^m\\sum\_{j=0}^n \\omega\_{ij} P\_{ij} N\_{i,p}(u)N\_{j,q}(v)}{\\sum\_{i=0}^m\\sum\_{j=0}^n \\omega\_{ij} N\_{i,p}(u)N\_{j,q}(v)} = \\sum\_{i=0}^m\\sum\_{j=0}^n P\_{ij}R\_{i,p;j,q}(u,v) , u,v\\in\[0,1\]
-
+$$
+P(u,v) = \frac{\sum_{i=0}^m\sum_{j=0}^n \omega_{ij} P_{ij} N_{i,p}(u)N_{j,q}(v)}{\sum_{i=0}^m\sum_{j=0}^n \omega_{ij} N_{i,p}(u)N_{j,q}(v)} = \sum_{i=0}^m\sum_{j=0}^n P_{ij}R_{i,p;j,q}(u,v) , u,v\in[0,1]
+$$
 上式中：
-
-R\_{i,p;j,q}(u,v) = \\frac{ \\omega\_{ij} N\_{i,p}(u)N\_{j,q}(v)}{\\sum\_{r=0}^m\\sum\_{s=0}^n \\omega\_{rs} N\_{r,p}(u)N\_{s,q}(v)}
-
+$$
+R_{i,p;j,q}(u,v) = \frac{ \omega_{ij} N_{i,p}(u)N_{j,q}(v)}{\sum_{r=0}^m\sum_{s=0}^n \omega_{rs} N_{r,p}(u)N_{s,q}(v)}
+$$
 NURBS曲面也具有可微性，同时存在局部极值点，也具有和B样条曲面类似的多种性质。这里就不过多介绍了。
 

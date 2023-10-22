@@ -1,5 +1,5 @@
 ---
-title: ROS——基本介绍
+title: CPP——记录（一）
 date: 2019-7-29 00:00:00
 tags: [cpp,code]
 categories: 程序设计语言
@@ -41,4 +41,4 @@ mathjax: true
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">int</span> &amp;d = <span class="built_in">array</span>[<span class="number">0</span>];</span><br><span class="line">d = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i!=<span class="number">10</span>;++i)</span><br><span class="line"><span class="built_in">array</span>.push_back(i);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"d = "</span> &lt;&lt;d &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></tbody></table>
 
-你觉得会输出什么？实际上输出什么是未定义的。当push\_back调用时候，array会更换新的地址。这时候原来的引用就失效了。因此引用`std::vector`的内容要格外小心，如果有最大容量的话最好reserve一下。
+你觉得会输出什么？实际上输出什么是未定义的。当push_back调用时候，array会更换新的地址。这时候原来的引用就失效了。因此引用`std::vector`的内容要格外小心，如果有最大容量的话最好reserve一下。

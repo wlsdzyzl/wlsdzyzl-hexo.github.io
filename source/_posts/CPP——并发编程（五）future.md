@@ -1,7 +1,7 @@
 ---
 title: CPP——并发编程（五）future
 date: 2019-03-31 00:00:00
-tags: [cpp,concurrent programmingm,Programming language]
+tags: [cpp,concurrent programming,Programming language]
 categories: 程序设计语言
 mathjax: true
 ---   
@@ -12,9 +12,9 @@ mathjax: true
 <!--more-->
 
 
-future包含了两个provider类：std::promise，std::package\_task，两个future类：std::future,std::shared\_future，一个provider函数：async，初次之外，它还有其他的函数和类型：
+future包含了两个provider类：std::promise，std::package_task，两个future类：std::future,std::shared_future，一个provider函数：async，初次之外，它还有其他的函数和类型：
 
-std::future\_category（function），std::future\_error，std::future\_errc，std::future\_status以及std::launch。
+std::future_category（function），std::future_error，std::future_errc，std::future_status以及std::launch。
 
 从这里可以大致看出来，主要操作的对象是future和provider两个类型（并不是具体的cpp类）。他们之间的关系简单来说，就是每个provider都拥有一个共享状态的访问权限，该共享状态可以联系到一个future对象。provider将共享状态设置为ready，与future对象访问共享状态是同步的。
 
@@ -34,53 +34,53 @@ promise是一个模板类，而且有两个特殊化模板：引用和void。
 | 函数 | 值 |
 | --- | --- |
 | operator= | Move-assign promise (public member function ) |
-| get\_future | Get future (public member function ) |
-| set\_value | Set value (public member function ) |
-| set\_exception | Set exception (public member function ) |
-| set\_value\_at\_thread\_exit | Set value at thread exit (public member function ) |
-| set\_exception\_at\_thread\_exit | Set exception at thread exit (public member function ) |
+| get_future | Get future (public member function ) |
+| set_value | Set value (public member function ) |
+| set_exception | Set exception (public member function ) |
+| set_value_at_thread_exit | Set value at thread exit (public member function ) |
+| set_exception_at_thread_exit | Set exception at thread exit (public member function ) |
 | swap | Swap shared states (public member function ) |
 
-上述成员函数的功能都显而易见，set系列运行后，共享状态变成ready。值得注意的是，在set\_value\_at\_thread\_exit和set\_exception\_at\_thread\_exit结束之前，别的线程尝试set共享状态的value会抛出错误。
+上述成员函数的功能都显而易见，set系列运行后，共享状态变成ready。值得注意的是，在set_value_at_thread_exit和set_exception_at_thread_exit结束之前，别的线程尝试set共享状态的value会抛出错误。
 
-这里重点说明一下get\_future，它可以使得当前promise对象的共享状态与一个future对象联系起来。当get\_future被调用的时，promise对象和future对象共享同样的共享状态：promise对象是状态异步提供者，可以在某个时间点设置状态值，而future是异步返回对象，它可以获取共享状态值，在有必要的情况下等待它的状态变为ready。下面是使用promise的一个例子。
+这里重点说明一下get_future，它可以使得当前promise对象的共享状态与一个future对象联系起来。当get_future被调用的时，promise对象和future对象共享同样的共享状态：promise对象是状态异步提供者，可以在某个时间点设置状态值，而future是异步返回对象，它可以获取共享状态值，在有必要的情况下等待它的状态变为ready。下面是使用promise的一个例子。
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// promise example</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;       // std::cout</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;     // std::ref</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;         // std::thread</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;         // std::promise, std::future</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_int</span> <span class="params">(<span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt;&amp; fut)</span> </span>{</span><br><span class="line">  <span class="keyword">int</span> x = fut.get();</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"value: "</span> &lt;&lt; x &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="built_in">std</span>::promise&lt;<span class="keyword">int</span>&gt; prom;                      <span class="comment">// create promise</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt; fut = prom.get_future();    <span class="comment">// engagement with future</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="function">thread <span class="title">th1</span> <span class="params">(print_int, <span class="built_in">std</span>::ref(fut))</span></span>;  <span class="comment">// send future to new thread</span></span><br><span class="line"></span><br><span class="line">  prom.set_value (<span class="number">10</span>);                         <span class="comment">// fulfill promise</span></span><br><span class="line">                                               <span class="comment">// (synchronizes with getting the future)</span></span><br><span class="line">  th1.join();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table>
 
-主线程中prom还没设置值之前，共享状态标志还不是ready，这时候在子线程th1中，fut调用get使得线程阻塞，等待共享状态的标志变为ready，而当主线程中prom调用set\_value之后，子线程接触阻塞，并得到设定的值，输出：  
+主线程中prom还没设置值之前，共享状态标志还不是ready，这时候在子线程th1中，fut调用get使得线程阻塞，等待共享状态的标志变为ready，而当主线程中prom调用set_value之后，子线程接触阻塞，并得到设定的值，输出：  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value <span class="number">10</span></span><br></pre></td></tr></tbody></table>
 
-### [](about:blank#std-package-task "std::package_task")std::package\_task
+### [](about:blank#std-package-task "std::package_task")std::package_task
 
-一个package\_task对象是一个callable对象的封装，并且允许它的结果被异步读取。它和std::function类似，只不过有共享状态来存储它的返回值。一般来说，package\_task包含两个元素：
+一个package_task对象是一个callable对象的封装，并且允许它的结果被异步读取。它和std::function类似，只不过有共享状态来存储它的返回值。一般来说，package_task包含两个元素：
 
 *   stored task，也就是对应的callable对象，接受一个对应的参数，返回一个Ret类型的值
-*   shared\_state，共享状态，用来存储返回值，并且可以被future对象访问
+*   shared_state，共享状态，用来存储返回值，并且可以被future对象访问
 
 共享状态直到不和任何的provider或者future联系了才会被销毁。
 
-package\_task的构造函数如下：
+package_task的构造函数如下：
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//default (1)	</span></span><br><span class="line">packaged_task() <span class="keyword">noexcept</span>;</span><br><span class="line"><span class="comment">//initialization (2)	</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Fn</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">explicit</span> <span class="title">packaged_task</span> (<span class="title">Fn</span>&amp;&amp; <span class="title">fn</span>);</span></span><br><span class="line"><span class="comment">//with allocator (3)	</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Fn</span>, <span class="title">class</span> <span class="title">Alloc</span>&gt;</span></span><br><span class="line"><span class="class">  <span class="title">explicit</span> <span class="title">packaged_task</span> (<span class="title">allocator_arg_t</span> <span class="title">aa</span>, <span class="title">const</span> <span class="title">Alloc</span>&amp; <span class="title">alloc</span>, <span class="title">Fn</span>&amp;&amp; <span class="title">fn</span>);</span></span><br><span class="line"><span class="comment">//copy [deleted] (4)	</span></span><br><span class="line">packaged_task (packaged_task&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"><span class="comment">//move (5)	</span></span><br><span class="line">packaged_task (packaged_task&amp;&amp; x) <span class="keyword">noexcept</span>;</span><br></pre></td></tr></tbody></table>
 
 它的构造函数与promise实际上各个类型差不多。
 
-下面是package\_task的其他成员函数。
+下面是package_task的其他成员函数。
 
 | 函数 | 描述 |
 | --- | --- |
-| operator= | Move-assign packaged\_task (public member function ) |
+| operator= | Move-assign packaged_task (public member function ) |
 | valid | Check for valid shared state (public member function ) |
-| get\_future | Get future (public member function ) |
+| get_future | Get future (public member function ) |
 | operator() | Call stored task (public member function ) |
-| make\_ready\_at\_thread\_exit | Call stored task and make ready at thread exit (public member function ) |
+| make_ready_at_thread_exit | Call stored task and make ready at thread exit (public member function ) |
 | reset | Reset task (public member function ) |
-| swap | Swap packaged\_task (public member function ) |
+| swap | Swap packaged_task (public member function ) |
 
-在上述函数中，valid()检查共享状态的有效性。对于默认构造函数，没有与任何函数绑定，该函数返回false。这是因为package\_task对象需要绑定任务，因此有效值是必要的，而promise并不需要这样一个函数，它创建之后就一定是有效的。reset()会重置共享状态，但是会保留之前包装的任务。
+在上述函数中，valid()检查共享状态的有效性。对于默认构造函数，没有与任何函数绑定，该函数返回false。这是因为package_task对象需要绑定任务，因此有效值是必要的，而promise并不需要这样一个函数，它创建之后就一定是有效的。reset()会重置共享状态，但是会保留之前包装的任务。
 
-package\_task一个例子如下：
+package_task一个例子如下：
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// packaged_task construction / assignment</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;     // std::cout</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;utility&gt;      // std::move</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;       // std::packaged_task, std::future</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;       // std::thread</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="built_in">std</span>::packaged_task&lt;<span class="keyword">int</span>(<span class="keyword">int</span>)&gt; foo;                          <span class="comment">// default-constructed, foo.valid() will reture a false</span></span><br><span class="line">  <span class="built_in">std</span>::packaged_task&lt;<span class="keyword">int</span>(<span class="keyword">int</span>)&gt; bar ([](<span class="keyword">int</span> x){<span class="keyword">return</span> x*<span class="number">2</span>;}); <span class="comment">// initialized</span></span><br><span class="line"></span><br><span class="line">  foo = <span class="built_in">std</span>::move(bar);                                      <span class="comment">// move-assignment</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt; ret = foo.get_future();  <span class="comment">// get future</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::thread(<span class="built_in">std</span>::move(foo),<span class="number">10</span>).detach();  <span class="comment">// spawn thread and call task</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> value = ret.get();                    <span class="comment">// wait for the task to finish and get result</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"The double of 10 is "</span> &lt;&lt; value &lt;&lt; <span class="string">".\n"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table>
 
@@ -92,13 +92,13 @@ package\_task一个例子如下：
 
 正如上面所说的，provider和future总是密切相关的。这里我们开始介绍类std::future。
 
-一个std::future对象一般是由provider产生的，比如promise，package\_task或者async函数。它可以读取共享状态的值，在之前的例子中它利用get，来阻塞当前线程，直到共享状态的标准变为ready才会返回得到共享状态的值。
+一个std::future对象一般是由provider产生的，比如promise，package_task或者async函数。它可以读取共享状态的值，在之前的例子中它利用get，来阻塞当前线程，直到共享状态的标准变为ready才会返回得到共享状态的值。
 
-std::future有默认构造函数和移动构造函数，一般利用的都是它的移动构造函数，通过provider的get\_future得到。std::future还有其他的几个构造函数：
+std::future有默认构造函数和移动构造函数，一般利用的都是它的移动构造函数，通过provider的get_future得到。std::future还有其他的几个构造函数：
 
 **share**
 
-得到std::shared\_future对象，调用之后它不在和任何共享状态相关联了。
+得到std::shared_future对象，调用之后它不在和任何共享状态相关联了。
 
 **get**
 
@@ -112,39 +112,39 @@ get之前的例子多次用到了，在相关联的共享状态标志为ready之
 
 wait和get一样，但是不会读取共享状态的值，只会阻塞线程。
 
-**wait\_for**
+**wait_for**
 
 等待一段时间，在该段时间内共享状态的标志不是ready则阻塞线程，超时会解除阻塞。
 
-**wait\_until**  
+**wait_until**  
 等待到某个时间点之前，在时间点前共享状态的标志不是ready则阻塞线程，超时会解除阻塞。
 
 上述两个函数返回值有下面几个可能：
 
 | 值 | 描述 |
 | --- | --- |
-| future\_status::ready | 共享状态的标志已经变为 ready，即 Provider 在共享状态上设置了值或者异常。 |
-| future\_status::timeout | 超时，即在规定的时间内共享状态的标志没有变为 ready。 |
-| future\_status::deferred | 共享状态包含一个 deferred 函数。 |
+| future_status::ready | 共享状态的标志已经变为 ready，即 Provider 在共享状态上设置了值或者异常。 |
+| future_status::timeout | 超时，即在规定的时间内共享状态的标志没有变为 ready。 |
+| future_status::deferred | 共享状态包含一个 deferred 函数。 |
 
-### [](about:blank#shared-future "shared_future")shared\_future
+### [](about:blank#shared-future "shared_future")shared_future
 
-std::shared\_future与 std::future类似，但是 td::shared\_future可以拷贝，多个std::shared\_future可以共享某个共享状态。shared\_future可以通过某个std::future对象隐式转换，或者通过 std::future::share()得到，无论哪种转换，被转换的那个std::future对象都会变为invalid。
+std::shared_future与 std::future类似，但是 td::shared_future可以拷贝，多个std::shared_future可以共享某个共享状态。shared_future可以通过某个std::future对象隐式转换，或者通过 std::future::share()得到，无论哪种转换，被转换的那个std::future对象都会变为invalid。
 
 它的构造函数如下：
 
 | 类型 | 函数形式 |
 | --- | --- |
-| default (1) | shared\_future() noexcept; |
-| copy (2) | shared\_future (const shared\_future& x); |
-| move (3) | shared\_future (shared\_future&& x) noexcept; |
-| move from future (4) | shared\_future (future&& x) noexcept; |
+| default (1) | shared_future() noexcept; |
+| copy (2) | shared_future (const shared_future& x); |
+| move (3) | shared_future (shared_future&& x) noexcept; |
+| move from future (4) | shared_future (future&& x) noexcept; |
 
-其他的和shared\_future一样，就不多介绍了。
+其他的和shared_future一样，就不多介绍了。
 
-### [](about:blank#future-error "future_error")future\_error
+### [](about:blank#future-error "future_error")future_error
 
-future\_error继承logic\_error，是future可能出现的异常。  
+future_error继承logic_error，是future可能出现的异常。  
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">future_error</span> :</span> <span class="keyword">public</span> logic_error;</span><br></pre></td></tr></tbody></table>
 
@@ -176,24 +176,24 @@ future\_error继承logic\_error，是future可能出现的异常。
 
 <table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">future_errc</span>;</span></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">future_status</span>;</span></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">launch</span>;</span></span><br></pre></td></tr></tbody></table>
 
-### [](about:blank#std-future-errc "std::future_errc")std::future\_errc
+### [](about:blank#std-future-errc "std::future_errc")std::future_errc
 
 | 枚举值 | 描述 |
 | --- | --- |
-| broken\_promise | 与该future共享状态相关联的promise对象在设置值或者异常之前一被销毁 |
-| future\_already\_retrieved | 与该std::future对象相关联的共享状态的值已经被当前provider获取了，即调用了std::future::get函数 |
-| promise\_already\_satisfied | std::promise对象已经对共享状态设置了某一值或者异常 |
-| no\_state | 无共享状态。 |
+| broken_promise | 与该future共享状态相关联的promise对象在设置值或者异常之前一被销毁 |
+| future_already_retrieved | 与该std::future对象相关联的共享状态的值已经被当前provider获取了，即调用了std::future::get函数 |
+| promise_already_satisfied | std::promise对象已经对共享状态设置了某一值或者异常 |
+| no_state | 无共享状态。 |
 
-### [](about:blank#std-future-status "std::future_status")std::future\_status
+### [](about:blank#std-future-status "std::future_status")std::future_status
 
-用于wait\_for和wait\_until的返回值
+用于wait_for和wait_until的返回值
 
 | 枚举值 | 描述 |
 | --- | --- |
-| future\_status::ready | wait\_for(或wait\_until)因为共享状态的标志变为ready而返回 |
-| future\_status::timeout | wait\_for(或wait\_until)因为超时而返回 |
-| future\_status::deferred | 共享状态包含了deferred函数。 |
+| future_status::ready | wait_for(或wait_until)因为共享状态的标志变为ready而返回 |
+| future_status::timeout | wait_for(或wait_until)因为超时而返回 |
+| future_status::deferred | 共享状态包含了deferred函数。 |
 
 ### [](about:blank#std-launch "std::launch")std::launch
 
