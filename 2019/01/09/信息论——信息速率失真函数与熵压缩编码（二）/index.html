@@ -23,22 +23,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wlsdzyzl.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="之前说到,我们直觉构造的1比特下高斯信源的传输与理论上的失真还有点差距，需要进行分组才能得到最优。下面，我们用失真联合典型序列来证明，同时证明率失真定理。  率失真定理的核心是我们要证明$R(D) &#x3D; R^{(I)}(D)$。">
+    <meta name="description" content="之前说到,我们直觉构造的1比特下高斯信源的传输与理论上的失真还有点差距，需要进行分组才能得到最优。下面，我们用失真联合典型序列来证明，同时证明率失真定理。 率失真定理的核心是我们要证明\(R(D) &#x3D; R^{(I)}(D)\)。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信息论——信息速率失真函数与熵压缩编码（二）">
 <meta property="og:url" content="http://wlsdzyzl.com/2019/01/09/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E6%81%AF%E9%80%9F%E7%8E%87%E5%A4%B1%E7%9C%9F%E5%87%BD%E6%95%B0%E4%B8%8E%E7%86%B5%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
 <meta property="og:site_name" content="wlsdzyzl">
-<meta property="og:description" content="之前说到,我们直觉构造的1比特下高斯信源的传输与理论上的失真还有点差距，需要进行分组才能得到最优。下面，我们用失真联合典型序列来证明，同时证明率失真定理。  率失真定理的核心是我们要证明$R(D) &#x3D; R^{(I)}(D)$。">
+<meta property="og:description" content="之前说到,我们直觉构造的1比特下高斯信源的传输与理论上的失真还有点差距，需要进行分组才能得到最优。下面，我们用失真联合典型序列来证明，同时证明率失真定理。 率失真定理的核心是我们要证明\(R(D) &#x3D; R^{(I)}(D)\)。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/rate_distort2.jpg">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/rate_distort1.jpg">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/rate_distort3.jpg">
 <meta property="article:published_time" content="2019-01-08T16:00:00.000Z">
 <meta property="article:modified_time" content="2023-10-21T23:05:02.339Z">
 <meta property="article:author" content="wlsdzyzl">
 <meta property="article:tag" content="information theory">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/rate_distort2.jpg">
 
 
 <link rel="canonical" href="http://wlsdzyzl.com/2019/01/09/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E6%81%AF%E9%80%9F%E7%8E%87%E5%A4%B1%E7%9C%9F%E5%87%BD%E6%95%B0%E4%B8%8E%E7%86%B5%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%EF%BC%88%E4%BA%8C%EF%BC%89/">
@@ -96,7 +92,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">155</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -136,18 +132,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -274,67 +270,158 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>之前说到,我们直觉构造的1比特下高斯信源的传输与理论上的失真还有点差距，需要进行分组才能得到最优。下面，我们用失真联合典型序列来证明，同时证明率失真定理。  率失真定理的核心是我们要证明$R(D) &#x3D; R^{(I)}(D)$。</p>
+    <div class="post-body" itemprop="articleBody"><p>之前说到,我们直觉构造的1比特下高斯信源的传输与理论上的失真还有点差距，需要进行分组才能得到最优。下面，我们用失真联合典型序列来证明，同时证明率失真定理。
+率失真定理的核心是我们要证明<span class="math inline">\(R(D) =
+R^{(I)}(D)\)</span>。</p>
 <span id="more"></span>
-
-
-<h3 id="率失真定理的converse"><a href="#率失真定理的converse" class="headerlink" title="率失真定理的converse"></a><a href="about:blank#%E7%8E%87%E5%A4%B1%E7%9C%9F%E5%AE%9A%E7%90%86%E7%9A%84converse" title="率失真定理的converse"></a>率失真定理的converse</h3><p>与之前不同的是，我们首先来证明定理的逆。我们需要说明这样一件事：</p>
-<p>对于服从分布$P(x)$的随机变量$X$和失真度量$d(x,\hat x)$，以及任意满足失真小于$D$的率失真编码$(2^{nR},n)$来说，$R \ge R^{(I)}(D)$。</p>
+<h3 id="率失真定理的converse"><a
+href="about:blank#%E7%8E%87%E5%A4%B1%E7%9C%9F%E5%AE%9A%E7%90%86%E7%9A%84converse"
+title="率失真定理的converse"></a>率失真定理的converse</h3>
+<p>与之前不同的是，我们首先来证明定理的逆。我们需要说明这样一件事：</p>
+<p>对于服从分布<span class="math inline">\(P(x)\)</span>的随机变量<span
+class="math inline">\(X\)</span>和失真度量<span
+class="math inline">\(d(x,\hat x)\)</span>，以及任意满足失真小于<span
+class="math inline">\(D\)</span>的率失真编码<span
+class="math inline">\((2^{nR},n)\)</span>来说，<span
+class="math inline">\(R \ge R^{(I)}(D)\)</span>。</p>
 <p>如下图：</p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/rate_distort2.jpg"></p>
-<p>我们证明的是可行域是如图所示的。<br>$$<br>\begin{aligned} nR &amp;\ge H(\hat X^n)\ &amp;\ge H(\hat X^n) - H(\hat X^n|X^n)\ &amp;&#x3D; I(\hat X^n,X^n)\ &amp;&#x3D; H(X^n)-H(X^n|\hat X^n)\ &amp;&#x3D; \sum_{i&#x3D;1}^n H(X_i) - \sum_{i&#x3D;1}^n H(X_i|\hat X^n,X_1,…,X_{i-1})\ &amp;\ge \sum (H(X_i) - H(X_i|\hat X_i))\ &amp; &#x3D; \sum I(X_i;\hat X_i)\ &amp; \ge \sum R^{(I)}(E[d(X_i,\hat X_i)]) \ &amp;&#x3D; n\sum \frac 1 n R^{(I)}(E[d(X_i, \hat X_i)])\ &amp;\ge nR^{(I)}(\frac 1 n \sum E[d(X_i,\hat X_i)])\ &amp;&#x3D; nR^{(I)}(D) \end{aligned}<br>$$<br>因此我们证明了任何一个率失真编码得到的率失真函数都不可能比信息论上的率失真函数来得更小。</p>
-<h3 id="率失真编码的存在性"><a href="#率失真编码的存在性" class="headerlink" title="率失真编码的存在性"></a><a href="about:blank#%E7%8E%87%E5%A4%B1%E7%9C%9F%E7%BC%96%E7%A0%81%E7%9A%84%E5%AD%98%E5%9C%A8%E6%80%A7" title="率失真编码的存在性"></a>率失真编码的存在性</h3><p>对于存在性的证明，是依照这样的想法进行的：</p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/rate_distort2.jpg" /></p>
+<p>我们证明的是可行域是如图所示的。 <span class="math display">\[
+\begin{aligned} nR &amp;\ge H(\hat X^n)\\ &amp;\ge H(\hat X^n) - H(\hat
+X^n|X^n)\\ &amp;= I(\hat X^n,X^n)\\ &amp;= H(X^n)-H(X^n|\hat X^n)\\
+&amp;= \sum_{i=1}^n H(X_i) - \sum_{i=1}^n H(X_i|\hat
+X^n,X_1,...,X_{i-1})\\ &amp;\ge \sum (H(X_i) - H(X_i|\hat X_i))\\ &amp;
+= \sum I(X_i;\hat X_i)\\ &amp; \ge \sum R^{(I)}(E[d(X_i,\hat X_i)]) \\
+&amp;= n\sum \frac 1 n R^{(I)}(E[d(X_i, \hat X_i)])\\ &amp;\ge
+nR^{(I)}(\frac 1 n \sum E[d(X_i,\hat X_i)])\\ &amp;= nR^{(I)}(D)
+\end{aligned}
+\]</span>
+因此我们证明了任何一个率失真编码得到的率失真函数都不可能比信息论上的率失真函数来得更小。</p>
+<h3 id="率失真编码的存在性"><a
+href="about:blank#%E7%8E%87%E5%A4%B1%E7%9C%9F%E7%BC%96%E7%A0%81%E7%9A%84%E5%AD%98%E5%9C%A8%E6%80%A7"
+title="率失真编码的存在性"></a>率失真编码的存在性</h3>
+<p>对于存在性的证明，是依照这样的想法进行的：</p>
 <ul>
-<li><p>设$X_1,X_2,…,X_n$是服从$p(x)$的独立同分布随机变量</p>
-</li>
-<li><p>设$d(x,\hat x)$为有界的失真度量</p>
-</li>
-<li><p>对于任何$D$，有$R \ge R^{(I)}(D)$</p>
-</li>
-<li><p>现在我们要证明的是，存在一组率失真编码，他们的码率都是$R$，而失真渐进达到$D$</p>
-</li>
+<li><p>设<span class="math inline">\(X_1,X_2,…,X_n\)</span>是服从<span
+class="math inline">\(p(x)\)</span>的独立同分布随机变量</p></li>
+<li><p>设<span class="math inline">\(d(x,\hat
+x)\)</span>为有界的失真度量</p></li>
+<li><p>对于任何<span class="math inline">\(D\)</span>，有<span
+class="math inline">\(R \ge R^{(I)}(D)\)</span></p></li>
+<li><p>现在我们要证明的是，存在一组率失真编码，他们的码率都是<span
+class="math inline">\(R\)</span>，而失真渐进达到<span
+class="math inline">\(D\)</span></p></li>
 </ul>
 <p>这个过程与信道编码定理是很类似的，不同的是多了一个失真的约束。因此我们首先定义”失真”典型序列。</p>
-<h4 id="失真典型序列"><a href="#失真典型序列" class="headerlink" title="失真典型序列"></a><a href="about:blank#%E5%A4%B1%E7%9C%9F%E5%85%B8%E5%9E%8B%E5%BA%8F%E5%88%97" title="失真典型序列"></a>失真典型序列</h4><p>设$p(x,\hat x)$和$d(x,\hat x)$分别是$X\times \hat X$上的联合概率分布和失真度量。对于任意$\epsilon&gt;0$，若一个序列对$(x^n,\hat x^n)$满足以下条件，就被称为失真$\epsilon$-典型序列。<br>$$<br>\left. \begin{matrix} \lvert -\frac 1 n \log p(x^n) - H(X) \rvert &lt; \epsilon\ \lvert -\frac 1 n \log p(\hat x^n) - H(\hat X) \rvert &lt; \epsilon\ \lvert -\frac 1 n \log p(x^n,\hat x^n) - H(X,\hat X) \rvert &lt; \epsilon\ \lvert d(x^n,\hat x^n) - E[d(X,\hat X)] \rvert &lt; \epsilon \end{matrix} \right } $$</p>
-<h4 id="联合典型序列"><a href="#联合典型序列" class="headerlink" title="联合典型序列"></a>联合典型序列</h4><p>前三个条件实际上就是联合典型序列的定义。实际上这个定义就是联合典型序列的拓展，失真联合典型序列一定是联合典型序列。</p>
-<p>有了上面的定义，有这样一条引理：设$(X_i,\hat X_i)$是服从联合概率分布$p(x,\hat x)$的独立同分布随机变量，当$n\rightarrow \infty$时，$Pr(A_{d,\epsilon}^(n)) \rightarrow 1$。</p>
+<h4 id="失真典型序列"><a
+href="about:blank#%E5%A4%B1%E7%9C%9F%E5%85%B8%E5%9E%8B%E5%BA%8F%E5%88%97"
+title="失真典型序列"></a>失真典型序列</h4>
+<p>设<span class="math inline">\(p(x,\hat x)\)</span>和<span
+class="math inline">\(d(x,\hat x)\)</span>分别是<span
+class="math inline">\(X\times \hat
+X\)</span>上的联合概率分布和失真度量。对于任意<span
+class="math inline">\(\epsilon&gt;0\)</span>，若一个序列对<span
+class="math inline">\((x^n,\hat
+x^n)\)</span>满足以下条件，就被称为失真<span
+class="math inline">\(\epsilon\)</span>-典型序列。 <span
+class="math display">\[
+\left. \begin{matrix} \lvert -\frac 1 n \log p(x^n) - H(X) \rvert &lt;
+\epsilon\\ \lvert -\frac 1 n \log p(\hat x^n) - H(\hat X) \rvert &lt;
+\epsilon\\ \lvert -\frac 1 n \log p(x^n,\hat x^n) - H(X,\hat X) \rvert
+&lt; \epsilon\\ \lvert d(x^n,\hat x^n) - E[d(X,\hat X)] \rvert &lt;
+\epsilon \end{matrix} \right \} \]</span></p>
+<h4 id="联合典型序列">联合典型序列</h4>
+<p>前三个条件实际上就是联合典型序列的定义。实际上这个定义就是联合典型序列的拓展，失真联合典型序列一定是联合典型序列。</p>
+<p>有了上面的定义，有这样一条引理：设<span
+class="math inline">\((X_i,\hat X_i)\)</span>是服从联合概率分布<span
+class="math inline">\(p(x,\hat x)\)</span>的独立同分布随机变量，当<span
+class="math inline">\(n\rightarrow \infty\)</span>时，<span
+class="math inline">\(Pr(A_{d,\epsilon}^(n)) \rightarrow
+1\)</span>。</p>
 <p>证明如下：</p>
-<p>按照大数定理，前三个不等式的左侧都散以概率1收敛到期望值0的，而对于最后一个条件，我们有：<br>$$<br>d(x^n,\hat x^n) &#x3D; \frac 1 n \sum_{i&#x3D;1}^n d(x_i,\hat x_i)<br>$$<br>根据大数定律，上式也会收敛到失真度量的统计平均。因此，最后一个条件也依概率1收敛到0。因此这个命题是成立的。</p>
-<h4 id="证明思路"><a href="#证明思路" class="headerlink" title="证明思路"></a><a href="about:blank#%E8%AF%81%E6%98%8E%E6%80%9D%E8%B7%AF" title="证明思路"></a>证明思路</h4><p>与之前的香农第二定理一样，这里我们依然要用到随机生成的码本。</p>
+<p>按照大数定理，前三个不等式的左侧都散以概率1收敛到期望值0的，而对于最后一个条件，我们有：
+<span class="math display">\[
+d(x^n,\hat x^n) = \frac 1 n \sum_{i=1}^n d(x_i,\hat x_i)
+\]</span>
+根据大数定律，上式也会收敛到失真度量的统计平均。因此，最后一个条件也依概率1收敛到0。因此这个命题是成立的。</p>
+<h4 id="证明思路"><a
+href="about:blank#%E8%AF%81%E6%98%8E%E6%80%9D%E8%B7%AF"
+title="证明思路"></a>证明思路</h4>
+<p>与之前的香农第二定理一样，这里我们依然要用到随机生成的码本。</p>
 <ul>
-<li><p>随机生成一个码本$C$，含有$2^{nR}$个序列$\hat X ^n \sim \prod _{i&#x3D;1}^n p(\hat x_i)$</p>
-</li>
-<li><p>将上述随机生成的$2^{nR}$个码进行编号$w \in {1,2,…,2^{nR} }$，因此我们可以确定的是这个信道的传输码率是$R$。</p>
-</li>
+<li><p>随机生成一个码本<span class="math inline">\(C\)</span>，含有<span
+class="math inline">\(2^{nR}\)</span>个序列<span
+class="math inline">\(\hat X ^n \sim \prod _{i=1}^n p(\hat
+x_i)\)</span></p></li>
+<li><p>将上述随机生成的<span
+class="math inline">\(2^{nR}\)</span>个码进行编号<span
+class="math inline">\(w \in {1,2,…,2^{nR}
+}\)</span>，因此我们可以确定的是这个信道的传输码率是<span
+class="math inline">\(R\)</span>。</p></li>
 <li><p>构造编码映射：</p>
 <blockquote>
-<p>若$(X^n,\hat X^n(W)) \in A_{d,\epsilon}^{(n)}$，则编码映射$X^n \rightarrow w$；若满足以上条件的$w$多于1，则取最小的$w$，否则，取$w &#x3D; 1$。</p>
-</blockquote>
-</li>
-<li><p>构造解码映射：取恢复点为$\hat X^n (w)$</p>
-</li>
-<li><p>我们需要证明它的失真渐进等于$D$</p>
-</li>
+<p>若<span class="math inline">\((X^n,\hat X^n(W)) \in
+A_{d,\epsilon}^{(n)}\)</span>，则编码映射<span class="math inline">\(X^n
+\rightarrow w\)</span>；若满足以上条件的<span
+class="math inline">\(w\)</span>多于1，则取最小的<span
+class="math inline">\(w\)</span>，否则，取<span class="math inline">\(w
+= 1\)</span>。</p>
+</blockquote></li>
+<li><p>构造解码映射：取恢复点为<span class="math inline">\(\hat X^n
+(w)\)</span></p></li>
+<li><p>我们需要证明它的失真渐进等于<span
+class="math inline">\(D\)</span></p></li>
 </ul>
-<p>这个信道的输入只有$2^{nR}$种字符，因此它的码率一定是$n$。</p>
+<p>这个信道的输入只有<span
+class="math inline">\(2^{nR}\)</span>种字符，因此它的码率一定是<span
+class="math inline">\(n\)</span>。</p>
 <p>这个信道如图：</p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/rate_distort1.jpg"></p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/rate_distort1.jpg" /></p>
 <p>传输过程会有两种情况：</p>
-<ol>
-<li><p>$\exists w$, \text{s.t. }$(x^n,\hat X^n(w)) \in A_{d,\epsilon}^{(n)}$，则$d(x^n,\hat X^n(w)) &lt; D+\epsilon$</p>
-</li>
-<li><p>不存在上述$w$，那么这时候$d(x^n,\hat X^n(w)) &lt; d_{max}$</p>
-</li>
+<ol type="1">
+<li><p><span class="math inline">\(\exists w\)</span>, <span
+class="math inline">\((x^n,\hat X^n(w)) \in
+A_{d,\epsilon}^{(n)}\)</span>，则<span class="math inline">\(d(x^n,\hat
+X^n(w)) &lt; D+\epsilon\)</span></p></li>
+<li><p>不存在上述<span class="math inline">\(w\)</span>，那么这时候<span
+class="math inline">\(d(x^n,\hat X^n(w)) &lt; d_{max}\)</span></p></li>
 </ol>
-<p>因此得到：<br>$$<br>E[d(X^n,\hat X^n(X^n))] \leq (1-P_e)(D+\epsilon) + P_e \cdot d_{max}\leq D + \epsilon +P_e \cdot d_{max}<br>$$<br>为了证明，我们再引入两个数学引理：</p>
+<p>因此得到： <span class="math display">\[
+E[d(X^n,\hat X^n(X^n))] \leq (1-P_e)(D+\epsilon) + P_e \cdot d_{max}\leq
+D + \epsilon +P_e \cdot d_{max}
+\]</span> 为了证明，我们再引入两个数学引理：</p>
 <ul>
-<li>对于所有$(x^n,\hat x ^n) \in A_{d,\epsilon}^{(n)}$， p(\hat x^n) \ge p(\hat x^n| x^n) 2 ^{-n(I(X;\hat X)+3\epsilon)}</li>
-<li>对于$0\leq x,y\leq 1,n&gt;0$, (1 - xy)^n \leq 1 -x + e^{-yn}</li>
+<li>对于所有<span class="math inline">\((x^n,\hat x ^n) \in
+A_{d,\epsilon}^{(n)}\)</span>， p(x^n) p(x^n| x^n) 2
+^{-n(I(X;X)+3)}</li>
+<li>对于<span class="math inline">\(0\leq x,y\leq 1,n&gt;0\)</span>, (1
+- xy)^n -x + e^{-yn}</li>
 </ul>
-<p>再引入一个标记函数：<br>$$<br>k(x^n,\hat x^n) &#x3D; \left { \begin{matrix} 1 &amp; (x^n,\hat x^n )\in A_{d,\epsilon}^{(n)}\ 0 &amp; \text{otherwise} \end{matrix} \right.<br>$$<br>则：<br>$$<br>\begin{aligned} P_e &amp;&#x3D; \sum_{x^n}p(x^n)[1-\sum_{\hat x^n} p(\hat x ^n)k(x^n,\hat x^n)]^{2^{nR} }\ &amp;\leq \sum_{x^n}p(x^n)[1-2^{-n(I(X;\hat X) + 3\epsilon)} \sum_{\hat x^n}p(\hat x^n|x^n)k(x^n,\hat x^n)]^{2^{nR} }\ &amp;\leq \sum_{x^n}p(x^n)[1-p(\hat x^n|x^n)k(x^n,\hat x^n) + \exp(-2^{-n(I(X;\hat X) + 3\epsilon)} 2^{nR})]\ &amp;\leq 1- \sum_{x^n\hat x^n}p(x^n)p(\hat x^n|x^n)k(x^n,\hat x^n) + \exp(-2^{n(R - I(X;\hat X) - 3\epsilon)}) \end{aligned}<br>$$<br>为了让上式趋于0,我们需要让$R \ge I(X;\hat X)$。而上式实际上就是$R \ge R^{(I)}(D)$。因此我们证明了，只要$R \ge R^{(I)}(D)$，失真是可以无限渐进逼近于$D$的。</p>
+<p>再引入一个标记函数： <span class="math display">\[
+k(x^n,\hat x^n) = \left \{ \begin{matrix} 1 &amp; (x^n,\hat x^n )\in
+A_{d,\epsilon}^{(n)}\\ 0 &amp; \text{otherwise} \end{matrix} \right.
+\]</span> 则： <span class="math display">\[
+\begin{aligned} P_e &amp;= \sum_{x^n}p(x^n)[1-\sum_{\hat x^n} p(\hat x
+^n)k(x^n,\hat x^n)]^{2^{nR} }\\ &amp;\leq
+\sum_{x^n}p(x^n)[1-2^{-n(I(X;\hat X) + 3\epsilon)} \sum_{\hat x^n}p(\hat
+x^n|x^n)k(x^n,\hat x^n)]^{2^{nR} }\\ &amp;\leq \sum_{x^n}p(x^n)[1-p(\hat
+x^n|x^n)k(x^n,\hat x^n) + \exp(-2^{-n(I(X;\hat X) + 3\epsilon)}
+2^{nR})]\\ &amp;\leq 1- \sum_{x^n\hat x^n}p(x^n)p(\hat
+x^n|x^n)k(x^n,\hat x^n) + \exp(-2^{n(R - I(X;\hat X) - 3\epsilon)})
+\end{aligned}
+\]</span> 为了让上式趋于0,我们需要让<span class="math inline">\(R \ge
+I(X;\hat X)\)</span>。而上式实际上就是<span class="math inline">\(R \ge
+R^{(I)}(D)\)</span>。因此我们证明了，只要<span class="math inline">\(R
+\ge R^{(I)}(D)\)</span>，失真是可以无限渐进逼近于<span
+class="math inline">\(D\)</span>的。</p>
 <p>最后，形象化的解释如下：</p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/rate_distort3.jpg"></p>
-<p>实际上推导到现在，我们也能够感觉到实际上信道编码定理和率失真定理之间是有一定的对偶关系的。在信道编码时候，由于信道噪声的存在，使得一个个$X^n$空间的点胀成了超球，而这个容量C就是最多能容纳多少个球。在率失真的情况下，由于失真$D$，我们想要求的是最少可以有多少个球可以覆盖信源。但是球的半径由于平均失真限制住，不能无限大。而这两个过程，正是对互信息的最大化和最小化。</p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/rate_distort3.jpg" /></p>
+<p>实际上推导到现在，我们也能够感觉到实际上信道编码定理和率失真定理之间是有一定的对偶关系的。在信道编码时候，由于信道噪声的存在，使得一个个<span
+class="math inline">\(X^n\)</span>空间的点胀成了超球，而这个容量C就是最多能容纳多少个球。在率失真的情况下，由于失真<span
+class="math inline">\(D\)</span>，我们想要求的是最少可以有多少个球可以覆盖信源。但是球的半径由于平均失真限制住，不能无限大。而这两个过程，正是对互信息的最大化和最小化。</p>
 
     </div>
 
@@ -421,6 +508,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

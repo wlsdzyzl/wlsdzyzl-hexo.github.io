@@ -23,20 +23,13 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wlsdzyzl.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="上节课除了介绍了K-Means，更重点介绍了另外一个算法，PCA（Principal Component Analysis）。">
+    <meta name="description" content="上节课除了介绍了K-Means，更重点介绍了另外一个算法，PCA（Principal Component Analysis）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Learning From Data——PCA">
 <meta property="og:url" content="http://wlsdzyzl.com/2018/11/19/Learning-From-Data%E2%80%94%E2%80%94PCA/index.html">
 <meta property="og:site_name" content="wlsdzyzl">
-<meta property="og:description" content="上节课除了介绍了K-Means，更重点介绍了另外一个算法，PCA（Principal Component Analysis）。">
+<meta property="og:description" content="上节课除了介绍了K-Means，更重点介绍了另外一个算法，PCA（Principal Component Analysis）。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA1.png">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA2.png">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA3.png">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA7.png">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA6.png">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA4.png">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA5.png">
 <meta property="article:published_time" content="2018-11-19T08:58:24.000Z">
 <meta property="article:modified_time" content="2018-12-07T07:37:16.000Z">
 <meta property="article:author" content="wlsdzyzl">
@@ -44,7 +37,6 @@
 <meta property="article:tag" content="LFD class">
 <meta property="article:tag" content="unsupervised learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA1.png">
 
 
 <link rel="canonical" href="http://wlsdzyzl.com/2018/11/19/Learning-From-Data%E2%80%94%E2%80%94PCA/">
@@ -102,7 +94,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">155</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -127,7 +119,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">PCA描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BCPCA"><span class="nav-number">2.</span> <span class="nav-text">推导PCA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E9%A2%981"><span class="nav-number">2.0.1.</span> <span class="nav-text">命题1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E9%A2%982"><span class="nav-number">2.0.2.</span> <span class="nav-text">命题2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">3.</span> <span class="nav-text">PCA的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E6%8A%95%E5%BD%B1"><span class="nav-number">4.</span> <span class="nav-text">PCA投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">PCA在做什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">PCA的限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means%E4%B8%8EPCA%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">7.</span> <span class="nav-text">k-means与PCA的对比</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BCpca"><span class="nav-number">1.</span> <span class="nav-text">推导PCA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E9%A2%981"><span class="nav-number">1.0.1.</span> <span class="nav-text">命题1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E9%A2%982"><span class="nav-number">1.0.2.</span> <span class="nav-text">命题2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pca%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">PCA的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pca%E6%8A%95%E5%BD%B1"><span class="nav-number">3.</span> <span class="nav-text">PCA投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pca%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">4.</span> <span class="nav-text">PCA在做什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pca%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">PCA的限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means%E4%B8%8Epca%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">6.</span> <span class="nav-text">k-means与PCA的对比</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -142,18 +134,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -185,7 +177,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">PCA描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BCPCA"><span class="nav-number">2.</span> <span class="nav-text">推导PCA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E9%A2%981"><span class="nav-number">2.0.1.</span> <span class="nav-text">命题1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E9%A2%982"><span class="nav-number">2.0.2.</span> <span class="nav-text">命题2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">3.</span> <span class="nav-text">PCA的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E6%8A%95%E5%BD%B1"><span class="nav-number">4.</span> <span class="nav-text">PCA投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">PCA在做什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">PCA的限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means%E4%B8%8EPCA%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">7.</span> <span class="nav-text">k-means与PCA的对比</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E5%AF%BCpca"><span class="nav-number">1.</span> <span class="nav-text">推导PCA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E9%A2%981"><span class="nav-number">1.0.1.</span> <span class="nav-text">命题1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E9%A2%982"><span class="nav-number">1.0.2.</span> <span class="nav-text">命题2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pca%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">PCA的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pca%E6%8A%95%E5%BD%B1"><span class="nav-number">3.</span> <span class="nav-text">PCA投影</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pca%E5%9C%A8%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">4.</span> <span class="nav-text">PCA在做什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pca%E7%9A%84%E9%99%90%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">PCA的限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means%E4%B8%8Epca%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">6.</span> <span class="nav-text">k-means与PCA的对比</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -280,105 +272,208 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>上节课除了介绍了K-Means，更重点介绍了另外一个算法，PCA（Principal Component Analysis）。</p>
-<span id="more"></span>
-
+    <div class="post-body" itemprop="articleBody"><p>上节课除了介绍了K-Means，更重点介绍了另外一个算法，PCA（Principal
+Component Analysis）。 <span id="more"></span></p>
 <p>PCA中文应该翻译为主要成分分析。这个翻译是直白的，我们也能很容易知道猜得到这个算法在做什么。</p>
 <p>首先举个例子：</p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA1.png"></p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA2.png"></p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA1.png" /></p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA2.png" /></p>
 <p>从上面看出来，有时候很多特征包含了很多的冗余信息。如拥挤程度和人流密度，就有很大的相关性。</p>
-<p>我们需要消除这样的相关性，并且减少噪声。</p>
-<h2 id="PCA描述"><a href="#PCA描述" class="headerlink" title="PCA描述"></a>PCA描述</h2><p>PCA算法的描述如下：</p>
-<p>给定输入${X_1,X_2,…,X_m}，X_i \in \mathbb{R}$.找到输入的一个线性，正交转换W：$\mathbb{R}^n, \mathbb{R}^k$。W将最大方差方向与新空间的坐标轴对其。</p>
-<p>如下图：左侧图片中，$x_1$与$x_2$是高度相关的，右侧图为转换过后的z，它几乎和水平坐标轴平行。<br><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA3.png"></p>
-<h2 id="推导PCA"><a href="#推导PCA" class="headerlink" title="推导PCA"></a>推导PCA</h2><p>为了方便PCA的推导，我们首先会对数据进行预处理，也就是对其进行normalize,使得Mean(X) &#x3D;0,Stdev(X) &#x3D; 1:<br>$$<br>X_i :&#x3D; X_i - Mean(X) \leftarrow recenter\<br>X_i :&#x3D; X_i &#x2F; Stdev(X) \leftarrow scale<br>$$</p>
+<p>我们需要消除这样的相关性，并且减少噪声。 ## PCA描述 ##
+PCA算法的描述如下：</p>
+<p>给定输入<span class="math inline">\({X_1,X_2,...,X_m}，X_i \in
+\mathbb{R}\)</span>.找到输入的一个线性，正交转换W：<span
+class="math inline">\(\mathbb{R}^n,
+\mathbb{R}^k\)</span>。W将最大方差方向与新空间的坐标轴对其。</p>
+<p>如下图：左侧图片中，<span class="math inline">\(x_1\)</span>与<span
+class="math inline">\(x_2\)</span>是高度相关的，右侧图为转换过后的z，它几乎和水平坐标轴平行。
+<img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA3.png" /></p>
+<h2 id="推导pca">推导PCA</h2>
+<p>为了方便PCA的推导，我们首先会对数据进行预处理，也就是对其进行normalize,使得Mean(X)
+=0,Stdev(X) = 1: <span class="math display">\[
+X_i := X_i - Mean(X) \leftarrow recenter\\
+X_i := X_i / Stdev(X) \leftarrow scale
+\]</span></p>
 <p>Stdev(X)为标准偏差函数。</p>
 <p>我们希望在输入中找到让各个样本变化最大的方向的主轴u（找到变分单位向量的主轴），如下图：</p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA7.png"></p>
-<p>PCA的目标：</p>
-<ol>
-<li>找到互相正交的主要成分$u_1,u_2,…,u_n$，它们之间互不相关。</li>
-<li>大多数X中的变化会被k个主要成分代表了，这里的$k &lt;&lt; n$.</li>
-</ol>
-<p>根据PCA的目标，我们可以分析PCA的主要步骤：</p>
-<ol>
-<li>找到X在某个向量上的投影，使得$u_1^TX$有最大的方差。</li>
-<li>对于j&#x3D;2,…n，继续上面的步骤，找到X在某个向量上的投影（与之前的向量正交），使得$u_j^TX$有最大的方差，再次强调：$u_j$与$u_1,…,u_{j-1}$正交。</li>
-</ol>
-<p>因为$\Vert u \Vert &#x3D; 1$,则$X_i$在$u$上的投影长度为：$X_i^Tu$.而这些投影的方差计算结果如下：<br>$$<br>\begin{aligned}<br>\frac 1 m \sum_{i&#x3D;1}^m (X_i^T u)^2 &amp;&#x3D; \frac 1 m \sum_{i&#x3D;1}^m u^TX_iX_i^T u \<br>&amp;&#x3D; u^T (\sum_{i&#x3D;1}^m X_i X_i^T)u\<br>&amp;&#x3D; u^T \Sigma u<br>\end{aligned}<br>$$<br>这里的$\Sigma$是$X$的协方差矩阵。</p>
-<p>找到单位向量$u_1$使得投影的方差最大，可以用数学语言描述如下：<br>$$<br>u_1 &#x3D;  argmax_{u:\Vert u \Vert &#x3D; 1} u^T\Sigma u<br>$$</p>
-<p>$u_i$是X的第i个主要成分。</p>
-<p>如何求解$u_i$呢？首先，既然$u_i$要与之前的正交，因此这个求解顺序是从1到n。现在我们来分析$u_1$。</p>
-<h4 id="命题1"><a href="#命题1" class="headerlink" title="命题1"></a>命题1</h4><p>$u_1$是协方差矩阵最大的特征向量(eigen vector)。</p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA7.png" /></p>
+<p>PCA的目标： 1. 找到互相正交的主要成分<span
+class="math inline">\(u_1,u_2,...,u_n\)</span>，它们之间互不相关。 2.
+大多数X中的变化会被k个主要成分代表了，这里的<span
+class="math inline">\(k &lt;&lt; n\)</span>.</p>
+<p>根据PCA的目标，我们可以分析PCA的主要步骤： 1.
+找到X在某个向量上的投影，使得<span
+class="math inline">\(u_1^TX\)</span>有最大的方差。 2.
+对于j=2,...n，继续上面的步骤，找到X在某个向量上的投影（与之前的向量正交），使得<span
+class="math inline">\(u_j^TX\)</span>有最大的方差，再次强调：<span
+class="math inline">\(u_j\)</span>与<span
+class="math inline">\(u_1,...,u_{j-1}\)</span>正交。</p>
+<p>因为<span class="math inline">\(\Vert u \Vert = 1\)</span>,则<span
+class="math inline">\(X_i\)</span>在<span
+class="math inline">\(u\)</span>上的投影长度为：<span
+class="math inline">\(X_i^Tu\)</span>.而这些投影的方差计算结果如下：
+<span class="math display">\[
+\begin{aligned}
+\frac 1 m \sum_{i=1}^m (X_i^T u)^2 &amp;= \frac 1 m \sum_{i=1}^m
+u^TX_iX_i^T u \\
+&amp;= u^T (\sum_{i=1}^m X_i X_i^T)u\\
+&amp;= u^T \Sigma u
+\end{aligned}
+\]</span> 这里的<span class="math inline">\(\Sigma\)</span>是<span
+class="math inline">\(X\)</span>的协方差矩阵。</p>
+<p>找到单位向量<span
+class="math inline">\(u_1\)</span>使得投影的方差最大，可以用数学语言描述如下：
+<span class="math display">\[
+u_1 =  argmax_{u:\Vert u \Vert = 1} u^T\Sigma u
+\]</span></p>
+<p><span class="math inline">\(u_i\)</span>是X的第i个主要成分。</p>
+<p>如何求解<span class="math inline">\(u_i\)</span>呢？首先，既然<span
+class="math inline">\(u_i\)</span>要与之前的正交，因此这个求解顺序是从1到n。现在我们来分析<span
+class="math inline">\(u_1\)</span>。</p>
+<h4 id="命题1">命题1</h4>
+<p><span
+class="math inline">\(u_1\)</span>是协方差矩阵最大的特征向量(eigen
+vector)。</p>
 <p>证明如下：</p>
-<p>首先，根据数学描述构建Lagrange function：<br>$$<br>L(u) &#x3D; -u^T \Sigma u + \beta (u^Tu - 1)<br>$$</p>
-<p>to minimize $L(u)$:</p>
-<p>$$<br>\frac{\partial L(u)} {\partial u} &#x3D; -\Sigma u + \beta u &#x3D; 0<br>$$</p>
-<p>因此我们可以确定了u是一个$\Sigma$的特征向量。</p>
-<p>同时,投影方差等于$u^T \Sigma u &#x3D; u^T \beta u &#x3D; \beta $.</p>
-<p>为了让方差最大，也就是$\beta$最大。而最大的特征值对应这最大的特征向量。</p>
-<h4 id="命题2"><a href="#命题2" class="headerlink" title="命题2"></a>命题2</h4><p>第j个X的主要成分，也就是$u_j$为$\Sigma$的第j个最大的特征向量。</p>
-<p>为了简化问题，先写出第二个主要成分的数学描述：<br>$$<br>u &#x3D; argmax_{u:\Vert u\Vert &#x3D; 1;u_1^T u &#x3D; 0} u^T \Sigma u<br>$$</p>
-<p>同样地构建Lagrange Function：<br>$$<br>L(u) &#x3D; -u^T\Sigma u + \beta_1 (u^Tu-1 ) + \beta_2 (u_1^Tu)<br>$$</p>
-<p>$$<br>\frac{\partial L(u)} {\partial u} &#x3D; -\Sigma u + \beta_1 u + \beta_2 u_1 &#x3D; 0<br>$$</p>
+<p>首先，根据数学描述构建Lagrange function： <span
+class="math display">\[
+L(u) = -u^T \Sigma u + \beta (u^Tu - 1)
+\]</span></p>
+<p>to minimize <span class="math inline">\(L(u)\)</span>:</p>
+<p><span class="math display">\[
+\frac{\partial L(u)} {\partial u} = -\Sigma u + \beta u = 0
+\]</span></p>
+<p>因此我们可以确定了u是一个<span
+class="math inline">\(\Sigma\)</span>的特征向量。</p>
+<p>同时,投影方差等于$u^T u = u^T u = $.</p>
+<p>为了让方差最大，也就是<span
+class="math inline">\(\beta\)</span>最大。而最大的特征值对应这最大的特征向量。</p>
+<h4 id="命题2">命题2</h4>
+<p>第j个X的主要成分，也就是<span
+class="math inline">\(u_j\)</span>为<span
+class="math inline">\(\Sigma\)</span>的第j个最大的特征向量。</p>
+<p>为了简化问题，先写出第二个主要成分的数学描述： <span
+class="math display">\[
+u = argmax_{u:\Vert u\Vert = 1;u_1^T u = 0} u^T \Sigma u
+\]</span></p>
+<p>同样地构建Lagrange Function： <span class="math display">\[
+L(u) = -u^T\Sigma u + \beta_1 (u^Tu-1 ) + \beta_2 (u_1^Tu)
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial L(u)} {\partial u} = -\Sigma u + \beta_1 u + \beta_2 u_1
+= 0
+\]</span></p>
 <p>上式中，我们知道两个互相正交的非零向量加起来不可能为0.所以得到：</p>
-<p>$\beta_2 &#x3D; 0, \Sigma u &#x3D; \beta_1 u $</p>
+<p>$_2 = 0, u = _1 u $</p>
 <p>所以按照证明命题1同样的步骤，我们就证明了命题2中的第二个主要成分是成立的.</p>
-<p>同样的证明方法可以继续拓展，$j&#x3D;3,…,n$，都是成立的。</p>
-<h2 id="PCA的性质"><a href="#PCA的性质" class="headerlink" title="PCA的性质"></a>PCA的性质</h2><p>从上面的推导，我们可以得到的PCA的下面几个性质：</p>
+<p>同样的证明方法可以继续拓展，<span
+class="math inline">\(j=3,...,n\)</span>，都是成立的。</p>
+<h2 id="pca的性质">PCA的性质</h2>
+<p>从上面的推导，我们可以得到的PCA的下面几个性质：</p>
 <ul>
 <li>主要成分投影的方差分别为：</li>
 </ul>
-<p>$Var(X^Tu_j) &#x3D; u_j^T \Sigma u_j &#x3D; \lambda_j,j&#x3D;1,2,…,n$</p>
+<p><span class="math inline">\(Var(X^Tu_j) = u_j^T \Sigma u_j =
+\lambda_j,j=1,2,...,n\)</span></p>
 <ul>
-<li>不同方差的百分比$\frac {\lambda_j}{\sum_{i&#x3D;1} ^n \lambda _i}$也就是主要成分的所占比重，也说明了各个主要成分之间是不相关的。</li>
+<li>不同方差的百分比<span class="math inline">\(\frac
+{\lambda_j}{\sum_{i=1} ^n \lambda
+_i}\)</span>也就是主要成分的所占比重，也说明了各个主要成分之间是不相关的。</li>
 </ul>
-<h2 id="PCA投影"><a href="#PCA投影" class="headerlink" title="PCA投影"></a>PCA投影</h2><p>确定主要成分后，我们通过将原数据对主要成分投影来得到数据的压缩等效果。也就是：</p>
-<p>$Z_i &#x3D; [X_{i}^T u_1,X_i^T u_2,…,X_i^T u_n]$</p>
-<p>使用矩阵形式：<br>$$<br>\begin{aligned}<br>Z &amp;&#x3D; \begin{bmatrix}<br>x_{1}^T&amp;<br>X_{2}^T&amp;<br>…&amp;<br>X_{m}^T<br>\end{bmatrix}\begin{bmatrix}<br> |&amp;|&amp;…&amp;|\<br>u_1 &amp; u_2&amp; … &amp; u_n\<br> |&amp;|&amp;…&amp;|<br>\end{bmatrix}<br>&amp;&#x3D;XU<br>\end{aligned}<br>$$</p>
-<p>或者$Z_i &#x3D; U^TX_i$。</p>
-<p>我们可以看出来，$Z_i$同样是n维度的。而截断转换$Z_k &#x3D; XU_k$只保留前k个主要成分，用来做维度的压缩，因为前k个主要成分往往占了内容的大部分。</p>
-<h2 id="PCA在做什么？"><a href="#PCA在做什么？" class="headerlink" title="PCA在做什么？"></a>PCA在做什么？</h2><p>PCA删除了输入X中的冗余数据：</p>
-<p>如果经过转换后为Z，则 $cov(Z) &#x3D; \frac 1 n Z^T Z &#x3D; \frac 1 n (XW)^T (XW) &#x3D; \frac 1 n W^T(X^TX)W  &#x3D; \frac 1 n W^T\Sigma W$.</p>
-<p>由于$\Sigma$是对称矩阵，因此它有实特征值。它的特征分解(eigen decomposition)为：<br>$$<br>\Sigma &#x3D; W Λ W^T，\<br>where~W &#x3D; \begin{bmatrix}<br> |&amp;|&amp;…&amp;|\<br>u_1 &amp; u_2&amp; … &amp; u_n\<br> |&amp;|&amp;…&amp;|<br>\end{bmatrix},Λ &#x3D; \begin{bmatrix}<br>\lambda _1 &amp;0&amp;\cdots&amp;0\<br>0&amp;\lambda_2&amp;\cdots&amp;0\<br>\vdots &amp; \vdots&amp; \ddots &amp;\vdots\<br>0&amp;0&amp;\cdots&amp;\lambda_n<br>\end{bmatrix}<br>$$</p>
-<p>因此： $cov(Z) &#x3D; W^TW Λ W^TW &#x3D; Λ $.主成分变换XW对角化了X的样本协方差矩阵.</p>
+<h2 id="pca投影">PCA投影</h2>
+<p>确定主要成分后，我们通过将原数据对主要成分投影来得到数据的压缩等效果。也就是：</p>
+<p><span class="math inline">\(Z_i = [X_{i}^T u_1,X_i^T u_2,...,X_i^T
+u_n]\)</span></p>
+<p>使用矩阵形式： <span class="math display">\[
+\begin{aligned}
+Z &amp;= \begin{bmatrix}
+x_{1}^T&amp;
+X_{2}^T&amp;
+...&amp;
+X_{m}^T
+\end{bmatrix}\begin{bmatrix}
+|&amp;|&amp;...&amp;|\\
+u_1 &amp; u_2&amp; ... &amp; u_n\\
+|&amp;|&amp;...&amp;|
+\end{bmatrix}
+&amp;=XU
+\end{aligned}
+\]</span></p>
+<p>或者<span class="math inline">\(Z_i = U^TX_i\)</span>。</p>
+<p>我们可以看出来，<span
+class="math inline">\(Z_i\)</span>同样是n维度的。而截断转换<span
+class="math inline">\(Z_k =
+XU_k\)</span>只保留前k个主要成分，用来做维度的压缩，因为前k个主要成分往往占了内容的大部分。</p>
+<h2 id="pca在做什么">PCA在做什么？</h2>
+<p>PCA删除了输入X中的冗余数据：</p>
+<p>如果经过转换后为Z，则 <span class="math inline">\(cov(Z) = \frac 1 n
+Z^T Z = \frac 1 n (XW)^T (XW) = \frac 1 n W^T(X^TX)W = \frac 1 n
+W^T\Sigma W\)</span>.</p>
+<p>由于<span
+class="math inline">\(\Sigma\)</span>是对称矩阵，因此它有实特征值。它的特征分解(eigen
+decomposition)为： <span class="math display">\[
+\Sigma = W Λ W^T，\\
+where~W = \begin{bmatrix}
+|&amp;|&amp;...&amp;|\\
+u_1 &amp; u_2&amp; ... &amp; u_n\\
+|&amp;|&amp;...&amp;|
+\end{bmatrix},Λ = \begin{bmatrix}
+\lambda _1 &amp;0&amp;\cdots&amp;0\\
+0&amp;\lambda_2&amp;\cdots&amp;0\\
+\vdots &amp; \vdots&amp; \ddots &amp;\vdots\\
+0&amp;0&amp;\cdots&amp;\lambda_n  
+\end{bmatrix}
+\]</span></p>
+<p>因此： $cov(Z) = W^TW Λ W^TW = Λ
+$.主成分变换XW对角化了X的样本协方差矩阵.</p>
 <p>PCA的著名例子：Iris Dataset，EigenFaces。</p>
-<h2 id="PCA的限制"><a href="#PCA的限制" class="headerlink" title="PCA的限制"></a>PCA的限制</h2><p>PCA很有用，但是它也有一些明显的缺陷：</p>
+<h2 id="pca的限制">PCA的限制</h2>
+<p>PCA很有用，但是它也有一些明显的缺陷：</p>
 <ul>
 <li>只考虑线性关系</li>
 <li>假设数据是真实并且连续的</li>
-<li>假设输入空间近似正态分布（不过在非正态分布中也可能工作得很好）<br>下面是一个非正态分布的例子：</li>
+<li>假设输入空间近似正态分布（不过在非正态分布中也可能工作得很好）
+下面是一个非正态分布的例子：</li>
 </ul>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA6.png"></p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA6.png" /></p>
 <p>输入：</p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA4.png"></p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA4.png" /></p>
 <p>PCA投影：</p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA5.png"></p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/images/PCA5.png" /></p>
 <p>下次我们将主要说明一下第一个缺陷的解决办法：kernel PCA。</p>
-<h2 id="k-means与PCA的对比"><a href="#k-means与PCA的对比" class="headerlink" title="k-means与PCA的对比"></a>k-means与PCA的对比</h2><p>Unsupervised learning algorithm:</p>
+<h2 id="k-means与pca的对比">k-means与PCA的对比</h2>
+<p>Unsupervised learning algorithm:</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>algorithm</th>
-<th align="center">low dimension</th>
-<th align="center">sparse</th>
-<th align="center">disentangle variations</th>
+<th style="text-align: center;">low dimension</th>
+<th style="text-align: center;">sparse</th>
+<th style="text-align: center;">disentangle variations</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>k-means</td>
-<td align="center">no</td>
-<td align="center">yes</td>
-<td align="center">no</td>
+<td style="text-align: center;">no</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">no</td>
 </tr>
-<tr>
+<tr class="even">
 <td>PCA</td>
-<td align="center">yes</td>
-<td align="center">no</td>
-<td align="center">yes</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">no</td>
+<td style="text-align: center;">yes</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 
     </div>
 
@@ -467,6 +562,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

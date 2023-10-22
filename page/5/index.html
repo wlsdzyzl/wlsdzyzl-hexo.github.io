@@ -89,7 +89,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">155</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -128,18 +128,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -207,6 +207,1315 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2019/01/09/SLAM%E2%80%94%E2%80%94%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/09/SLAM%E2%80%94%E2%80%94%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/" class="post-title-link" itemprop="url">SLAM——视觉里程计（二）对极几何</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-09T00:00:00+08:00">2019-01-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-22 07:24:17" itemprop="dateModified" datetime="2023-10-22T07:24:17+08:00">2023-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>上次介绍了特征，现在我们已经得到了特征匹配后的点对，现在我们需要用这些东西来估计相机运动。由于相机原理不同，估计的方法也不同。现在我们考虑的是单目相机，使用的方法为对极几何。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/09/SLAM%E2%80%94%E2%80%94%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2019/01/09/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E6%81%AF%E9%80%9F%E7%8E%87%E5%A4%B1%E7%9C%9F%E5%87%BD%E6%95%B0%E4%B8%8E%E7%86%B5%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/09/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E6%81%AF%E9%80%9F%E7%8E%87%E5%A4%B1%E7%9C%9F%E5%87%BD%E6%95%B0%E4%B8%8E%E7%86%B5%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">信息论——信息速率失真函数与熵压缩编码（二）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-09T00:00:00+08:00">2019-01-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-22 07:05:02" itemprop="dateModified" datetime="2023-10-22T07:05:02+08:00">2023-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BF%A1%E6%81%AF%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">信息论</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>之前说到,我们直觉构造的1比特下高斯信源的传输与理论上的失真还有点差距，需要进行分组才能得到最优。下面，我们用失真联合典型序列来证明，同时证明率失真定理。
+率失真定理的核心是我们要证明<span class="math inline">\(R(D) =
+R^{(I)}(D)\)</span>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/09/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E6%81%AF%E9%80%9F%E7%8E%87%E5%A4%B1%E7%9C%9F%E5%87%BD%E6%95%B0%E4%B8%8E%E7%86%B5%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%EF%BC%88%E4%BA%8C%EF%BC%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2019/01/08/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E6%81%AF%E9%80%9F%E7%8E%87%E5%A4%B1%E7%9C%9F%E5%87%BD%E6%95%B0%E4%B8%8E%E7%86%B5%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%EF%BC%88%E4%B8%80%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/08/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E6%81%AF%E9%80%9F%E7%8E%87%E5%A4%B1%E7%9C%9F%E5%87%BD%E6%95%B0%E4%B8%8E%E7%86%B5%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-title-link" itemprop="url">信息论——信息速率失真函数与熵压缩编码（一）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-08 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-08T00:00:00+08:00">2019-01-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-22 07:32:27" itemprop="dateModified" datetime="2023-10-22T07:32:27+08:00">2023-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BF%A1%E6%81%AF%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">信息论</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>之前我们研究的问题，冗余度压缩编码以及信道编码（增加信息冗余度，以对抗信道中的传输错误），目的都是对信息进行可靠无差错的传输，信息熵没有变化，也就是是保熵的。之后的内容，我们不再保证信息传输是无差错的。<br />
+在实际中，很多情况下我们是没有必要把信息的所有内容都保留下来的。比如看视频的时候，有高清标清的选择，对应于不同的网络情况。同样的还有图片的有损压缩等等。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/08/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E6%81%AF%E9%80%9F%E7%8E%87%E5%A4%B1%E7%9C%9F%E5%87%BD%E6%95%B0%E4%B8%8E%E7%86%B5%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%EF%BC%88%E4%B8%80%EF%BC%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2019/01/02/Learning-From-Data%E2%80%94%E2%80%94DQN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/02/Learning-From-Data%E2%80%94%E2%80%94DQN/" class="post-title-link" itemprop="url">Learning From Data——DQN</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-02 00:42:53" itemprop="dateCreated datePublished" datetime="2019-01-02T00:42:53+08:00">2019-01-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 04:07:54" itemprop="dateModified" datetime="2023-10-21T04:07:54+08:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>之前的博客讲了<a
+target="_blank" rel="noopener" href="https://wlsdzyzl.github.io/2018/12/28/Learning-From-Data%E2%80%94%E2%80%94Reinforcement-Learning/">reinforcement
+learning</a>，但是上节课讲得更多的像是理论层面的东西，实际操作起来还是一脸懵逼。这次介绍一个非常有名的DQN（Deep
+Q-network），是神经网络和Q-learning结合起来的一个算法。并且在最后，我们会用它做一个有趣的事情。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/02/Learning-From-Data%E2%80%94%E2%80%94DQN/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2019/01/02/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E9%81%93%E5%8F%8A%E5%85%B6%E5%AE%B9%E9%87%8F%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/02/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E9%81%93%E5%8F%8A%E5%85%B6%E5%AE%B9%E9%87%8F%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">信息论——信道及其容量（二）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-02 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-02T00:00:00+08:00">2019-01-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-22 07:03:02" itemprop="dateModified" datetime="2023-10-22T07:03:02+08:00">2023-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BF%A1%E6%81%AF%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">信息论</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>到目前为止，我们都只算出来了信道容量，没有讲过怎么编码能得到这些容量。接下来要做的就是说明，所有上面算出来的容量，都是可以实现的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/02/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E9%81%93%E5%8F%8A%E5%85%B6%E5%AE%B9%E9%87%8F%EF%BC%88%E4%BA%8C%EF%BC%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2019/01/01/Learning-From-Data%E2%80%94%E2%80%94Introduction-of-Deep-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/01/Learning-From-Data%E2%80%94%E2%80%94Introduction-of-Deep-Learning/" class="post-title-link" itemprop="url">Learning From Data——Introduction of Deep Learning</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-01-01 17:41:32" itemprop="dateCreated datePublished" datetime="2019-01-01T17:41:32+08:00">2019-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2019-01-02 00:43:13" itemprop="dateModified" datetime="2019-01-02T00:43:13+08:00">2019-01-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>上节课是数据学习的最后一个课程，做了一个简单的深度学习的介绍。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/01/Learning-From-Data%E2%80%94%E2%80%94Introduction-of-Deep-Learning/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/12/28/Learning-From-Data%E2%80%94%E2%80%94Reinforcement-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/28/Learning-From-Data%E2%80%94%E2%80%94Reinforcement-Learning/" class="post-title-link" itemprop="url">Learning From Data——Reinforcement Learning</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-28 20:05:58" itemprop="dateCreated datePublished" datetime="2018-12-28T20:05:58+08:00">2018-12-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 03:49:19" itemprop="dateModified" datetime="2023-10-21T03:49:19+08:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这周数据学习的内容是关于强化学习（Reinforcement
+Learning）的。不过课上睡着了，而且由于信息论时间太赶一直没有空看这节课的内容。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/28/Learning-From-Data%E2%80%94%E2%80%94Reinforcement-Learning/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/12/20/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94Unbiased-Estimation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/20/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94Unbiased-Estimation/" class="post-title-link" itemprop="url">数学——Unbiased Estimation</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-20 23:12:33" itemprop="dateCreated datePublished" datetime="2018-12-20T23:12:33+08:00">2018-12-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2018-12-23 01:57:12" itemprop="dateModified" datetime="2018-12-23T01:57:12+08:00">2018-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在很久之前学习概率论的时候呢，有这么一个比较奇怪的地方，方差的无偏估计：
+<span class="math display">\[
+\sigma^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i - \overline X)^2
+\]</span></p>
+<p><span class="math inline">\(\overline X = \frac 1 n
+X_i\)</span>，这里无偏估计是<span
+class="math inline">\(\frac{1}{n-1}\)</span>总感觉有点反直觉。这篇文章就是想介绍一下无偏估计，以及这个<span
+class="math inline">\((n-1)\)</span>是从何而来的。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/20/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94Unbiased-Estimation/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/12/17/Learning-From-Data%E2%80%94%E2%80%94Mixture-of-Gaussians-EM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/17/Learning-From-Data%E2%80%94%E2%80%94Mixture-of-Gaussians-EM/" class="post-title-link" itemprop="url">Learning From Data——Mixture of Gaussians & EM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-17 12:32:12" itemprop="dateCreated datePublished" datetime="2018-12-17T12:32:12+08:00">2018-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 03:30:59" itemprop="dateModified" datetime="2023-10-21T03:30:59+08:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这一周的内容是关于EM算法的，同时介绍了EM算法在混合高斯模型（Mixture
+of Gaussians）上的情况以及在因子分析上的用途。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/17/Learning-From-Data%E2%80%94%E2%80%94Mixture-of-Gaussians-EM/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/12/16/SLAM%E2%80%94%E2%80%94%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89feature/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/16/SLAM%E2%80%94%E2%80%94%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89feature/" class="post-title-link" itemprop="url">SLAM——视觉里程计（一）feature</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-16 23:56:36" itemprop="dateCreated datePublished" datetime="2018-12-16T23:56:36+08:00">2018-12-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 04:07:54" itemprop="dateModified" datetime="2023-10-21T04:07:54+08:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>从现在开始下面两篇文章来介绍SLAM中的视觉里程计（Visual
+Odometry）。这个是我们正式进入SLAM工程的第一步，而之前介绍的更多的是一些基础理论。视觉里程计完成的事情是视觉里程计VO的目标是根据拍摄的图像估计相机的位姿。目前主要有两个方法，我们这一篇介绍的是特征点法。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/16/SLAM%E2%80%94%E2%80%94%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89feature/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/12/11/Learning-From-Data%E2%80%94%E2%80%94Hypothesis-Testing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/11/Learning-From-Data%E2%80%94%E2%80%94Hypothesis-Testing/" class="post-title-link" itemprop="url">Learning From Data——Hypothesis Testing</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-11 20:01:16" itemprop="dateCreated datePublished" datetime="2018-12-11T20:01:16+08:00">2018-12-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 03:34:00" itemprop="dateModified" datetime="2023-10-21T03:34:00+08:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>上周讲的内容，和之前一样，从无到有推出来一堆东西。老师在白板上写Statistical
+Learning, Hypothesis
+Testing，当然是有关系的，但是这届课讲得内容应该只是上述二者的一小部分。比较神奇的是，最后竟然推到了VC
+Divergence。Amazing!
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/11/Learning-From-Data%E2%80%94%E2%80%94Hypothesis-Testing/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/12/07/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94KKT-condition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/07/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94KKT-condition/" class="post-title-link" itemprop="url">数学——KKT condition</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-07 21:01:35" itemprop="dateCreated datePublished" datetime="2018-12-07T21:01:35+08:00">2018-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2018-12-08 16:13:35" itemprop="dateModified" datetime="2018-12-08T16:13:35+08:00">2018-12-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>实际上，之前的文章中已经多次提到了KKT条件，比如机器学习中<a
+target="_blank" rel="noopener" href="https://wlsdzyzl.top/2018/10/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94Dual-Support-Vector-Machine/">SVM</a>，以及信息论中<a
+target="_blank" rel="noopener" href="https://wlsdzyzl.top/2018/11/27/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E9%81%93%E5%8F%8A%E5%85%B6%E5%AE%B9%E9%87%8F/">信道容量</a>.但是都是具体问题下的kkt条件。这次来概括说明下，纯数学中的kkt条件。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/07/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94KKT-condition/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/12/05/Learning-From-Data%E2%80%94%E2%80%94Multi-Dimensional-ACE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/05/Learning-From-Data%E2%80%94%E2%80%94Multi-Dimensional-ACE/" class="post-title-link" itemprop="url">Learning From Data——Multivariate ACE</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-05 14:02:15" itemprop="dateCreated datePublished" datetime="2018-12-05T14:02:15+08:00">2018-12-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 03:30:59" itemprop="dateModified" datetime="2023-10-21T03:30:59+08:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>上节课除了说了softmax与HGR，还介绍了ACE算法的拓展：多变量下的ACE。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/05/Learning-From-Data%E2%80%94%E2%80%94Multi-Dimensional-ACE/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/12/05/Learning-From-Data%E2%80%94%E2%80%94derive-something-from-Softmax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="wlsdzyzl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wlsdzyzl">
+      <meta itemprop="description" content="Everything is choice.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wlsdzyzl">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/05/Learning-From-Data%E2%80%94%E2%80%94derive-something-from-Softmax/" class="post-title-link" itemprop="url">Learning From Data——derive something from Softmax</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-12-05 13:58:52" itemprop="dateCreated datePublished" datetime="2018-12-05T13:58:52+08:00">2018-12-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-10-21 03:34:00" itemprop="dateModified" datetime="2023-10-21T03:34:00+08:00">2023-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这周的数据学习课更不知道该起什么题目了。主要是加上一些假设，从Softmax函数开始推导，最后得到一个非常简单的形式，从而大大简化了算法。这次的derivation和上篇讲得东西还是有一些相关的。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/05/Learning-From-Data%E2%80%94%E2%80%94derive-something-from-Softmax/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/28/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94EVD%E4%B8%8ESVD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -265,7 +1574,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>这个博客介绍特征值分解（Eigen Value Decomposition,EVD）和奇异值分解(Singular Value Decomposition),　可以当作机器学习的补充材料。</p>
+          <p>这个博客介绍特征值分解（Eigen Value
+Decomposition,EVD）和奇异值分解(Singular Value
+Decomposition),　可以当作机器学习的补充材料。
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/28/%E6%95%B0%E5%AD%A6%E2%80%94%E2%80%94EVD%E4%B8%8ESVD/#more" rel="contents">
@@ -357,7 +1668,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>这次来介绍信道以及信道的容量。</p>
+          <p>这次来介绍信道以及信道的容量。
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/27/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94%E4%BF%A1%E9%81%93%E5%8F%8A%E5%85%B6%E5%AE%B9%E9%87%8F/#more" rel="contents">
@@ -449,7 +1760,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>上一周的数据学习，没有课件，老师直接开始从头推了一些神奇的东西出来。所以我也很难给这篇的内容起一个题目，因为是从Ｘ与Ｙ之间的信息推导到SVD的，因此就这么叫吧。</p>
+          <p>上一周的数据学习，没有课件，老师直接开始从头推了一些神奇的东西出来。所以我也很难给这篇的内容起一个题目，因为是从Ｘ与Ｙ之间的信息推导到SVD的，因此就这么叫吧。
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/27/Learning-From-Data%E2%80%94%E2%80%94Info-between-X-and-Y-SVD/#more" rel="contents">
@@ -541,7 +1852,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>上次说了几个PCA的局限性，其中有一个是它只找各个特征之间的线性关系。如何拓展线性关系到非线性，似乎有点思路，因为之前SVM中说过，可以通过kernel将SVM拓展到非线性的分类。同样通过kernel，我们也可以找到特征之间的非线性关系，从而利用PCA进行数据压缩等操作。</p>
+          <p>上次说了几个PCA的局限性，其中有一个是它只找各个特征之间的线性关系。如何拓展线性关系到非线性，似乎有点思路，因为之前SVM中说过，可以通过kernel将SVM拓展到非线性的分类。同样通过kernel，我们也可以找到特征之间的非线性关系，从而利用PCA进行数据压缩等操作。
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/20/Learning-From-Data%E2%80%94%E2%80%94Kernel-PCA/#more" rel="contents">
@@ -633,7 +1944,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>上节课除了介绍了K-Means，更重点介绍了另外一个算法，PCA（Principal Component Analysis）。</p>
+          <p>上节课除了介绍了K-Means，更重点介绍了另外一个算法，PCA（Principal
+Component Analysis）。
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/19/Learning-From-Data%E2%80%94%E2%80%94PCA/#more" rel="contents">
@@ -751,1288 +2063,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/17/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94Huffman%E7%BC%96%E7%A0%81%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%85%B6%E6%9C%80%E4%BC%98%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/17/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94Huffman%E7%BC%96%E7%A0%81%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%85%B6%E6%9C%80%E4%BC%98%E6%80%A7/" class="post-title-link" itemprop="url">信息论——Huffman编码实现及其最优性</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2018-11-17 21:17:08 / Modified: 22:03:16" itemprop="dateCreated datePublished" datetime="2018-11-17T21:17:08+08:00">2018-11-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%BF%A1%E6%81%AF%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">信息论</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>香农虽然提出了香农码，但是香农码很多情况下离最优码还差得不少。比如：K&#x3D;2,$p(a_1) &#x3D; 0.9999,p(a_2) &#x3D; 0.0001$，这种偏差非常大的情况下，香农码给$a_1,a_2$的编码长度分别为：1,14.而实际上两个值，我们可以仅用一个bit就能区分开来。在这里介绍一个大名鼎鼎的最优前缀编码：Huffman编码。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/17/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94Huffman%E7%BC%96%E7%A0%81%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%85%B6%E6%9C%80%E4%BC%98%E6%80%A7/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/16/Learning-From-Data%E2%80%94%E2%80%94%E6%8B%9F%E5%90%88sin%E6%9B%B2%E7%BA%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/16/Learning-From-Data%E2%80%94%E2%80%94%E6%8B%9F%E5%90%88sin%E6%9B%B2%E7%BA%BF/" class="post-title-link" itemprop="url">Learning From Data——拟合sin曲线</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-16 17:45:44" itemprop="dateCreated datePublished" datetime="2018-11-16T17:45:44+08:00">2018-11-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2018-11-25 14:17:16" itemprop="dateModified" datetime="2018-11-25T14:17:16+08:00">2018-11-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这次的作业是用神经网络来拟合sin曲线。通过实践更能感受到ReLU以及sigmoid，tanh激活函数的区别。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/16/Learning-From-Data%E2%80%94%E2%80%94%E6%8B%9F%E5%90%88sin%E6%9B%B2%E7%BA%BF/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/14/Learning-From-Data%E2%80%94%E2%80%94Activation-Function/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/14/Learning-From-Data%E2%80%94%E2%80%94Activation-Function/" class="post-title-link" itemprop="url">Learning From Data——Activation Function</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-14 21:28:08" itemprop="dateCreated datePublished" datetime="2018-11-14T21:28:08+08:00">2018-11-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 03:30:59" itemprop="dateModified" datetime="2023-10-21T03:30:59+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>上次lfd的博客讲了神经网络的一些基本内容，包括它的起源，前向传播以及后向传播。实际上，对于一个很重要的部分：activation function，只是简单提到。所以这次着重说一下不同的激活函数之间的区别。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/14/Learning-From-Data%E2%80%94%E2%80%94Activation-Function/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/14/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94Kraft%E4%B8%8D%E7%AD%89%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%8F%98%E9%95%BF%E7%BC%96%E7%A0%81%E5%AE%9A%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/14/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94Kraft%E4%B8%8D%E7%AD%89%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%8F%98%E9%95%BF%E7%BC%96%E7%A0%81%E5%AE%9A%E7%90%86/" class="post-title-link" itemprop="url">信息论——Kraft不等式以及变长编码定理</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-14 14:32:52" itemprop="dateCreated datePublished" datetime="2018-11-14T14:32:52+08:00">2018-11-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 03:30:59" itemprop="dateModified" datetime="2023-10-21T03:30:59+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%BF%A1%E6%81%AF%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">信息论</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>上次介绍了香农无损编码定理以及一些不同类别的编码。这次介绍kraft不等式以及huffman编码，并且说明霍夫曼编码的最优性。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/14/%E4%BF%A1%E6%81%AF%E8%AE%BA%E2%80%94%E2%80%94Kraft%E4%B8%8D%E7%AD%89%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%8F%98%E9%95%BF%E7%BC%96%E7%A0%81%E5%AE%9A%E7%90%86/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/14/SLAM%E2%80%94%E2%80%94%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/14/SLAM%E2%80%94%E2%80%94%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">SLAM——非线性优化</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-14 14:29:22" itemprop="dateCreated datePublished" datetime="2018-11-14T14:29:22+08:00">2018-11-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 03:30:59" itemprop="dateModified" datetime="2023-10-21T03:30:59+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>实际上从上次介绍的东西，我们理论上已经知道了SLAM是怎么运作的了。从深度图和颜色图，估计相机位姿，通过相机位姿，以及深度图和颜色图，我们实际上就可以去拼接点云或者三维建模了。不过现实往往没有那么容易，如果这么简单SLAM也没什么好研究的了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/14/SLAM%E2%80%94%E2%80%94%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/14/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94Viewing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/14/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94Viewing/" class="post-title-link" itemprop="url">图形学——Viewing</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-14 14:28:58" itemprop="dateCreated datePublished" datetime="2018-11-14T14:28:58+08:00">2018-11-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2018-11-21 17:20:18" itemprop="dateModified" datetime="2018-11-21T17:20:18+08:00">2018-11-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%9B%BE%E5%BD%A2%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">图形学</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>上次图形学的博客中介绍了转换，所以我们可以从世界坐标转换到相机坐标了。不过虽然我们学的是三维模型，不过我们看到的都是二维的。近大远小是小学生都明白的道理，而一个物品的距离等等都会影响它在我们眼中,以及拍摄出来照片的样子。因此这次讲得内容是观察（Viewing）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/14/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94Viewing/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/12/SLAM%E2%80%94%E2%80%94%E7%9B%B8%E6%9C%BA%E4%B8%8E%E5%9B%BE%E5%83%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/12/SLAM%E2%80%94%E2%80%94%E7%9B%B8%E6%9C%BA%E4%B8%8E%E5%9B%BE%E5%83%8F/" class="post-title-link" itemprop="url">SLAM——相机与图像</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-12 16:03:20" itemprop="dateCreated datePublished" datetime="2018-11-12T16:03:20+08:00">2018-11-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:27:42" itemprop="dateModified" datetime="2023-10-21T04:27:42+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>SLAM建模的过程中，相机是很重要的一个部分。因此这一讲主要探讨相机的成像模型。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/12/SLAM%E2%80%94%E2%80%94%E7%9B%B8%E6%9C%BA%E4%B8%8E%E5%9B%BE%E5%83%8F/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/10/%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91%E2%80%94%E2%80%94vnc+SSH%20tunnel%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%86%85%E7%BD%91%E6%9C%BA%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/10/%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91%E2%80%94%E2%80%94vnc+SSH%20tunnel%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%86%85%E7%BD%91%E6%9C%BA%E5%99%A8/" class="post-title-link" itemprop="url">踩过的坑——vnc+SSH tunnel远程控制内网机器</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-10 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-10T00:00:00+08:00">2018-11-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:21:39" itemprop="dateModified" datetime="2023-10-21T04:21:39+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近出了个幺蛾子：teamviewer疑似被黑客攻击（已经证明是谣言了）。因此直到现在实验室的teamviewer端口依然被封禁。所以就需要使用新的方法，好在宿舍能够学习。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/10/%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91%E2%80%94%E2%80%94vnc+SSH%20tunnel%E8%BF%9C%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%86%85%E7%BD%91%E6%9C%BA%E5%99%A8/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/09/SLAM%E2%80%94%E2%80%94%E6%9D%8E%E7%BE%A4%E5%92%8C%E6%9D%8E%E4%BB%A3%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/09/SLAM%E2%80%94%E2%80%94%E6%9D%8E%E7%BE%A4%E5%92%8C%E6%9D%8E%E4%BB%A3%E6%95%B0/" class="post-title-link" itemprop="url">SLAM——李群和李代数</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-09 13:06:47" itemprop="dateCreated datePublished" datetime="2018-11-09T13:06:47+08:00">2018-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 03:30:59" itemprop="dateModified" datetime="2023-10-21T03:30:59+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在SLAM中，我们需要对姿态进行估计和优化。但是旋转矩阵自身是有约束的，增加优化难度。因此我们需要引入李群和李代数，可以将位姿估计转换为无约束的优化问题。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/09/SLAM%E2%80%94%E2%80%94%E6%9D%8E%E7%BE%A4%E5%92%8C%E6%9D%8E%E4%BB%A3%E6%95%B0/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/07/SLAM%E2%80%94%E2%80%94%E5%88%9A%E4%BD%93%E8%BF%90%E5%8A%A8%E4%BB%A5%E5%8F%8AEigen/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/07/SLAM%E2%80%94%E2%80%94%E5%88%9A%E4%BD%93%E8%BF%90%E5%8A%A8%E4%BB%A5%E5%8F%8AEigen/" class="post-title-link" itemprop="url">SLAM——刚体运动以及Eigen</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-07 21:22:37" itemprop="dateCreated datePublished" datetime="2018-11-07T21:22:37+08:00">2018-11-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 03:30:59" itemprop="dateModified" datetime="2023-10-21T03:30:59+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这次主要介绍一些刚体运动中需要的数学知识以及Eigen库的基本使用。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/07/SLAM%E2%80%94%E2%80%94%E5%88%9A%E4%BD%93%E8%BF%90%E5%8A%A8%E4%BB%A5%E5%8F%8AEigen/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/06/SLAM%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/06/SLAM%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">SLAM——基本介绍</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-06 21:04:23" itemprop="dateCreated datePublished" datetime="2018-11-06T21:04:23+08:00">2018-11-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 04:27:23" itemprop="dateModified" datetime="2023-10-21T04:27:23+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>不出意外的话，以后我的方向应该就是三维重建方向了，而SLAM是一个逃不开的东西。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/06/SLAM%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/06/Learning-From-Data%E2%80%94%E2%80%94Covariance-Matrix-Derivation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/06/Learning-From-Data%E2%80%94%E2%80%94Covariance-Matrix-Derivation/" class="post-title-link" itemprop="url">Learning From Data——Covariance Matrix Derivation</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-06 15:35:34" itemprop="dateCreated datePublished" datetime="2018-11-06T15:35:34+08:00">2018-11-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 03:30:59" itemprop="dateModified" datetime="2023-10-21T03:30:59+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>上周的数据学习课程布置了一个作业，主要做的是对多维高斯分布下求得协方差矩阵的取值。这个和之前将的Generative Learning Algorithm很相关，但是当时是直接给出了协方差矩阵的取值。结果是异常简单的，但是其中的证明可能要费点功夫。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/06/Learning-From-Data%E2%80%94%E2%80%94Covariance-Matrix-Derivation/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/06/Learning-From-Data%E2%80%94%E2%80%94Neural-Network/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/06/Learning-From-Data%E2%80%94%E2%80%94Neural-Network/" class="post-title-link" itemprop="url">Learning From Data——Neural Network</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-06 13:54:51" itemprop="dateCreated datePublished" datetime="2018-11-06T13:54:51+08:00">2018-11-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 03:34:00" itemprop="dateModified" datetime="2023-10-21T03:34:00+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">数据学习课程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>这周上的数据学习，主要讲了一些神经网络相关的知识。神经网络是目前最流行的机器学习算法了，甚至由它诞生了一个新的学科：deep learning。因此一篇博客，只能浅浅介绍一些神经网络的基本内容。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/06/Learning-From-Data%E2%80%94%E2%80%94Neural-Network/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://wlsdzyzl.com/2018/11/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94Kernel-Logistic-Regression/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="wlsdzyzl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wlsdzyzl">
-      <meta itemprop="description" content="Everything is choice.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | wlsdzyzl">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94Kernel-Logistic-Regression/" class="post-title-link" itemprop="url">机器学习——Kernel Logistic Regression</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-11-06 13:37:08" itemprop="dateCreated datePublished" datetime="2018-11-06T13:37:08+08:00">2018-11-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-21 03:30:59" itemprop="dateModified" datetime="2023-10-21T03:30:59+08:00">2023-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在我们的生活中，其实大部分使用的都是soft-margin SVM，很少会有人真正去使用hard-margin，因为我们无法避免噪声。现在想想，能否将soft-margin svm与我们之前的losgistic regress结合起来，会得到什么样的学习算法？</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94Kernel-Logistic-Regression/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -2088,6 +2118,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

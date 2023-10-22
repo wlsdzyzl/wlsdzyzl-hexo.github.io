@@ -92,7 +92,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">155</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -132,18 +132,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -270,29 +270,54 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>如何将离散随机变量的这些概念推广到连续随机变量？</p>
-<span id="more"></span>
-
+    <div class="post-body" itemprop="articleBody"><p>如何将离散随机变量的这些概念推广到连续随机变量？ <span id="more"></span></p>
 <p>使用黎曼积分，我们可以得到：</p>
-<p>$$<br>\begin{align}<br>H(X) &amp;&#x3D; -\sum_{x} p(x)\Delta x \log p(x) \Delta x\<br>&amp;&#x3D; -\sum_{x}p(x)\log p(x)\Delta x - -\sum_{x}p(x)\log \Delta x\Delta x<br>\end{align}<br>$$</p>
+<p><span class="math display">\[
+\begin{align}
+H(X) &amp;= -\sum_{x} p(x)\Delta x \log p(x) \Delta x\\
+&amp;= -\sum_{x}p(x)\log p(x)\Delta x - -\sum_{x}p(x)\log \Delta x\Delta
+x
+\end{align}
+\]</span></p>
 <p>上式中，最后一项是趋于负无穷的。</p>
 <p>这意味着连续随机变量包含的信息是无穷的。但是无穷的是无法研究的，因此香农重新给了一个微分熵的定义，它在数学上不够严格，但是在实际上却非常有用。</p>
-<p>$$<br>h(X) &#x3D; \int _{-\infty }^{+\infty} p(x)\log p(x) dx<br>$$</p>
+<p><span class="math display">\[
+h(X) = \int _{-\infty }^{+\infty} p(x)\log p(x) dx
+\]</span></p>
 <p>可以看到它在形式上与离散形式的熵是非常相似的。</p>
-<p>同时也有联合熵：<br>$$<br>h(X,Y) &#x3D; -\int p(x,y)\log p(x,y) dxdy<br>$$</p>
-<p>条件熵：<br>$$<br>h(X|Y) &#x3D; -\iint p(x,y) \log p(x|y) dxdy &#x3D; -\int p(y) \int p(x|y) \log p(x|y) dx dy<br>$$</p>
-<p>不等式关系：<br>$<br>h(X,Y) &#x3D; h(X) + h(Y|X) &#x3D; h(Y) + h(X|Y)<br>$</p>
-<p>$<br>h(X|Y) \leq h(X), h(Y|X) \leq h(Y)<br>$</p>
-<p>$<br>h(X,Y)\leq h(X) + h(Y)<br>$</p>
+<p>同时也有联合熵： <span class="math display">\[
+h(X,Y) = -\int p(x,y)\log p(x,y) dxdy
+\]</span></p>
+<p>条件熵： <span class="math display">\[
+h(X|Y) = -\iint p(x,y) \log p(x|y) dxdy = -\int p(y) \int p(x|y) \log
+p(x|y) dx dy
+\]</span></p>
+<p>不等式关系： $ h(X,Y) = h(X) + h(Y|X) = h(Y) + h(X|Y) $</p>
+<p>$ h(X|Y) h(X), h(Y|X) h(Y) $</p>
+<p>$ h(X,Y)h(X) + h(Y) $</p>
 <p>这些不等式都是存在的，与离散形式一致，但是要注意的是h(X)不一定是非负的了。</p>
-<p>例如：<br>$$<br>X:p(x) &#x3D; \left { \begin{array}{c}<br>    \frac 1 {b-a} , a \leq x \leq b;\<br>    0, otherwise;<br>    \end{array}<br>    \right.<br>$$</p>
-<p>那么它的微分熵实际上等于$\log(b-a)$.当$b-a&lt;1$的时候，这个熵是小于0的。</p>
-<h3 id="高斯分布的微分熵"><a href="#高斯分布的微分熵" class="headerlink" title="高斯分布的微分熵"></a>高斯分布的微分熵</h3><p>高斯分布概率密度如下：</p>
-<p>$X:p(x) &#x3D; \frac{1}{\sqrt {2 \pi \sigma} } exp [-\frac{(x-m)^2}{2\sigma ^2}]$</p>
-<p>而它的微分熵为$h(x) &#x3D; \frac 1 2 \log 2 \pi e \sigma^2$.</p>
+<p>例如： <span class="math display">\[
+X:p(x) = \left \{ \begin{array}{c}
+    \frac 1 {b-a} , a \leq x \leq b;\\
+    0, otherwise;
+    \end{array}
+    \right.
+\]</span></p>
+<p>那么它的微分熵实际上等于<span
+class="math inline">\(\log(b-a)\)</span>.当<span
+class="math inline">\(b-a&lt;1\)</span>的时候，这个熵是小于0的。</p>
+<h3 id="高斯分布的微分熵">高斯分布的微分熵</h3>
+<p>高斯分布概率密度如下：</p>
+<p><span class="math inline">\(X:p(x) = \frac{1}{\sqrt {2 \pi \sigma} }
+exp [-\frac{(x-m)^2}{2\sigma ^2}]\)</span></p>
+<p>而它的微分熵为<span class="math inline">\(h(x) = \frac 1 2 \log 2 \pi
+e \sigma^2\)</span>.</p>
 <p>这个需要记住。当然只要带进定义就可以推算出来的。值得注意的是，它的微分熵和m（期望）是无关的</p>
-<p>给定m和$\sigma$的情况下，当连续变量服从高斯分布的时候，微分熵最大。</p>
-<h3 id="互信息"><a href="#互信息" class="headerlink" title="互信息"></a>互信息</h3><p>$I(X;Y) &#x3D; \iint p(x,y) \log \frac{p(x,y)}{p(x)p(y)}dxdy$</p>
+<p>给定m和<span
+class="math inline">\(\sigma\)</span>的情况下，当连续变量服从高斯分布的时候，微分熵最大。</p>
+<h3 id="互信息">互信息</h3>
+<p><span class="math inline">\(I(X;Y) = \iint p(x,y) \log
+\frac{p(x,y)}{p(x)p(y)}dxdy\)</span></p>
 <p>可以直接使用黎曼积分得到，与离散的情况也非常一致。</p>
 
     </div>
@@ -380,6 +405,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

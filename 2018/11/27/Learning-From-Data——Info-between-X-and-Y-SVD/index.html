@@ -96,7 +96,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">155</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -121,7 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#info-shared-Between-X-Y"><span class="nav-number">1.</span> <span class="nav-text">info shared Between X, Y</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVD"><span class="nav-number">2.</span> <span class="nav-text">SVD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Power-Iteration"><span class="nav-number">2.1.</span> <span class="nav-text">Power Iteration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACE%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">ACE算法</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#power-iteration"><span class="nav-number">1.</span> <span class="nav-text">Power Iteration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ace%E7%AE%97%E6%B3%95"><span class="nav-number"></span> <span class="nav-text">ACE算法</span></a></div>
         </div>
         <!--/noindex-->
 
@@ -136,18 +136,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -179,7 +179,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#info-shared-Between-X-Y"><span class="nav-number">1.</span> <span class="nav-text">info shared Between X, Y</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVD"><span class="nav-number">2.</span> <span class="nav-text">SVD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Power-Iteration"><span class="nav-number">2.1.</span> <span class="nav-text">Power Iteration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACE%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">ACE算法</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#power-iteration"><span class="nav-number">1.</span> <span class="nav-text">Power Iteration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ace%E7%AE%97%E6%B3%95"><span class="nav-number"></span> <span class="nav-text">ACE算法</span></a></div>
         </div>
         <!--/noindex-->
 
@@ -274,67 +274,231 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>上一周的数据学习，没有课件，老师直接开始从头推了一些神奇的东西出来。所以我也很难给这篇的内容起一个题目，因为是从Ｘ与Ｙ之间的信息推导到SVD的，因此就这么叫吧。</p>
-<span id="more"></span>
-<h2 id="info-shared-Between-X-Y"><a href="#info-shared-Between-X-Y" class="headerlink" title="info shared Between X, Y"></a>info shared Between X, Y</h2><p>假如现在有两个离散变量，Ｘ与Ｙ他们是一一对应的。在之前的机器学习问题中，我们知道Ｘ是输入数据，Ｙ是标签。现在忘掉之前的学习算法，从信息的角度来看，我们希望做的，是提取Ｘ与Ｙ之间的公共信息，而这部分才是它们有某种关系的真正原因。因此现在我们的目标变成，从Ｘ与Ｙ的联合分布提取Ｘ与Ｙ之前的公共信息，。</p>
-<p>那么首先遇到的问题：我们是如何提取Ｘ和Ｙ的各自的信息的？我们的做法是利用一个函数，就像linear regression等学习算法一样，也就是：<br>$$<br> X \rightarrow f(X) \rightarrow \mathbb{R}\<br> Y \rightarrow g(Y) \rightarrow \mathbb{R}\<br>$$</p>
-<p>衡量它们之间的共同信息，我们使用一个比较熟悉的名词：相关系数。我们要做的就是找到合适的$f,g$函数，让它们的共同信息最大，也就是相关系数达到最大（HGR Maximal Correlation）：<br>$$<br>\max \rho_{XY} &#x3D; \max \mathbb{E}<em>{p</em>{XY} } [f(x)g(y) ]<br>$$</p>
-<p>当然我们还有一些限制条件，才能让相关系数为上值。在概率论中我们知道，相关系数的求法：<br>$$<br>\begin{aligned}<br>\rho_{XY} &amp;&#x3D; \frac{Cov(X,Y)}{\sqrt{Var (X) Var (Y)} }\<br>&amp;&#x3D; \frac{\mathbb{E}[XY ] - \mathbb{E}[X ] \mathbb{E}[Y ]}{ \sqrt{\mathbb{E}[X^2 ] - \mathbb{E}^2[X ]} }<br>\end{aligned}<br>$$</p>
-<p>所以可以看到的是，我们应该让<br>$$<br>\mathbb{E}[f(x) ] &#x3D; \mathbb{E}[g(x) ] &#x3D; 0,\<br>\mathbb{E}[f^2(x) ] &#x3D; \mathbb{E}[g^2(x) ] &#x3D; 1<br>$$</p>
-<p>这时候，$0\leq\rho_{XY}\leq 1$.当$\rho_{XY} &#x3D; 0$时，说明二者独立（要注意，这并不意味着E(XY) &#x3D; 0说明Ｘ，Ｙ独立，实际上相关系数为0才能证明二者独立，只不过我们这里加上了限制，使得$\rho_{XY} &#x3D; \mathbb{E}[f(x)g(x) ]$）。</p>
-<p>现在，用数学语言来描述这个问题：<br>$$<br>\begin{align}<br>\max \mathbb{E}<em>{p</em>{XY} } [f(x)g(y) ]&amp; &#x3D; \sum_{x,y}p_{XY}(x,y)f(x)g(y)\<br>s.t. &amp;\sum_{x}p_X(x)f(x) &#x3D; \sum_y p_Y(y)g(y) &#x3D; 0\<br>&amp; \sum_{x}p_X(x)f^2(x) &#x3D; \sum_y p_Y(y)g^2(y) &#x3D; 1<br>\end{align}<br>$$</p>
-<p>为了方便后面的计算，我们要对原式进行一些转换：<br>$$<br>\begin{aligned}<br>(1)&amp;&#x3D; \sum_{x,y} \frac{p_{XY}(x,y)}{\sqrt{p_X(x)p_Y(y)} } [\underbrace{\sqrt{p_X(x)}\cdot f(x)}<em>{\phi(x)} \underbrace{\sqrt{p_Y(y)}\cdot g(y)}</em>{\psi(y)}]\<br>&amp;&#x3D; \sum_{x,y}  \frac{p_{XY}(x,y)}{\sqrt{p_X(x)p_Y(y)} } \phi(x) \psi(y) &#x3D; \Psi^TB\Phi<br>\end{aligned}<br>$$</p>
-<p>上式中：<br>$$<br>\Phi &#x3D; \begin{bmatrix}<br>\phi(x_1),\phi(x_2),…,\phi(x_{|X|})<br>\end{bmatrix}^T_{|X|\times 1},\<br>\Psi &#x3D; \begin{bmatrix}<br>\psi(y_1),\psi(y_2),…,\psi(y_{|Y|})<br>\end{bmatrix}^T_{|Y|\times 1},\<br>B_{y,x} &#x3D;  \frac{p_{XY}(x,y)}{\sqrt{p_X(x)p_Y(y)} },B_{|Y| \times |X|}.<br>$$</p>
-<p>经过上面的转换，我们可以得到：<br>$$<br>\begin{aligned}<br>(2): &amp;\sum_{x} \sqrt{p_X{x} } \phi(x) &#x3D; 0 \rightarrow \sqrt{P_X}^T \Phi &#x3D; 0;\<br>&amp;\sum_{y} \sqrt{p_Y{y} } \psi(y) &#x3D; 0 \rightarrow \sqrt{P_Y}^T \Psi &#x3D; 0;<br>\end{aligned}<br>$$<br>$$<br>(3): \Vert \Phi \Vert^2 &#x3D; \Vert \Psi \Vert ^2 &#x3D; 1<br>$$</p>
-<p>这时候我们的问题变成了：<br>$$<br>\begin{aligned}<br>\max \Psi^T B \Phi,s.t. &amp;\langle\sqrt{P_X},\Phi\rangle &#x3D; \langle\sqrt{P_Y},\Psi\rangle &#x3D; 0;\<br>&amp;\Vert \Phi \Vert^2 &#x3D; \Vert \Psi \Vert^2 &#x3D; 1.<br>\end{aligned}<br>$$</p>
-<p>而实际上，上面问题的解正是Ｂ矩阵的最大的奇异向量。</p>
-<h2 id="SVD"><a href="#SVD" class="headerlink" title="SVD"></a>SVD</h2><p>接下来，想提一下，什么是奇异值分解(Singular Value Decomposition)：<br>$$<br>B &#x3D; [u　][\Sigma][　v^T],<br>$$</p>
-<p>其中$u,v$的列向量为Ｂ的左右奇异向量。</p>
-<p>而实际上，$\sqrt{P_X},\sqrt{P_Y}$正是Ｂ矩阵对应的最大的奇异向量。但是显然，我们是不能让它们作为$\Phi,\Psi$的值的，因为这个不满足约束(2):<br>$$<br>\langle\sqrt{P_X},\Phi\rangle &#x3D; \langle\sqrt{P_X},\sqrt{P_X}\rangle &#x3D; 1 \ne 0;\<br>\langle\sqrt{P_Y},\Psi\rangle &#x3D; \langle\sqrt{P_Y},\sqrt{P_Y}\rangle &#x3D;1 \ne 0.<br>$$</p>
-<p>不过，好的消息是，实际上$\Phi,\Psi$正是第二大的奇异向量。可以看出来，不同奇异向量是互相正交的，这个和上次说的PCA非常像。实际上，PCA和SVD是有千丝万缕的关系的。</p>
-<p>从上面的分析，我们可以直接得到：<br>$$<br>f(x) &#x3D; \frac{1}{\sqrt{p_X(x)} } \phi^*(x);\<br>g(y) &#x3D; \frac{1}{\sqrt{p_Y(y)} } \psi^*(y)<br>$$</p>
+    <div class="post-body" itemprop="articleBody"><p>上一周的数据学习，没有课件，老师直接开始从头推了一些神奇的东西出来。所以我也很难给这篇的内容起一个题目，因为是从Ｘ与Ｙ之间的信息推导到SVD的，因此就这么叫吧。
+<span id="more"></span> ## info shared Between X, Y ##
+假如现在有两个离散变量，Ｘ与Ｙ他们是一一对应的。在之前的机器学习问题中，我们知道Ｘ是输入数据，Ｙ是标签。现在忘掉之前的学习算法，从信息的角度来看，我们希望做的，是提取Ｘ与Ｙ之间的公共信息，而这部分才是它们有某种关系的真正原因。因此现在我们的目标变成，从Ｘ与Ｙ的联合分布提取Ｘ与Ｙ之前的公共信息，。</p>
+<p>那么首先遇到的问题：我们是如何提取Ｘ和Ｙ的各自的信息的？我们的做法是利用一个函数，就像linear
+regression等学习算法一样，也就是： <span class="math display">\[
+X \rightarrow f(X) \rightarrow \mathbb{R}\\
+Y \rightarrow g(Y) \rightarrow \mathbb{R}\\
+\]</span></p>
+<p>衡量它们之间的共同信息，我们使用一个比较熟悉的名词：相关系数。我们要做的就是找到合适的<span
+class="math inline">\(f,g\)</span>函数，让它们的共同信息最大，也就是相关系数达到最大（HGR
+Maximal Correlation）： <span class="math display">\[
+\max \rho_{XY} = \max \mathbb{E}_{p_{XY} } [f(x)g(y) ]
+\]</span></p>
+<p>当然我们还有一些限制条件，才能让相关系数为上值。在概率论中我们知道，相关系数的求法：
+<span class="math display">\[
+\begin{aligned}
+\rho_{XY} &amp;= \frac{Cov(X,Y)}{\sqrt{Var (X) Var (Y)} }\\
+&amp;= \frac{\mathbb{E}[XY ] - \mathbb{E}[X ] \mathbb{E}[Y ]}{
+\sqrt{\mathbb{E}[X^2 ] - \mathbb{E}^2[X ]} }
+\end{aligned}
+\]</span></p>
+<p>所以可以看到的是，我们应该让 <span class="math display">\[
+\mathbb{E}[f(x) ] = \mathbb{E}[g(x) ] = 0,\\
+\mathbb{E}[f^2(x) ] = \mathbb{E}[g^2(x) ] = 1
+\]</span></p>
+<p>这时候，<span class="math inline">\(0\leq\rho_{XY}\leq
+1\)</span>.当<span class="math inline">\(\rho_{XY} =
+0\)</span>时，说明二者独立（要注意，这并不意味着E(XY) =
+0说明Ｘ，Ｙ独立，实际上相关系数为0才能证明二者独立，只不过我们这里加上了限制，使得<span
+class="math inline">\(\rho_{XY} = \mathbb{E}[f(x)g(x) ]\)</span>）。</p>
+<p>现在，用数学语言来描述这个问题： <span class="math display">\[
+\begin{align}
+\max \mathbb{E}_{p_{XY} } [f(x)g(y) ]&amp; =
+\sum_{x,y}p_{XY}(x,y)f(x)g(y)\\
+s.t. &amp;\sum_{x}p_X(x)f(x) = \sum_y p_Y(y)g(y) = 0\\
+&amp; \sum_{x}p_X(x)f^2(x) = \sum_y p_Y(y)g^2(y) = 1
+\end{align}
+\]</span></p>
+<p>为了方便后面的计算，我们要对原式进行一些转换： <span
+class="math display">\[
+\begin{aligned}
+(1)&amp;= \sum_{x,y} \frac{p_{XY}(x,y)}{\sqrt{p_X(x)p_Y(y)} }
+[\underbrace{\sqrt{p_X(x)}\cdot f(x)}_{\phi(x)}
+\underbrace{\sqrt{p_Y(y)}\cdot g(y)}_{\psi(y)}]\\
+&amp;= \sum_{x,y}  \frac{p_{XY}(x,y)}{\sqrt{p_X(x)p_Y(y)} } \phi(x)
+\psi(y) = \Psi^TB\Phi
+\end{aligned}
+\]</span></p>
+<p>上式中： <span class="math display">\[
+\Phi = \begin{bmatrix}
+\phi(x_1),\phi(x_2),...,\phi(x_{|X|})
+\end{bmatrix}^T_{|X|\times 1},\\
+\Psi = \begin{bmatrix}
+\psi(y_1),\psi(y_2),...,\psi(y_{|Y|})
+\end{bmatrix}^T_{|Y|\times 1},\\
+B_{y,x} =  \frac{p_{XY}(x,y)}{\sqrt{p_X(x)p_Y(y)} },B_{|Y| \times |X|}.
+\]</span></p>
+<p>经过上面的转换，我们可以得到： <span class="math display">\[
+\begin{aligned}
+(2): &amp;\sum_{x} \sqrt{p_X{x} } \phi(x) = 0 \rightarrow \sqrt{P_X}^T
+\Phi = 0;\\
+&amp;\sum_{y} \sqrt{p_Y{y} } \psi(y) = 0 \rightarrow \sqrt{P_Y}^T \Psi =
+0;
+\end{aligned}
+\]</span> <span class="math display">\[
+(3): \Vert \Phi \Vert^2 = \Vert \Psi \Vert ^2 = 1
+\]</span></p>
+<p>这时候我们的问题变成了： <span class="math display">\[
+\begin{aligned}
+\max \Psi^T B \Phi,s.t. &amp;\langle\sqrt{P_X},\Phi\rangle =
+\langle\sqrt{P_Y},\Psi\rangle = 0;\\
+&amp;\Vert \Phi \Vert^2 = \Vert \Psi \Vert^2 = 1.
+\end{aligned}
+\]</span></p>
+<p>而实际上，上面问题的解正是Ｂ矩阵的最大的奇异向量。 ## SVD ##
+接下来，想提一下，什么是奇异值分解(Singular Value Decomposition)： <span
+class="math display">\[
+B = [u　][\Sigma][　v^T],
+\]</span></p>
+<p>其中<span
+class="math inline">\(u,v\)</span>的列向量为Ｂ的左右奇异向量。</p>
+<p>而实际上，<span
+class="math inline">\(\sqrt{P_X},\sqrt{P_Y}\)</span>正是Ｂ矩阵对应的最大的奇异向量。但是显然，我们是不能让它们作为<span
+class="math inline">\(\Phi,\Psi\)</span>的值的，因为这个不满足约束(2):
+<span class="math display">\[
+\langle\sqrt{P_X},\Phi\rangle = \langle\sqrt{P_X},\sqrt{P_X}\rangle = 1
+\ne 0;\\
+\langle\sqrt{P_Y},\Psi\rangle = \langle\sqrt{P_Y},\sqrt{P_Y}\rangle =1
+\ne 0.
+\]</span></p>
+<p>不过，好的消息是，实际上<span
+class="math inline">\(\Phi,\Psi\)</span>正是第二大的奇异向量。可以看出来，不同奇异向量是互相正交的，这个和上次说的PCA非常像。实际上，PCA和SVD是有千丝万缕的关系的。</p>
+<p>从上面的分析，我们可以直接得到： <span class="math display">\[
+f(x) = \frac{1}{\sqrt{p_X(x)} } \phi^*(x);\\
+g(y) = \frac{1}{\sqrt{p_Y(y)} } \psi^*(y)
+\]</span></p>
 <p>那么接下来一个问题，如何直接从data中计算出来f,g？</p>
-<p>想要解决上面的问题，首先考虑，如何计算Ｂ的奇异向量。有人说，matlab, openCV. 这里介绍一个简单的算法：Power Iteration.</p>
-<p>首先，我们要知道的是，实际上求奇异值分解，也就是在做PCA(求特征向量和特征值)：<br>$$<br>B^TB &#x3D; v \Sigma^T u^T u \Sigma v^T &#x3D; v \Sigma^2 v^T,\<br>BB^T &#x3D; u \Sigma v^T v \Sigma^T u^T &#x3D;  u \Sigma^2 u^T<br>$$</p>
-<p>这里提下特征向量分解(EVD)：$X &#x3D; v D v^T $, 其中$v$为$X$的特征向量组成的矩阵，而$D$为对角矩阵，对角元素为$X$的特征值，$X$为实对称矩阵。</p>
-<p>所以可以不难得到，Ｂ的奇异向量，也就是$B^TB$与$BB^T$的特征向量，分别对应右侧的和左侧的奇异向量。</p>
+<p>想要解决上面的问题，首先考虑，如何计算Ｂ的奇异向量。有人说，matlab,
+openCV. 这里介绍一个简单的算法：Power Iteration.</p>
+<p>首先，我们要知道的是，实际上求奇异值分解，也就是在做PCA(求特征向量和特征值)：
+<span class="math display">\[
+B^TB = v \Sigma^T u^T u \Sigma v^T = v \Sigma^2 v^T,\\
+BB^T = u \Sigma v^T v \Sigma^T u^T =  u \Sigma^2 u^T
+\]</span></p>
+<p>这里提下特征向量分解(EVD)：$X = v D v^T <span class="math inline">\(,
+其中\)</span>v<span class="math inline">\(为\)</span>X<span
+class="math inline">\(的特征向量组成的矩阵，而\)</span>D<span
+class="math inline">\(为对角矩阵，对角元素为\)</span>X<span
+class="math inline">\(的特征值，\)</span>X$为实对称矩阵。</p>
+<p>所以可以不难得到，Ｂ的奇异向量，也就是<span
+class="math inline">\(B^TB\)</span>与<span
+class="math inline">\(BB^T\)</span>的特征向量，分别对应右侧的和左侧的奇异向量。</p>
 <p>因此我们的问题变成了，如何求eigen vector？</p>
-<h3 id="Power-Iteration"><a href="#Power-Iteration" class="headerlink" title="Power Iteration"></a>Power Iteration</h3><p>给定一个实对称矩阵Ｍ，假设$M &#x3D; U \Sigma U^T$, 则假设它的特征向量为$\upsilon_1,\upsilon_2,…,\upsilon_n$，对应的特征值$\lambda_1,…,\lambda_n $.</p>
-<ol>
-<li>初始化得到一个向量$\mu_0$，则$\mu_0 &#x3D; \alpha_1 \upsilon_1+…+\alpha_n \upsilon_n$.</li>
-<li>$\mu_1 &#x3D; \frac{M\mu_0}{\Vert M\mu_0 \Vert}$</li>
-<li>迭代执行３，得到$\mu_n$</li>
+<h3 id="power-iteration">Power Iteration</h3>
+<p>给定一个实对称矩阵Ｍ，假设<span class="math inline">\(M = U \Sigma
+U^T\)</span>, 则假设它的特征向量为<span
+class="math inline">\(\upsilon_1,\upsilon_2,...,\upsilon_n\)</span>，对应的特征值$_1,...,_n
+$.</p>
+<ol type="1">
+<li>初始化得到一个向量<span
+class="math inline">\(\mu_0\)</span>，则<span
+class="math inline">\(\mu_0 = \alpha_1 \upsilon_1+...+\alpha_n
+\upsilon_n\)</span>.</li>
+<li><span class="math inline">\(\mu_1 = \frac{M\mu_0}{\Vert M\mu_0
+\Vert}\)</span></li>
+<li>迭代执行３，得到<span class="math inline">\(\mu_n\)</span></li>
 </ol>
 <p>最后这个算法收敛于最大的特征向量（前提是最大的特征值严格大于其他的特征值，并且初始向量在最大特征向量的方向上分量不为0，这两个条件都比较好满足）。</p>
-<p>这个算法不难理解：<br>$$<br>\begin{aligned}<br>\mu_k &amp;&#x3D;\frac{M \mu_{k-1} }{\Vert M \mu_{k-1} \Vert} \<br>&amp;&#x3D; \frac{M \frac{M\mu_{k-2} }{\Vert M \mu_{k-2}\Vert} }{ \Vert M \frac{M\mu_{k-2} }{\Vert M \mu_{k-2}\Vert}  \Vert  }\<br>&amp;&#x3D; \frac{M^2 \mu_{k-2} } {\Vert M^2 \mu_{k-2} \Vert}\<br>&amp;&#x3D; \frac{M^k \mu_0}{\Vert  M^k \mu_0\Vert}  \<br>&amp;&#x3D; \frac{M^k (\alpha_1 \upsilon_1+…+\alpha_n \upsilon_n)}{\Vert  M^k \mu_0\Vert}\<br>&amp;&#x3D; \frac{\alpha_1 \lambda_1^k \upsilon_1+…+\alpha_n \lambda_n^k \upsilon_n}{\Vert  M^k \mu_0\Vert}\<br>&amp;&#x3D; \frac{\alpha_1 \lambda_1^k (\upsilon_1+\frac{\alpha_2}{\alpha_1}\cdot \frac{\lambda_2^k}{\lambda_1^k} \upsilon_2+…+ \frac{\alpha_n}{\alpha_1}\cdot \frac{\lambda_n^k}{\lambda_1^k} \upsilon_n  )}{\Vert  M^k \mu_0\Vert}<br>\end{aligned}<br>$$</p>
-<p>上式中$k \rightarrow \infty ,\frac{\lambda_i^k}{\lambda_1^k} \rightarrow 0,i\ne 1$，所以可以得到：<br>$$<br>M^k \mu_0 \rightarrow \alpha_1 \lambda_1^k \upsilon_1.<br>$$<br>所以：<br>$$<br>\begin{aligned}<br>\mu_k &amp;&#x3D; \frac{M^k \mu_0}{\Vert  M^k \mu_0\Vert} \<br>&amp;\rightarrow  \frac{\alpha_1 \lambda_1^k \upsilon_1}{\Vert\alpha_1 \lambda_1^k \upsilon_1 \Vert}\<br>&amp;&#x3D; \frac{ \alpha_1 \lambda_1^k \upsilon_1}{\Vert \alpha_1 \lambda_1^k \Vert} \<br>&amp;&#x3D; \upsilon_1<br>\end{aligned}<br>$$</p>
-<p>上面通过power iteration,　我们就得到了最大的特征向量。使用Gram Schmidt procedure，可以求得其他的特征向量。比较容易理解，找到一个已求向量垂直的向量进行Power Iteration，就可以求得第二大特征向量，特征向量从大到小依次被求出。</p>
+<p>这个算法不难理解： <span class="math display">\[
+\begin{aligned}
+\mu_k &amp;=\frac{M \mu_{k-1} }{\Vert M \mu_{k-1} \Vert} \\
+&amp;= \frac{M \frac{M\mu_{k-2} }{\Vert M \mu_{k-2}\Vert} }{ \Vert M
+\frac{M\mu_{k-2} }{\Vert M \mu_{k-2}\Vert}  \Vert  }\\
+&amp;= \frac{M^2 \mu_{k-2} } {\Vert M^2 \mu_{k-2} \Vert}\\
+&amp;= \frac{M^k \mu_0}{\Vert  M^k \mu_0\Vert}  \\
+&amp;= \frac{M^k (\alpha_1 \upsilon_1+...+\alpha_n
+\upsilon_n)}{\Vert  M^k \mu_0\Vert}\\
+&amp;= \frac{\alpha_1 \lambda_1^k \upsilon_1+...+\alpha_n \lambda_n^k
+\upsilon_n}{\Vert  M^k \mu_0\Vert}\\
+&amp;= \frac{\alpha_1 \lambda_1^k
+(\upsilon_1+\frac{\alpha_2}{\alpha_1}\cdot
+\frac{\lambda_2^k}{\lambda_1^k} \upsilon_2+...+
+\frac{\alpha_n}{\alpha_1}\cdot \frac{\lambda_n^k}{\lambda_1^k}
+\upsilon_n  )}{\Vert  M^k \mu_0\Vert}
+\end{aligned}
+\]</span></p>
+<p>上式中<span class="math inline">\(k \rightarrow \infty
+,\frac{\lambda_i^k}{\lambda_1^k} \rightarrow 0,i\ne
+1\)</span>，所以可以得到： <span class="math display">\[
+M^k \mu_0 \rightarrow \alpha_1 \lambda_1^k \upsilon_1.
+\]</span> 所以： <span class="math display">\[
+\begin{aligned}
+\mu_k &amp;= \frac{M^k \mu_0}{\Vert  M^k \mu_0\Vert} \\
+&amp;\rightarrow  \frac{\alpha_1 \lambda_1^k \upsilon_1}{\Vert\alpha_1
+\lambda_1^k \upsilon_1 \Vert}\\
+&amp;= \frac{ \alpha_1 \lambda_1^k \upsilon_1}{\Vert \alpha_1
+\lambda_1^k \Vert} \\
+&amp;= \upsilon_1
+\end{aligned}
+\]</span></p>
+<p>上面通过power iteration,　我们就得到了最大的特征向量。使用Gram
+Schmidt
+procedure，可以求得其他的特征向量。比较容易理解，找到一个已求向量垂直的向量进行Power
+Iteration，就可以求得第二大特征向量，特征向量从大到小依次被求出。</p>
 <p>现在我们考虑，如何得到Ｂ矩阵的第二大奇异向量。</p>
-<ol>
-<li>选择$\Phi^{(0)}$</li>
-<li>$\Psi^{(0)} &#x3D; B\Phi^{(0)}$, $\Phi^{(1)} &#x3D; B^T \Psi^{(0)}$</li>
+<ol type="1">
+<li>选择<span class="math inline">\(\Phi^{(0)}\)</span></li>
+<li><span class="math inline">\(\Psi^{(0)} = B\Phi^{(0)}\)</span>, <span
+class="math inline">\(\Phi^{(1)} = B^T \Psi^{(0)}\)</span></li>
 <li>迭代第二步</li>
 </ol>
-<p>实际上第二步做的就是:<br>$$\Phi^{(1)} &#x3D; B^TB \Phi^{(0)}, \Psi^{(1)} &#x3D; BB^T \Psi^{(0)}$$<br>也就是一直在利用Power Iteration迭代求解$B^TB$与$BB^T$的特征向量.</p>
-<p>但是这个如果对初始的值不加以限制，求得的应该是第一大特征向量。如果$\Phi^{(0)} \perp \sqrt{P_X}$，则我们得到了第二大特征向量。</p>
+<p>实际上第二步做的就是: <span class="math display">\[\Phi^{(1)} = B^TB
+\Phi^{(0)}, \Psi^{(1)} = BB^T \Psi^{(0)}\]</span> 也就是一直在利用Power
+Iteration迭代求解<span class="math inline">\(B^TB\)</span>与<span
+class="math inline">\(BB^T\)</span>的特征向量.</p>
+<p>但是这个如果对初始的值不加以限制，求得的应该是第一大特征向量。如果<span
+class="math inline">\(\Phi^{(0)} \perp
+\sqrt{P_X}\)</span>，则我们得到了第二大特征向量。</p>
 <p>那么如何直接从数据求得f,g呢？终于到了终极问题。</p>
-<p>上面有这么一个计算:$B\Phi$，实际上拆开的话，每一行就是ｙ固定之后的$p(x,y)$与$\Phi$相乘，我们记做$B \Phi (y)$:</p>
-<p>$$<br>\begin{aligned}<br>B \Phi(y) &amp;&#x3D; \sum_{x} B(y,x)\phi(x)\<br>&amp;&#x3D; \sum_x \frac{p_{XY}(x,y)}{\sqrt{p_X(x)p_Y(y)} } \cdot [\sqrt{p_X(x) f(x)}]\<br>&amp;&#x3D;\frac{1}{\sqrt{p_Y{y} } } \sum_x p_{XY}(x,y)f(x)\<br>&amp;&#x3D; \sqrt{p_Y(y)} \sum_x \frac{p_{XY}(x,y)}{p_{Y}(y)}f(x)\<br>&amp;&#x3D; \sqrt{p_Y(y)} \mathbb{E}[f(x)\vert Y &#x3D; y]<br>\end{aligned}<br>$$</p>
-<p>从上面的推导中，我们得到：$g(y) &#x3D; \mathbb{E}[f(X)\vert Y&#x3D;y ]$.</p>
-<p>所以从原来的$ \Psi^{(0)} &#x3D; B\Phi^{(0)} \rightarrow g^{(0)} &#x3D; \mathbb{E}[f^{(1)}(x) \vert Y&#x3D;y]$</p>
-<h2 id="ACE算法"><a href="#ACE算法" class="headerlink" title="ACE算法"></a>ACE算法</h2><ol>
-<li>选择$$f^{(0)}(x), s.t. \mathbb{E}[f^{(0)}(X) ] &#x3D; 0$$(注意，这里$$ \mathbb{E}[f^{(0)}(X) ] &#x3D; P_Xf_X(X) &#x3D; \sqrt{P_X} \sqrt{P_X}f_X(X) &#x3D; \sqrt{P_X}\Phi  &#x3D; 0$$，也就暗含了$\Phi\perp \sqrt{P_X}$)</li>
+<p>上面有这么一个计算:<span
+class="math inline">\(B\Phi\)</span>，实际上拆开的话，每一行就是ｙ固定之后的<span
+class="math inline">\(p(x,y)\)</span>与<span
+class="math inline">\(\Phi\)</span>相乘，我们记做<span
+class="math inline">\(B \Phi (y)\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+B \Phi(y) &amp;= \sum_{x} B(y,x)\phi(x)\\
+&amp;= \sum_x \frac{p_{XY}(x,y)}{\sqrt{p_X(x)p_Y(y)} } \cdot
+[\sqrt{p_X(x) f(x)}]\\
+&amp;=\frac{1}{\sqrt{p_Y{y} } } \sum_x p_{XY}(x,y)f(x)\\
+&amp;= \sqrt{p_Y(y)} \sum_x \frac{p_{XY}(x,y)}{p_{Y}(y)}f(x)\\
+&amp;= \sqrt{p_Y(y)} \mathbb{E}[f(x)\vert Y = y]
+\end{aligned}
+\]</span></p>
+<p>从上面的推导中，我们得到：<span class="math inline">\(g(y) =
+\mathbb{E}[f(X)\vert Y=y ]\)</span>.</p>
+<p>所以从原来的$ ^{(0)} = B^{(0)} g^{(0)} = [f^{(1)}(x) Y=y]$</p>
+<h2 id="ace算法">ACE算法</h2>
+<ol type="1">
+<li>选择<span class="math display">\[f^{(0)}(x), s.t.
+\mathbb{E}[f^{(0)}(X) ] = 0\]</span>(注意，这里<span
+class="math display">\[ \mathbb{E}[f^{(0)}(X) ] = P_Xf_X(X) = \sqrt{P_X}
+\sqrt{P_X}f_X(X) = \sqrt{P_X}\Phi  = 0\]</span>，也就暗含了<span
+class="math inline">\(\Phi\perp \sqrt{P_X}\)</span>)</li>
 <li><ul>
-<li>$g^{(0)}(y) &#x3D; \mathbb{E}[f^{(0)}(x)\vert Y&#x3D;y]$</li>
-<li>$f^{(1)}(x) &#x3D; \mathbb{E}[g^{(0)}(y)\vert X &#x3D; x]$</li>
-</ul>
-</li>
+<li><span class="math inline">\(g^{(0)}(y) = \mathbb{E}[f^{(0)}(x)\vert
+Y=y]\)</span></li>
+<li><span class="math inline">\(f^{(1)}(x) = \mathbb{E}[g^{(0)}(y)\vert
+X = x]\)</span></li>
+</ul></li>
 <li>迭代２</li>
 </ol>
 <p>最后ｆ，ｇ都会收敛到最佳的结果。</p>
-<p>这个算法被称为ACE（Alternative Conditional Expectation）算法，当然在实际过程中，我们可以每一步都进行normalize. 而第二步中，条件的ｘ和ｙ的值，有时候是随机选择，在数据量小的时候可以对所有的ｘ和ｙ都进行计算。</p>
-<p>还有一点，如何计算$\mathbb{E}[f^{(i)}(x) \vert Y&#x3D;y]$?</p>
-<p>其实很简单：首先从${(x_1,y_1),…,(x_n,y_n)}$中提取出来${(x_1,y_1),…,(x_k,y_k)}$,使得$y_1 &#x3D; … &#x3D; y_k &#x3D; y$,然后：<br>$$<br>\mathbb{E} &#x3D; \frac{1}{k}\sum_{i&#x3D;1}^kf^{(i)}(x_k)<br>$$</p>
+<p>这个算法被称为ACE（Alternative Conditional
+Expectation）算法，当然在实际过程中，我们可以每一步都进行normalize.
+而第二步中，条件的ｘ和ｙ的值，有时候是随机选择，在数据量小的时候可以对所有的ｘ和ｙ都进行计算。</p>
+<p>还有一点，如何计算<span class="math inline">\(\mathbb{E}[f^{(i)}(x)
+\vert Y=y]\)</span>?</p>
+<p>其实很简单：首先从<span
+class="math inline">\(\{(x_1,y_1),...,(x_n,y_n)\}\)</span>中提取出来<span
+class="math inline">\(\{(x_1,y_1),...,(x_k,y_k)\}\)</span>,使得<span
+class="math inline">\(y_1 = ... = y_k = y\)</span>,然后： <span
+class="math display">\[
+\mathbb{E} = \frac{1}{k}\sum_{i=1}^kf^{(i)}(x_k)
+\]</span></p>
 
     </div>
 
@@ -425,6 +589,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

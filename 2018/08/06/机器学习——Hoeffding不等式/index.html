@@ -23,12 +23,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wlsdzyzl.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="这次用霍夫丁不等式来证明学习的可行性。首先要说明一个定理，叫做“No Free Lunch”定理。如果真是需要预测的值是完全随机的情况下，我们无论最后建立一个什么样的模型，误差期望都是一致的。这样学习似乎是不可行的。">
+    <meta name="description" content="这次用霍夫丁不等式来证明学习的可行性。首先要说明一个定理，叫做“No Free Lunch”定理。如果真是需要预测的值是完全随机的情况下，我们无论最后建立一个什么样的模型，误差期望都是一致的。这样学习似乎是不可行的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习——Hoeffding不等式">
 <meta property="og:url" content="http://wlsdzyzl.com/2018/08/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94Hoeffding%E4%B8%8D%E7%AD%89%E5%BC%8F/index.html">
 <meta property="og:site_name" content="wlsdzyzl">
-<meta property="og:description" content="这次用霍夫丁不等式来证明学习的可行性。首先要说明一个定理，叫做“No Free Lunch”定理。如果真是需要预测的值是完全随机的情况下，我们无论最后建立一个什么样的模型，误差期望都是一致的。这样学习似乎是不可行的。">
+<meta property="og:description" content="这次用霍夫丁不等式来证明学习的可行性。首先要说明一个定理，叫做“No Free Lunch”定理。如果真是需要预测的值是完全随机的情况下，我们无论最后建立一个什么样的模型，误差期望都是一致的。这样学习似乎是不可行的。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-08-06T05:13:54.000Z">
 <meta property="article:modified_time" content="2018-08-12T09:13:02.000Z">
@@ -93,7 +93,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">155</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -132,18 +132,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -269,16 +269,42 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>这次用霍夫丁不等式来证明学习的可行性。首先要说明一个定理，叫做“No Free Lunch”定理。如果真是需要预测的值是完全随机的情况下，我们无论最后建立一个什么样的模型，误差期望都是一致的。这样学习似乎是不可行的。<span id="more"></span>但是实际上，事物都有自己的规律。我们可以套用霍夫丁不等式来说明，在某个验证集上这个模型的准确率是p，那么在总体上它预测的实际准确率很大可能与p是相差不大的（Probably Approximately Correct）。</p>
-<p>Hoeffding不等式：$P[\nu  - \upsilon|&gt; \epsilon ] \leq 2 e^{-2\epsilon ^2N}$</p>
-<p>其中$\nu$是我们测的期望，而$\upsilon$是真实期望，这是未知的，N是测试抽取的样本数量，而$\epsilon$是我们可以容忍的误差值，因此实际上也就是$\upsilon ∈ [\nu - \epsilon , \nu + \epsilon]$的概率是大于等于$2 e^{-2\epsilon ^2N}$的，也就是置信区间与置信度的关系。</p>
+    <div class="post-body" itemprop="articleBody"><p>这次用霍夫丁不等式来证明学习的可行性。首先要说明一个定理，叫做“No
+Free
+Lunch”定理。如果真是需要预测的值是完全随机的情况下，我们无论最后建立一个什么样的模型，误差期望都是一致的。这样学习似乎是不可行的。<span id="more"></span>但是实际上，事物都有自己的规律。我们可以套用霍夫丁不等式来说明，在某个验证集上这个模型的准确率是p，那么在总体上它预测的实际准确率很大可能与p是相差不大的（Probably
+Approximately Correct）。</p>
+<p>Hoeffding不等式：<span class="math inline">\(P[\nu - \upsilon|&gt;
+\epsilon ] \leq 2 e^{-2\epsilon ^2N}\)</span></p>
+<p>其中<span class="math inline">\(\nu\)</span>是我们测的期望，而<span
+class="math inline">\(\upsilon\)</span>是真实期望，这是未知的，N是测试抽取的样本数量，而<span
+class="math inline">\(\epsilon\)</span>是我们可以容忍的误差值，因此实际上也就是<span
+class="math inline">\(\upsilon ∈ [\nu - \epsilon , \nu +
+\epsilon]\)</span>的概率是大于等于<span class="math inline">\(2
+e^{-2\epsilon ^2N}\)</span>的，也就是置信区间与置信度的关系。</p>
 <p>因此霍夫丁不等式对独立随机变量的和与其期望值偏差的概率上限。</p>
-<p>从另一个简单的例子来说：假如我们有一个罐子里装了红球和绿球，我们想要测的是红球的占比。每次取出N个球，则这N个球中红球占比为$\nu$，而总体红球占比为$\upsilon$，我们假设可以接受的误差范围为$\epsilon$，那么这几个量满足霍夫丁不等式。总体球中取出N个有m中不同的组合，而这些组合中红球占比误差很大的组合占了所有组合的比重是小于$2 e^{-2\epsilon ^2N}$的。而这些误差很大的样本组合就是所谓的Bad Data。因为从它测出来的值与实际值偏差很大。</p>
-<p>从另一方面来讲，如果我们测试的数目足够多，依然很有可能选到错误样本。就像你我是天才的概率很小，但这个世界总会出现天才。用霍夫丁不等式来说，假如我们测试了t次，那么出现一次bad data 的概率是小于$2te^{-2\epsilon ^2N}$，为什么可以简单相加？如下：</p>
-<p>假如一件事发生的概率是p，那么n次它至少发生一次的概率是$1-(1-p)^n$。</p>
-<p> 令 $g(p) &#x3D; 1- (1-p)^n - np, g’(p) &#x3D; n(1-p)^{n-1} - n &#x3D; n[(1-p)^{n-1} - 1];$<br> 令$g’(p) &#x3D; 0$,则$p &#x3D; 0;$<br> 当p$∈[0,1]$时候， $g’(p) \leq 0, g(0) &#x3D; 0$,所以$g(p)\leq 0$;<br> 因此 $1- (1-p)^n \leq np$</p>
+<p>从另一个简单的例子来说：假如我们有一个罐子里装了红球和绿球，我们想要测的是红球的占比。每次取出N个球，则这N个球中红球占比为<span
+class="math inline">\(\nu\)</span>，而总体红球占比为<span
+class="math inline">\(\upsilon\)</span>，我们假设可以接受的误差范围为<span
+class="math inline">\(\epsilon\)</span>，那么这几个量满足霍夫丁不等式。总体球中取出N个有m中不同的组合，而这些组合中红球占比误差很大的组合占了所有组合的比重是小于<span
+class="math inline">\(2 e^{-2\epsilon
+^2N}\)</span>的。而这些误差很大的样本组合就是所谓的Bad
+Data。因为从它测出来的值与实际值偏差很大。</p>
+<p>从另一方面来讲，如果我们测试的数目足够多，依然很有可能选到错误样本。就像你我是天才的概率很小，但这个世界总会出现天才。用霍夫丁不等式来说，假如我们测试了t次，那么出现一次bad
+data 的概率是小于<span class="math inline">\(2te^{-2\epsilon
+^2N}\)</span>，为什么可以简单相加？如下：</p>
+<p>假如一件事发生的概率是p，那么n次它至少发生一次的概率是<span
+class="math inline">\(1-(1-p)^n\)</span>。</p>
+<p>令 <span class="math inline">\(g(p) = 1- (1-p)^n - np, g&#39;(p) =
+n(1-p)^{n-1} - n = n[(1-p)^{n-1} - 1];\)</span> 令<span
+class="math inline">\(g&#39;(p) = 0\)</span>,则<span
+class="math inline">\(p = 0;\)</span> 当p<span
+class="math inline">\(∈[0,1]\)</span>时候， <span
+class="math inline">\(g&#39;(p) \leq 0, g(0) = 0\)</span>,所以<span
+class="math inline">\(g(p)\leq 0\)</span>; 因此 <span
+class="math inline">\(1- (1-p)^n \leq np\)</span></p>
 <p>上述是一个简单的证明，而实际上独立随机变量至少发生一件的概率是小于它们各自发生的概率之和的。在概率论中这相当于是个常识。</p>
-<p>应用到机器学习当中，如果H是有限的，也就是我们可选假说个数是有限的，只要选取足够大的测试样本量（Hoeffding不等式中的N足够大），出现错误估计的概率依然是非常小的，该test dataset有很大的概率对每个假说都能正确评估它在总体样本上的性能，因此我们可以选择一个表现最好的来当做g，它对大多数样本都会使用，相比之下也就更接近f。</p>
+<p>应用到机器学习当中，如果H是有限的，也就是我们可选假说个数是有限的，只要选取足够大的测试样本量（Hoeffding不等式中的N足够大），出现错误估计的概率依然是非常小的，该test
+dataset有很大的概率对每个假说都能正确评估它在总体样本上的性能，因此我们可以选择一个表现最好的来当做g，它对大多数样本都会使用，相比之下也就更接近f。</p>
 <p>这就说明学习是可行的。</p>
 <p>这里还有个问题：如果H的个数是无限的呢？</p>
 
@@ -368,6 +394,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

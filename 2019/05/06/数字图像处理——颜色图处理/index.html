@@ -30,16 +30,11 @@
 <meta property="og:site_name" content="wlsdzyzl">
 <meta property="og:description" content="之前介绍的都是在灰度图的基础上，而我们现实中遇到的一般都是颜色图。对于颜色图的处理，并不是将灰度图等简单叠加，因为人眼对不同颜色的感知敏感度不一样，因此这个权重不是均匀分配的。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage0.png">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage1.png">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage2.png">
-<meta property="og:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage3.png">
 <meta property="article:published_time" content="2019-05-05T16:00:00.000Z">
 <meta property="article:modified_time" content="2023-10-20T20:23:39.056Z">
 <meta property="article:author" content="wlsdzyzl">
 <meta property="article:tag" content="digital image processing">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage0.png">
 
 
 <link rel="canonical" href="http://wlsdzyzl.com/2019/05/06/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E9%A2%9C%E8%89%B2%E5%9B%BE%E5%A4%84%E7%90%86/">
@@ -97,7 +92,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">155</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -122,7 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pseudo-Color"><span class="nav-number">1.</span> <span class="nav-text">Pseudo Color</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#pseudo-color"><span class="nav-number">1.</span> <span class="nav-text">Pseudo Color</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -137,18 +132,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -180,7 +175,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pseudo-Color"><span class="nav-number">1.</span> <span class="nav-text">Pseudo Color</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#pseudo-color"><span class="nav-number">1.</span> <span class="nav-text">Pseudo Color</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -275,20 +270,27 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>之前介绍的都是在灰度图的基础上，而我们现实中遇到的一般都是颜色图。对于颜色图的处理，并不是将灰度图等简单叠加，因为人眼对不同颜色的感知敏感度不一样，因此这个权重不是均匀分配的。  </p>
+    <div class="post-body" itemprop="articleBody"><p>之前介绍的都是在灰度图的基础上，而我们现实中遇到的一般都是颜色图。对于颜色图的处理，并不是将灰度图等简单叠加，因为人眼对不同颜色的感知敏感度不一样，因此这个权重不是均匀分配的。</p>
 <span id="more"></span>
-
-
 <p>实际上颜色图是很强的描述子，它对于目标检测以及识别都非常有用。而且人眼对于颜色图比对灰度图更敏感，颜色图也更漂亮。</p>
-<p>实际上，之前的图形学也介绍了一部分不同的Color模型：<a target="_blank" rel="noopener" href="https://wlsdzyzl.top/2019/03/11/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94%E9%A2%9C%E8%89%B2%E4%B8%8E%E7%BD%91%E6%A0%BC/">图形学——颜色与网格</a>。除了之前介绍的，还有HSI模型，它与HSV模型非常类似，只是这里I指的是平均值，而V指的是最大值。YUV模型，是被电视系统采用的。</p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage0.png"></p>
+<p>实际上，之前的图形学也介绍了一部分不同的Color模型：<a
+target="_blank" rel="noopener" href="https://wlsdzyzl.top/2019/03/11/%E5%9B%BE%E5%BD%A2%E5%AD%A6%E2%80%94%E2%80%94%E9%A2%9C%E8%89%B2%E4%B8%8E%E7%BD%91%E6%A0%BC/">图形学——颜色与网格</a>。除了之前介绍的，还有HSI模型，它与HSV模型非常类似，只是这里I指的是平均值，而V指的是最大值。YUV模型，是被电视系统采用的。</p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage0.png" /></p>
 <p>不同模型有不同的应用，它们之间有的可以互相转换，具体转换规则可以去网上查阅相关的资料，一般来说也用不上，就不细谈了。</p>
-<h3 id="Pseudo-Color"><a href="#Pseudo-Color" class="headerlink" title="Pseudo Color"></a><a href="about:blank#Pseudo-Color" title="Pseudo Color"></a>Pseudo Color</h3><p>这里介绍一个比较重要的概念是伪彩色。介绍伪彩色首先需要明白什么是颜色表。之前我们说的RGB图，表示一张图的每个像素值，是一个三维向量，由RGB三个分量组成。而这样的处理并不是最好的，很多时候我们用不了太多的颜色。因此还有一种处理方式，是每个像素的值，实际上是一个颜色表的索引，而颜色表表示了这个图应该有的颜色，毕竟8bit表示下，颜色一共有255_255_255种，实际上一幅图可能根本达不到这个级别，这时候使用颜色表就可以大大压缩图像空间。现在颜色表也在硬件上实现了，它有很多名字，最有名的应该是LUT（Look Up Table）。</p>
-<p>伪彩色图像，就是使用LUT表示色彩的图像。人眼对灰度的敏感度要比颜色低很多，而颜色表是一个很好的灰度图转色彩图的工具，将灰度图转化成色彩图，这里有多种方法，比如intensity slicing（切片），然后根据索引找对应的颜色。</p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage1.png"></p>
+<h3 id="pseudo-color"><a href="about:blank#Pseudo-Color"
+title="Pseudo Color"></a>Pseudo Color</h3>
+<p>这里介绍一个比较重要的概念是伪彩色。介绍伪彩色首先需要明白什么是颜色表。之前我们说的RGB图，表示一张图的每个像素值，是一个三维向量，由RGB三个分量组成。而这样的处理并不是最好的，很多时候我们用不了太多的颜色。因此还有一种处理方式，是每个像素的值，实际上是一个颜色表的索引，而颜色表表示了这个图应该有的颜色，毕竟8bit表示下，颜色一共有255_255_255种，实际上一幅图可能根本达不到这个级别，这时候使用颜色表就可以大大压缩图像空间。现在颜色表也在硬件上实现了，它有很多名字，最有名的应该是LUT（Look
+Up Table）。</p>
+<p>伪彩色图像，就是使用LUT表示色彩的图像。人眼对灰度的敏感度要比颜色低很多，而颜色表是一个很好的灰度图转色彩图的工具，将灰度图转化成色彩图，这里有多种方法，比如intensity
+slicing（切片），然后根据索引找对应的颜色。</p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage1.png" /></p>
 <p>将灰度图转换成伪彩色可以很大程度上增加人眼刺激，使得结果更加明了。很多深度图并不是用黑白表示，而是用伪彩色，就是这个道理，下面是一些例子：</p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage2.png"></p>
-<p><img src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage3.png"></p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage2.png" /></p>
+<p><img
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/colorimage3.png" /></p>
 <p>还有更一般的转换方法，根据灰度图，生成R,G,B对应的值，得到真彩色图，这个明显比上述的切片得到伪彩色要复杂很多。</p>
 <p>而对于真彩色图来说，很多关于灰度图的处理，可以很容易拓展到颜色图上。无非就是对各个channel的值分别进行处理，对于权重可能有不同的分配，这里就不多介绍了。</p>
 
@@ -307,8 +309,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2019/04/29/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E9%A2%91%E5%9F%9F%E6%BB%A4%E6%B3%A2/" rel="prev" title="数字图像处理——频域滤波">
-                  <i class="fa fa-angle-left"></i> 数字图像处理——频域滤波
+                <a href="/2019/04/29/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E2%80%94%E2%80%94%E7%A9%BA%E9%97%B4%E5%9F%9F%E6%BB%A4%E6%B3%A2/" rel="prev" title="数字图像处理——空间域滤波">
+                  <i class="fa fa-angle-left"></i> 数字图像处理——空间域滤波
                 </a>
             </div>
             <div class="post-nav-item">
@@ -377,6 +379,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

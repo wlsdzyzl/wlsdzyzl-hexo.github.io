@@ -93,7 +93,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">155</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Occam%E2%80%99s-Razor"><span class="nav-number">1.</span> <span class="nav-text">Occam’s Razor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampling-Bias"><span class="nav-number">2.</span> <span class="nav-text">Sampling Bias</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Snooping"><span class="nav-number">3.</span> <span class="nav-text">Data Snooping</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#occams-razor"><span class="nav-number">1.</span> <span class="nav-text">Occam&#39;s Razor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sampling-bias"><span class="nav-number">2.</span> <span class="nav-text">Sampling Bias</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data-snooping"><span class="nav-number">3.</span> <span class="nav-text">Data Snooping</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -133,18 +133,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -176,7 +176,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Occam%E2%80%99s-Razor"><span class="nav-number">1.</span> <span class="nav-text">Occam’s Razor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampling-Bias"><span class="nav-number">2.</span> <span class="nav-text">Sampling Bias</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Snooping"><span class="nav-number">3.</span> <span class="nav-text">Data Snooping</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#occams-razor"><span class="nav-number">1.</span> <span class="nav-text">Occam&#39;s Razor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sampling-bias"><span class="nav-number">2.</span> <span class="nav-text">Sampling Bias</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data-snooping"><span class="nav-number">3.</span> <span class="nav-text">Data Snooping</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -271,15 +271,26 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>到了现在机器学习基石的课程就结束了。最后有一些实际利用学习的原则和小tips，用来作为总结。</p>
-<span id="more"></span>
-
-<h2 id="Occam’s-Razor"><a href="#Occam’s-Razor" class="headerlink" title="Occam’s Razor"></a>Occam’s Razor</h2><p>Entities must not be multiplied beyond necessity.</p>
-<p>使用的模型要尽量简单。我们知道越复杂的模型可以解释的样本更多，但是一个样本集如果被简单的模型所解释，那么从另一方面来说这个数据集更可能存在一定的规律性。因为即使是随机产生的样本，复杂的模型依然可以解释。而对于完全随机的样本是没有学习的必要的（可见No Free Lunch定理）。因此我们尽量使用简单的模型去解释样本，在泛化能力上等等相对于复杂模型来说都会更好。越简单越好。</p>
-<h2 id="Sampling-Bias"><a href="#Sampling-Bias" class="headerlink" title="Sampling Bias"></a>Sampling Bias</h2><p>1948年美国总统大选，Truman versus Dewey.一家报社为了提前预测大选结果，利用电话进行民意调查，得到的结果是Dewey Defeat Truman，然而最后的结果是Truman赢得了大选。而民意调查既没有出错，也没有出现运气不好的情况，为何会这样？当年电话是比较昂贵的，因此接受民意调查的都是比较富有的阶级，在这些人中对Dewey的支持率更高，但是占了大多数人的中下阶级对Truman的支持更好，因此出现了这样的结果。</p>
-<p>在我们所有的上述的这些理论推论中，我们都假设训练与测试集，都来自同一分布。而现实中，比如上面的例子，这样的情况并不是经常会碰到。保证我们获得的训练集与真实的数据来自同一分布是比较困难的。因此在实际操作中我们要注意尽可能让训练集与测试集来自同一分布。比如在预测电影时，可能每个人看的前7部电影是训练集，后三步用来测试，这就不是同一分布，因为观影顺序可能是很重要的,有一定的意向，而不是随机的。因此在学习时需要适当加重后面几部电影的权重，或者利用后面几部来做验证集。总之，Sampling Bias也是常见的影响学习效果的原因。</p>
-<h2 id="Data-Snooping"><a href="#Data-Snooping" class="headerlink" title="Data Snooping"></a>Data Snooping</h2><p>数据“偷窥”。这是之前也一直提到的，如用自己的眼睛来决定学习算法。这时候可能会算上意外的VC dimension，但是我们却不知道。但是实际上，不光用眼睛，很多时候Data snooping很难以避免，一些小小的动作就会影响到这些东西。比如一直在前人的模型上改进发表论文，虽然你可能没有去看数据，但是确实利用了之前的模型，它就在一定程度上包含了数据的信息。偷窥数据的结果就是使得自己学习的模型过于乐观，可能会造成overfitting，这也是overfitting很难处理的一个原因。</p>
-<p>有几个小的建议，就是在不看数据之前，想好需要用到的特征量；保证测试数据的封锁，使其不受到污染。对于避免Data Snooping的做法可能需要多年的经验，其中的机制因为组合太多很复杂，因此这个需要慢慢体会。</p>
+    <div class="post-body" itemprop="articleBody"><p>到了现在机器学习基石的课程就结束了。最后有一些实际利用学习的原则和小tips，用来作为总结。
+<span id="more"></span></p>
+<h2 id="occams-razor">Occam's Razor</h2>
+<p>Entities must not be multiplied beyond necessity.</p>
+<p>使用的模型要尽量简单。我们知道越复杂的模型可以解释的样本更多，但是一个样本集如果被简单的模型所解释，那么从另一方面来说这个数据集更可能存在一定的规律性。因为即使是随机产生的样本，复杂的模型依然可以解释。而对于完全随机的样本是没有学习的必要的（可见No
+Free
+Lunch定理）。因此我们尽量使用简单的模型去解释样本，在泛化能力上等等相对于复杂模型来说都会更好。越简单越好。</p>
+<h2 id="sampling-bias">Sampling Bias</h2>
+<p>1948年美国总统大选，Truman versus
+Dewey.一家报社为了提前预测大选结果，利用电话进行民意调查，得到的结果是Dewey
+Defeat
+Truman，然而最后的结果是Truman赢得了大选。而民意调查既没有出错，也没有出现运气不好的情况，为何会这样？当年电话是比较昂贵的，因此接受民意调查的都是比较富有的阶级，在这些人中对Dewey的支持率更高，但是占了大多数人的中下阶级对Truman的支持更好，因此出现了这样的结果。</p>
+<p>在我们所有的上述的这些理论推论中，我们都假设训练与测试集，都来自同一分布。而现实中，比如上面的例子，这样的情况并不是经常会碰到。保证我们获得的训练集与真实的数据来自同一分布是比较困难的。因此在实际操作中我们要注意尽可能让训练集与测试集来自同一分布。比如在预测电影时，可能每个人看的前7部电影是训练集，后三步用来测试，这就不是同一分布，因为观影顺序可能是很重要的,有一定的意向，而不是随机的。因此在学习时需要适当加重后面几部电影的权重，或者利用后面几部来做验证集。总之，Sampling
+Bias也是常见的影响学习效果的原因。</p>
+<h2 id="data-snooping">Data Snooping</h2>
+<p>数据“偷窥”。这是之前也一直提到的，如用自己的眼睛来决定学习算法。这时候可能会算上意外的VC
+dimension，但是我们却不知道。但是实际上，不光用眼睛，很多时候Data
+snooping很难以避免，一些小小的动作就会影响到这些东西。比如一直在前人的模型上改进发表论文，虽然你可能没有去看数据，但是确实利用了之前的模型，它就在一定程度上包含了数据的信息。偷窥数据的结果就是使得自己学习的模型过于乐观，可能会造成overfitting，这也是overfitting很难处理的一个原因。</p>
+<p>有几个小的建议，就是在不看数据之前，想好需要用到的特征量；保证测试数据的封锁，使其不受到污染。对于避免Data
+Snooping的做法可能需要多年的经验，其中的机制因为组合太多很复杂，因此这个需要慢慢体会。</p>
 <p>机器学习是人工智能，数据挖掘，统计理论的交集，它为今天人类生活带来了很多便利，如语音处理人脸识别等等。希望自己可以学好这门课程并且付诸实践。</p>
 
     </div>
@@ -368,6 +379,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

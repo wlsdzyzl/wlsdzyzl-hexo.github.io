@@ -93,7 +93,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">83</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">18</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">141</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">155</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -133,18 +133,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">155</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -273,24 +273,69 @@
     
     <div class="post-body" itemprop="articleBody"><p>我自己用过不少语言，cpp，java，python，html，ccs，javascript都接触过，系统学过java，cpp，也用过cpp，python和java编写过一些项目。但是呢，语言学过了都会忘记，但是过去写的代码不是毫无帮助，再次上手会非常容易。记录，就是记录一下最近用到的，之前学过但是忘记了的东西。</p>
 <span id="more"></span>
-
-
-
-<h3 id="类内静态变量初始化"><a href="#类内静态变量初始化" class="headerlink" title="类内静态变量初始化"></a><a href="about:blank#%E7%B1%BB%E5%86%85%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96" title="类内静态变量初始化"></a>类内静态变量初始化</h3><p>类内静态变量是不能在声明时候初始化的，如果是常量则可以。如下：  </p>
-<table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">static</span> <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">//static int b = 10;error</span></span><br><span class="line">};</span><br><span class="line"><span class="keyword">int</span> C::a = <span class="number">10</span>;</span><br></pre></td></tr></tbody></table>
-
+<h3 id="类内静态变量初始化"><a
+href="about:blank#%E7%B1%BB%E5%86%85%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96"
+title="类内静态变量初始化"></a>类内静态变量初始化</h3>
+<p>类内静态变量是不能在声明时候初始化的，如果是常量则可以。如下：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">static</span> <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">//static int b = 10;error</span></span><br><span class="line">};</span><br><span class="line"><span class="keyword">int</span> C::a = <span class="number">10</span>;</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
 <p>类内静态变量声明时候是没有分配内存的，只有在外部初始化以后，才会进行内存的分配。</p>
-<h3 id="使用类内函数建立线程"><a href="#使用类内函数建立线程" class="headerlink" title="使用类内函数建立线程"></a><a href="about:blank#%E4%BD%BF%E7%94%A8%E7%B1%BB%E5%86%85%E5%87%BD%E6%95%B0%E5%BB%BA%E7%AB%8B%E7%BA%BF%E7%A8%8B" title="使用类内函数建立线程"></a>使用类内函数建立线程</h3><p>想要使用类的成员函数进行多线程，直接绑定是绑定不上的。下面的做法是错误的：  </p>
-<table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">//other code</span></span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">useFunc</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="built_in">std</span>::thread t = <span class="built_in">std</span>::thread(C::func,<span class="keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line">C obj;</span><br><span class="line"><span class="built_in">std</span>::thread t = <span class="built_in">std</span>::thread(C::func,obj);</span><br></pre></td></tr></tbody></table>
-
-<p>实际上是很容易理解的，因为成员函数就算是没有参数，实际上也是有一个参数的，就是变量本身。因此可以想想在建立thread的时候要像参数一样将变量传进去。但是用上面的方法仙人是不行的，因为我们不能像<code>func(this)</code>一样调用成员函数。如何将成员函数伪装成一个普通的函数？我们可以使用C++11中的bind：  </p>
-<table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">//other code</span></span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">useFunc</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="built_in">std</span>::thread t = <span class="built_in">std</span>::thread( <span class="built_in">std</span>::bind(&amp;C::func,<span class="keyword">this</span>));</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line">C obj;</span><br><span class="line"><span class="keyword">auto</span> func = <span class="built_in">std</span>::bind(&amp;C::func,&amp;obj);</span><br><span class="line">func();<span class="comment">// = obj.func()</span></span><br><span class="line"><span class="built_in">std</span>::thread t = <span class="built_in">std</span>::thread(func);</span><br></pre></td></tr></tbody></table>
-
+<h3 id="使用类内函数建立线程"><a
+href="about:blank#%E4%BD%BF%E7%94%A8%E7%B1%BB%E5%86%85%E5%87%BD%E6%95%B0%E5%BB%BA%E7%AB%8B%E7%BA%BF%E7%A8%8B"
+title="使用类内函数建立线程"></a>使用类内函数建立线程</h3>
+<p>想要使用类的成员函数进行多线程，直接绑定是绑定不上的。下面的做法是错误的：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">//other code</span></span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">useFunc</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="built_in">std</span>::thread t = <span class="built_in">std</span>::thread(C::func,<span class="keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line">C obj;</span><br><span class="line"><span class="built_in">std</span>::thread t = <span class="built_in">std</span>::thread(C::func,obj);</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>实际上是很容易理解的，因为成员函数就算是没有参数，实际上也是有一个参数的，就是变量本身。因此可以想想在建立thread的时候要像参数一样将变量传进去。但是用上面的方法仙人是不行的，因为我们不能像<code>func(this)</code>一样调用成员函数。如何将成员函数伪装成一个普通的函数？我们可以使用C++11中的bind：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">//other code</span></span><br><span class="line">    }</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">useFunc</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="built_in">std</span>::thread t = <span class="built_in">std</span>::thread( <span class="built_in">std</span>::bind(&amp;C::func,<span class="keyword">this</span>));</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line">C obj;</span><br><span class="line"><span class="keyword">auto</span> func = <span class="built_in">std</span>::bind(&amp;C::func,&amp;obj);</span><br><span class="line">func();<span class="comment">// = obj.func()</span></span><br><span class="line"><span class="built_in">std</span>::thread t = <span class="built_in">std</span>::thread(func);</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
 <p>可以看到，<code>std::bind</code>可以将成员函数包装成普通函数，也就可以传入到thread中了。而且，即使是在类内其他成员函数，也是一样可以这样调用的。</p>
-<h3 id="vector的坑"><a href="#vector的坑" class="headerlink" title="vector的坑"></a><a href="about:blank#vector%E7%9A%84%E5%9D%91" title="vector的坑"></a>vector的坑</h3><p>实际上，<code>std::vector</code>会动态分配内存，不是一个秘密，应该初学stl的都会明白。最近遇到了一个bug，内存泄露，一直找不到原因，后来发现是<code>std::vector</code>动态分配内存的原因。</p>
-<p>首先，<code>std::vector</code>中内存是连续的，这意味着，在动态分配内存过程中，<code>std::vector</code>会把旧的内容拷贝到新的内存中去。这时候原先的引用，指针，就会失效。比如下面的例子：  </p>
-<table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">int</span> &amp;d = <span class="built_in">array</span>[<span class="number">0</span>];</span><br><span class="line">d = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i!=<span class="number">10</span>;++i)</span><br><span class="line"><span class="built_in">array</span>.push_back(i);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"d = "</span> &lt;&lt;d &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></tbody></table>
-
+<h3 id="vector的坑"><a href="about:blank#vector%E7%9A%84%E5%9D%91"
+title="vector的坑"></a>vector的坑</h3>
+<p>实际上，<code>std::vector</code>会动态分配内存，不是一个秘密，应该初学stl的都会明白。最近遇到了一个bug，内存泄露，一直找不到原因，后来发现是<code>std::vector</code>动态分配内存的原因。</p>
+<p>首先，<code>std::vector</code>中内存是连续的，这意味着，在动态分配内存过程中，<code>std::vector</code>会把旧的内容拷贝到新的内存中去。这时候原先的引用，指针，就会失效。比如下面的例子：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="built_in">array</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">int</span> &amp;d = <span class="built_in">array</span>[<span class="number">0</span>];</span><br><span class="line">d = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i!=<span class="number">10</span>;++i)</span><br><span class="line"><span class="built_in">array</span>.push_back(i);</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"d = "</span> &lt;&lt;d &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
 <p>你觉得会输出什么？实际上输出什么是未定义的。当push_back调用时候，array会更换新的地址。这时候原来的引用就失效了。因此引用<code>std::vector</code>的内容要格外小心，如果有最大容量的话最好reserve一下。</p>
 
     </div>
@@ -379,6 +424,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
