@@ -82,13 +82,13 @@ categories: 深度学习
 
 实际上，message passing的方式是非常灵活的。我们也可以将顶点与边的信息，甚至是global embedding的信息聚合。下面给出几种不同的message passing的方式：
 
-![Some of the different ways we might combine edge and node representation in a GNN layer.](%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88Graph%20Neural%20Network%EF%BC%89%20c3afe36d752b4d0f957c59f23c82a974/Untitled%2014.png)
+![Some of the different ways we might combine edge and node representation in a GNN layer.](https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88Graph%20Neural%20Network%EF%BC%89%20c3afe36d752b4d0f957c59f23c82a974/Untitled%2014.png)
 
 Some of the different ways we might combine edge and node representation in a GNN layer.
 
 也可以利用global information，他和每个顶点每条边相连。这也就意味着，通过几层message passing，每个顶点实际上就能感知到其他的所有顶点。否则的话，在一些很大的图上，一些顶点可能很难感知到据它较远的顶点。
 
-![Schematic of a Graph Nets architecture leveraging global representations.](%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88Graph%20Neural%20Network%EF%BC%89%20c3afe36d752b4d0f957c59f23c82a974/Untitled%2015.png)
+![Schematic of a Graph Nets architecture leveraging global representations.](https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88Graph%20Neural%20Network%EF%BC%89%20c3afe36d752b4d0f957c59f23c82a974/Untitled%2015.png)
 
 Schematic of a Graph Nets architecture leveraging global representations.
 

@@ -61,11 +61,3 @@ System will still suffer from drift during long-distance navigation tasks. GPS i
 ### Loop Closure
 
 LIO-SAM use a naive but effective method for loop closure detection based on the Euclidean distance. When a new node $x_{i+1}$ is registered, we search for the near nodes from the factor graph. For example, $x_3$ is selected, and we match $\mathbb F_{i+1}$ with the subkeframe voxel map $\left\{\mathbb{F}_{3-m}, \ldots, \mathbb{F}_{3}, \ldots, \mathbb{F}_{3+m}\right\}$. If the matching succeed, a relative transformation $\Delta \mathbf T_{3, i+1}$ will be added into fact graph as a loop closure factor. In LIO-SAM，$m = 12$ and the search radius is $15m$.
-
-## Code Analysis
-
-[Code Analysis (1)](https://www.notion.so/Code-Analysis-1-454a537333c0470489b43567edde0ebc?pvs=21)
-
-[Code Analysis (2)](https://www.notion.so/Code-Analysis-2-585a543cf039495198bfb178736c8fc9?pvs=21)
-
-[Code Analysis (3)](https://www.notion.so/Code-Analysis-3-ac2d42aeacad4326b20f3eec276f3f4a?pvs=21)
