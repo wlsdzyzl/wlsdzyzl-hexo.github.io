@@ -31,7 +31,7 @@
 <meta property="og:description" content="本篇文章记录一下图神经网络的基本内容，是看了李沐老师讲的一篇博客。博客连接如下：https:&#x2F;&#x2F;distill.pub&#x2F;2021&#x2F;gnn-intro&#x2F;。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-12-16T22:07:36.000Z">
-<meta property="article:modified_time" content="2023-10-22T23:07:36.909Z">
+<meta property="article:modified_time" content="2023-10-25T13:38:42.885Z">
 <meta property="article:author" content="wlsdzyzl">
 <meta property="article:tag" content="deep learning">
 <meta property="article:tag" content="neural network">
@@ -94,7 +94,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">155</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>Tags<span class="badge">89</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>Categories<span class="badge">19</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>Archives<span class="badge">156</span></a></li><li class="menu-item menu-item-photos"><a href="/photos/" rel="section"><i class="photo fa-fw"></i>Photos</a></li>
   </ul>
 </nav>
 
@@ -134,7 +134,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">155</span>
+          <span class="site-state-item-count">156</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -251,7 +251,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-10-23 07:07:36" itemprop="dateModified" datetime="2023-10-23T07:07:36+08:00">2023-10-23</time>
+      <time title="Modified: 2023-10-25 21:38:42" itemprop="dateModified" datetime="2023-10-25T21:38:42+08:00">2023-10-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -390,7 +390,7 @@ passing的方式是非常灵活的。我们也可以将顶点与边的信息，�
 embedding的信息聚合。下面给出几种不同的message passing的方式：</p>
 <figure>
 <img
-src="%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88Graph%20Neural%20Network%EF%BC%89%20c3afe36d752b4d0f957c59f23c82a974/Untitled%2014.png"
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88Graph%20Neural%20Network%EF%BC%89%20c3afe36d752b4d0f957c59f23c82a974/Untitled%2014.png"
 alt="Some of the different ways we might combine edge and node representation in a GNN layer." />
 <figcaption aria-hidden="true">Some of the different ways we might
 combine edge and node representation in a GNN layer.</figcaption>
@@ -402,7 +402,7 @@ information，他和每个顶点每条边相连。这也就意味着，通过几
 passing，每个顶点实际上就能感知到其他的所有顶点。否则的话，在一些很大的图上，一些顶点可能很难感知到据它较远的顶点。</p>
 <figure>
 <img
-src="%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88Graph%20Neural%20Network%EF%BC%89%20c3afe36d752b4d0f957c59f23c82a974/Untitled%2015.png"
+src="https://evolution-video.oss-cn-beijing.aliyuncs.com/wlsdzyzl_hexo/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88Graph%20Neural%20Network%EF%BC%89%20c3afe36d752b4d0f957c59f23c82a974/Untitled%2015.png"
 alt="Schematic of a Graph Nets architecture leveraging global representations." />
 <figcaption aria-hidden="true">Schematic of a Graph Nets architecture
 leveraging global representations.</figcaption>
